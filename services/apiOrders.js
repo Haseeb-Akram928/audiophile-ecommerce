@@ -1,38 +1,84 @@
 import { supabase } from "@/lib/supabase";
 
-export async function createOrder(order) {
-  const { data: orderData, error: orderError } = await supabase
+export async function createOrder({
+  userId,
+  cartItems,
+  shippingAddress,
+  paymentMethod,
+  totalAmount,
+}) {
+  try {
+    // 1. Create the order
+    const { data: order, error: orderError } = await supabase
+      .from("orders")
+      .insert({
+        user_id: userId,
+        total_amount: totalAmount,
+        shipping_address: shippingAddress,
+        payment_method: paymentMethod,
+      })
+      .select()
+      .single();
+
+    if (orderError) {
+      console.error("Supabase order creation error:", orderError);
+      throw new Error("Could not create order.");
+    }
+
+    // 2. Create order items
+    const orderItems = cartItems.map((item) => ({
+      order_id: order.id,
+      product_id: item.productId, // Assuming cart item has productId
+      quantity: item.quantity,
+      price: item.price,
+    }));
+
+    const { error: orderItemsError } = await supabase
+      .from("order_items")
+      .insert(orderItems);
+
+    if (orderItemsError) {
+      console.error("Supabase order items creation error:", orderItemsError);
+      // Ideally, here you'd also want to roll back the order creation if order items fail.
+      // Supabase's client-side library doesn't directly support transactions spanning multiple inserts
+      // in a single call. For true transactional integrity across two different table inserts,
+      // you'd typically need a stored procedure/database function in Supabase.
+      // For now, we'll just throw an error.
+      throw new Error("Could not create order items.");
+    }
+
+    return { status: "success", orderId: order.id };
+  } catch (error) {
+    console.error("Error in createOrder:", error);
+    throw error; // Re-throw the error for the caller to handle
+  }
+}
+
+export async function getOrders(userId) {
+  if (!userId) return null;
+
+  const { data, error } = await supabase
     .from("orders")
-    .insert([
-      {
-        ...order,
-        // You might want to add user_id here if the user is authenticated
-      },
-    ])
-    .select();
+    .select(
+      `
+      *,
+      order_items (
+        *,
+        products (
+          name,
+          image,
+          slug
+        )
+      )
+    `,
+    )
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false });
 
-  if (orderError) {
-    console.error(orderError);
-    throw new Error("Order could not be created");
+  if (error) {
+    console.error("Supabase order fetching error:", error);
+    throw new Error("Could not fetch orders.");
   }
 
-  const orderId = orderData[0].id;
-  const orderItems = order.cart.map((item) => ({
-    order_id: orderId,
-    product_id: item.id,
-    quantity: item.quantity,
-    price: item.price,
-  }));
-
-  const { error: itemsError } = await supabase
-    .from("order_items")
-    .insert(orderItems);
-
-  if (itemsError) {
-    console.error(itemsError);
-    // You might want to delete the order here if items fail to insert
-    throw new Error("Order items could not be created");
-  }
-
-  return orderData[0];
+  return data;
 }

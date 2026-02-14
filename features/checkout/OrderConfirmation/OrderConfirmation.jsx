@@ -1,9 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCart, getTotalCartPrice } from "@/features/cart/cartSlice";
+import { clearCart } from "@/features/cart/cartSlice";
 import styles from "@/features/checkout/OrderConfirmation/OrderConfirmation.module.css";
 
 const OrderConfirmation = ({ isVisible }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector(getCart);
   const totalAmount = useSelector(getTotalCartPrice);
@@ -14,6 +16,7 @@ const OrderConfirmation = ({ isVisible }) => {
   if (!isVisible || cart.length === 0) return null;
 
   const handleBackHome = () => {
+    dispatch(clearCart());
     navigate("/");
   };
 

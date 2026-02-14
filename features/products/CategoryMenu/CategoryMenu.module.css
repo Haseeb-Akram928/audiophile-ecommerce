@@ -1,17 +1,11 @@
-.categoryMenu {
-  padding-bottom: 92px;
-}
-
-.categoryList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.menuGrid {
   display: flex;
   flex-direction: column;
   gap: 68px; /* High gap to leave room for the overlapping images */
+  background-color: var(--white);
 }
 
-.categoryItem {
+.card {
   background-color: var(--color-surface); /* hsl(0, 0%, 95%) */
   border-radius: 8px;
   display: flex;
@@ -22,28 +16,15 @@
   text-align: center;
 }
 
-.categoryLink {
-  text-decoration: none;
-}
-
-.imageWrapper {
+.thumb {
   width: 150px;
-  height: 150px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
   /* This moves the image up so it sits outside the gray box */
   margin-top: -52px;
-}
-
-.categoryImage {
-  width: 100%;
-  height: auto;
   /* Standard shadow for the product thumbnails */
   filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.2));
 }
 
-.categoryName {
+.name {
   font-size: var(--fs-300); /* 15px */
   font-weight: 700;
   letter-spacing: 1.07px;
@@ -69,22 +50,27 @@
   opacity: 1;
 }
 
+.arrow {
+  color: var(--color-primary);
+  font-size: 18px;
+}
+
 /* Tablet & Desktop Layout (3 cards in a row) */
 @media (min-width: 768px) {
-  .categoryList {
+  .menuGrid {
     flex-direction: row;
     justify-content: space-between;
     gap: 10px; /* Small gap as cards will take up equal width */
   }
 
-  .categoryItem {
+  .card {
     flex: 1;
     margin-top: 52px; /* Adds space for the image overlap in the grid */
   }
 }
 
 @media (min-width: 1100px) {
-  .categoryList {
+  .menuGrid {
     gap: 30px;
   }
 }

@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useProduct } from "../useProduct";
 import styles from "@/features/products/ProductDetail/ProductDetail.module.css";
 import RelatedProducts from "@/features/products/RelatedProducts/RelatedProducts";
 import NotFound from "@/pages/NotFound";
-import { useProduct } from "../useProduct";
 import Loader from "@/components/ui/Loader";
 import ProductGallery from "./components/ProductGallery";
 import ProductFeatures from "./components/ProductFeatures";

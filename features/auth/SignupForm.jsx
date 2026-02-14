@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useSignup } from "./useSignup";
-import styles from "./AuthForm.module.css";
+import { useSignup } from "@/features/auth/useSignup";
+import styles from "@/features/auth/AuthForm.module.css";
 
 function SignupForm() {
   const { register, handleSubmit, formState, getValues } = useForm();

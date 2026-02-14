@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useLogin } from "./useLogin";
-import styles from "./AuthForm.module.css";
+import { useLogin } from "@/features/auth/useLogin";
+import styles from "@/features/auth/AuthForm.module.css";
 
 function LoginForm() {
   const { register, handleSubmit, formState } = useForm();
@@ -24,7 +24,9 @@ function LoginForm() {
           className={styles.fieldInput}
           disabled={isLoading}
         />
-        {errors.email && <span className={styles.fieldError}>{errors.email.message}</span>}
+        {errors.email && (
+          <span className={styles.fieldError}>{errors.email.message}</span>
+        )}
       </div>
       <div className={styles.field}>
         <label htmlFor="password" className={styles.fieldLabel}>

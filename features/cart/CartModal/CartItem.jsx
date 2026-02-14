@@ -1,7 +1,9 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { increaseItemQuantity, decreaseItemQuantity } from '@/features/cart/cartSlice';
-import styles from './CartModal.module.css'; // Assuming styles are imported from CartModal.module.css
+import { useDispatch } from "react-redux";
+import {
+  increaseItemQuantity,
+  decreaseItemQuantity,
+} from "@/features/cart/cartSlice";
+import styles from "@/features/cart/CartModal/CartModal.module.css"; // Assuming styles are imported from CartModal.module.css
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
@@ -14,9 +16,7 @@ const CartItem = ({ item }) => {
         </div>
         <div className={styles.itemText}>
           <p className={styles.itemName}>{item.name}</p>
-          <p className={styles.itemPrice}>
-            $ {item.price.toLocaleString()}
-          </p>
+          <p className={styles.itemPrice}>$ {item.price.toLocaleString()}</p>
         </div>
       </div>
       <div className={styles.quantityControls}>

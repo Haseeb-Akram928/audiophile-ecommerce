@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from '../ProductDetail.module.css';
+import styles from "../ProductDetail.module.css";
 
 const ProductFeatures = ({ features, includes }) => {
   return (

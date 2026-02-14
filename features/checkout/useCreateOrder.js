@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createOrder as createOrderApi } from "@/services/apiOrders";
 import { sendOrderConfirmation } from "@/services/apiEmail";
 import { useNavigate } from "react-router-dom";
-import { clearCart } from "../cart/cartSlice";
+import { clearCart } from "@/features/cart/cartSlice";
 import { useDispatch } from "react-redux";
 
 export function useCreateOrder() {

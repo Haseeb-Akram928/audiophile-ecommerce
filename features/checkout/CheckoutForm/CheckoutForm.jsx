@@ -1,11 +1,12 @@
-import { useUser } from "../../auth/useUser.js";
-import { clearCart } from "../../cart/cartSlice.js"; // Use clearCart instead of removeAll
-import { createOrder } from "../../../services/apiOrders.js"; // Corrected import
+import { useUser } from "@/features/auth/useUser"; // Import useUser to get authenticated user
+import { createOrder } from "@/services/apiOrders.js"; // Corrected import
 import { useMutation, useQueryClient } from "@tanstack/react-query"; // Import useQueryClient
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { getCart, getTotalCartPrice } from "@/features/cart/cartSlice";
 import styles from "@/features/checkout/CheckoutForm/CheckoutForm.module.css";
-// import { updateProductStockApi } from '../../api/products.js'; // Removed as it doesn't exist
+import toast from "react-hot-toast"; // Import toast
+
 // import FormInputGroup from "./components/FormInputGroup.jsx";
 import BillingDetailsSection from "@/features/checkout/CheckoutForm/components/BillingDetailsSection.jsx";
 import ShippingInfoSection from "@/features/checkout/CheckoutForm/components/ShippingInfoSection.jsx";
@@ -26,41 +27,22 @@ const CheckoutForm = ({ onOrderSuccess }) => {
   const paymentMethod = watch("paymentMethod");
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useUser(); // Get authenticated user
-  const cartItems = useSelector((state) => state.cart.items);
-  const total = useSelector((state) => state.cart.total);
-  const shipping = useSelector((state) => state.cart.shipping);
-  const vat = useSelector((state) => state.cart.vat);
-  const grandTotal = useSelector((state) => state.cart.grandTotal);
+  const cartItems = useSelector(getCart);
+  const grandTotal = useSelector(getTotalCartPrice);
 
   const createOrderMutation = useMutation({
-    mutationFn: createOrder, // Changed to createOrder
-    onSuccess: async (_, variables) => {
-      // Removed variables from arguments as stock update logic is removed
-      // Stock update logic removed as updateProductStockApi doesn't exist
-      // const stockUpdatePromises = variables.cart_items.map(item =>
-      //   updateProductStockApi(item.product_id, item.quantity)
-      // );
-
-      try {
-        // await Promise.all(stockUpdatePromises);
-        // queryClient.invalidateQueries(['adminProducts']);
-        // queryClient.invalidateQueries(['product']);
-
-        dispatch(clearCart()); // Use clearCart to clear cart
-        onOrderSuccess();
-      } catch (stockError) {
-        console.error("Failed to update stock after order:", stockError);
-        // alert(`Order placed, but failed to update stock: ${stockError.message}`);
-      }
+    mutationFn: createOrder,
+    onSuccess: async () => {
+      onOrderSuccess();
     },
     onError: (err) => {
-      // toast.error(`Order placement failed: ${err.message}`); // toast is not defined
+      toast.error(`Order placement failed: ${err.message}`);
     },
   });
 
   const onSubmit = async (formData) => {
     if (!isAuthenticated || !user?.id) {
-      // toast.error('You must be logged in to place an order.'); // toast is not defined
+      toast.error("You must be logged in to place an order.");
       return;
     }
 
@@ -76,19 +58,15 @@ const CheckoutForm = ({ onOrderSuccess }) => {
     };
 
     const orderData = {
-      user_id: user.id,
-      cart_items: cartItems.map((item) => ({
-        product_id: item.id,
-        name: item.name,
-        slug: item.slug,
-        image: item.image,
-        price: item.price,
+      userId: user.id,
+      cartItems: cartItems.map((item) => ({
+        productId: item.id,
         quantity: item.quantity,
+        price: item.price,
       })),
-      total_amount: grandTotal, // Using grandTotal from Redux store
-      shipping_address: shippingAddress,
-      payment_method: formData.paymentMethod,
-      status: "pending", // Initial status
+      totalAmount: grandTotal,
+      shippingAddress: shippingAddress,
+      paymentMethod: formData.paymentMethod,
     };
 
     createOrderMutation.mutate(orderData);

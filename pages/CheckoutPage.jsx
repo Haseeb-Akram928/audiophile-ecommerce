@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CheckoutForm from "@/features/checkout/CheckoutForm/CheckoutForm";
 import CheckoutSummary from "@/features/checkout/CheckoutSummary/CheckoutSummary";
+import OrderConfirmation from "@/features/checkout/OrderConfirmation/OrderConfirmation";
 import styles from "@/pages/CheckoutPage.module.css";
 
 function CheckoutPage() {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <main className={styles.checkoutWrapper}>
@@ -14,10 +17,14 @@ function CheckoutPage() {
         </button>
 
         <div className={styles.layoutGrid}>
-          <CheckoutForm />
+          {/* Add the onOrderSuccess prop here */}
+          <CheckoutForm onOrderSuccess={() => setIsModalOpen(true)} />
           <CheckoutSummary />
         </div>
       </div>
+
+      {/* Render the modal here */}
+      <OrderConfirmation isVisible={isModalOpen} />
     </main>
   );
 }

@@ -7,7 +7,7 @@ import {
   clearCart,
 } from "@/features/cart/cartSlice";
 import styles from "@/features/cart/CartModal/CartModal.module.css";
-import CartItem from "./CartItem";
+import CartItem from "@/features/cart/CartModal/CartItem";
 
 const CartModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -38,7 +38,9 @@ const CartModal = ({ isOpen, onClose }) => {
         </div>
 
         <div className={styles.itemList}>
-          {cart.map((item) => <CartItem key={item.id} item={item} />)}
+          {cart.map((item) => (
+            <CartItem key={item.id} item={item} />
+          ))}
         </div>
 
         <div className={styles.totalRow}>

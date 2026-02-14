@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "@/components/layout/Header/Header.module.css";
-import CategoryMenu from "@/components/layout/Header/CategoryMenu.jsx";
+import CategoryMenu from "@/features/products/CategoryMenu/CategoryMenu";
 import CartModal from "@/features/cart/CartModal/CartModal";
-import DesktopNav from "./DesktopNav";
-import HeaderActions from "./HeaderActions";
+import DesktopNav from "@/components/layout/Header/DesktopNav";
+import HeaderActions from "@/components/layout/Header/HeaderActions";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -1,5 +1,5 @@
-import LoginForm from "@/features/auth/LoginForm";
 import { Link } from "react-router-dom";
+import LoginForm from "@/features/auth/LoginForm";
 import styles from "@/features/auth/AuthPage.module.css";
 
 const LoginPage = () => {

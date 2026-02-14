@@ -1,10 +1,9 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { getTotalCartQuantity } from '@/features/cart/cartSlice';
-import { useUser } from '@/features/auth/useUser';
-import { useLogout } from '@/features/auth/useLogout';
-import styles from './Header.module.css'; // Assuming styles are imported from Header.module.css
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { getTotalCartQuantity } from "@/features/cart/cartSlice";
+import { useUser } from "@/features/auth/useUser";
+import { useLogout } from "@/features/auth/useLogout";
+import styles from "@/components/layout/Header/Header.module.css"; // Assuming styles are imported from Header.module.css
 
 const HeaderActions = ({ setIsCartOpen }) => {
   const totalQuantity = useSelector(getTotalCartQuantity);
@@ -22,7 +21,7 @@ const HeaderActions = ({ setIsCartOpen }) => {
             onClick={logout}
             disabled={isLoggingOut || isLoading}
             className={`${styles.authButton} ${
-              isLoggingOut || isLoading ? styles.disabled : ''
+              isLoggingOut || isLoading ? styles.disabled : ""
             }`}
           >
             Logout
@@ -31,7 +30,7 @@ const HeaderActions = ({ setIsCartOpen }) => {
       ) : (
         <NavLink
           to="/login"
-          className={`${styles.authButton} ${isLoading ? styles.disabled : ''}`}
+          className={`${styles.authButton} ${isLoading ? styles.disabled : ""}`}
           aria-disabled={isLoading}
           onClick={(e) => isLoading && e.preventDefault()}
         >

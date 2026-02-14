@@ -1,47 +1,37 @@
 import { Link } from "react-router-dom";
-import styles from "./CategoryMenu.module.css";
-
-// No more imports for images, use direct paths
+import styles from "@/features/products/CategoryMenu/CategoryMenu.module.css";
 
 const categories = [
   {
-    name: "headphones",
-    image: "/assets/shared/desktop/image-headphones.png", // Direct path
+    name: "HEADPHONES",
+    image: "/assets/shared/desktop/image-category-thumbnail-headphones.png",
+    link: "/headphones",
   },
   {
-    name: "speakers",
-    image: "/assets/shared/desktop/image-speakers.png", // Direct path
+    name: "SPEAKERS",
+    image: "/assets/shared/desktop/image-category-thumbnail-speakers.png",
+    link: "/speakers",
   },
   {
-    name: "earphones",
-    image: "/assets/shared/desktop/image-earphones.png", // Direct path
+    name: "EARPHONES",
+    image: "/assets/shared/desktop/image-category-thumbnail-earphones.png",
+    link: "/earphones",
   },
 ];
 
 const CategoryMenu = ({ closeMenu }) => {
   return (
-    <nav className={styles.categoryMenu}>
-      <ul className={styles.categoryList}>
-        {categories.map((category) => (
-          <li key={category.name} className={styles.categoryItem}>
-            <Link
-              to={`/category/${category.name}`}
-              onClick={closeMenu}
-              className={styles.categoryLink}
-            >
-              <div className={styles.imageWrapper}>
-                <img src={category.image} alt="" className={styles.categoryImage} />
-              </div>
-              <h6 className={styles.categoryName}>{category.name}</h6>
-              <div className={styles.shopLink}>
-                <p className={styles.shopText}>Shop</p>
-                <img src="/assets/shared/desktop/icon-arrow-right.svg" alt="Shop category" />
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div className={styles.menuGrid}>
+      {categories.map((cat) => (
+        <div key={cat.name} className={styles.card}>
+          <img src={cat.image} alt={cat.name} className={styles.thumb} />
+          <h3 className={styles.name}>{cat.name}</h3>
+          <Link to={cat.link} className={styles.shopLink} onClick={closeMenu}>
+            SHOP <span className={styles.arrow}>&gt;</span>
+          </Link>
+        </div>
+      ))}
+    </div>
   );
 };
 
