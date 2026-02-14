@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "@/features/products/ProductPreview/ProductPreview.module.css";
 import { useProducts } from "../useProducts";
-import Loader from "@/ui/Loader";
+import Loader from "@/components/ui/Loader";
 
 const ProductPreview = ({ categoryName }) => {
   const { isLoading, products, error } = useProducts();
@@ -22,13 +22,16 @@ const ProductPreview = ({ categoryName }) => {
               <picture>
                 <source
                   media="(min-width: 1100px)"
-                  srcSet={product.categoryImage?.desktop || ''}
+                  srcSet={product.categoryImage?.desktop || ""}
                 />
                 <source
                   media="(min-width: 768px)"
-                  srcSet={product.categoryImage?.tablet || ''}
+                  srcSet={product.categoryImage?.tablet || ""}
                 />
-                <img src={product.categoryImage?.mobile || ''} alt={product.name} />
+                <img
+                  src={product.categoryImage?.mobile || ""}
+                  alt={product.name}
+                />
               </picture>
             </div>
 

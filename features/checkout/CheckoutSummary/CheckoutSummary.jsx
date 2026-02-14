@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { getCart, getTotalCartPrice } from "@/features/cart/cartSlice";
-import styles from "@/features/checkout/CheckoutSummary.module.css";
+import styles from "@/features/checkout/CheckoutSummary/CheckoutSummary.module.css";
 
 const CheckoutSummary = () => {
   const cart = useSelector(getCart);

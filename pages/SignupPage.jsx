@@ -1,6 +1,6 @@
 import SignupForm from "@/features/auth/SignupForm";
 import { Link } from "react-router-dom";
-import styles from "@/pages/AuthPage.module.css";
+import styles from "@/features/auth/AuthPage.module.css";
 
 const SignupPage = () => {
   return (

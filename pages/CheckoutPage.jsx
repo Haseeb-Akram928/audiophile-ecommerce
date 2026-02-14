@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import CheckoutForm from "@/features/checkout/CheckoutForm";
-import CheckoutSummary from "@/features/checkout/CheckoutSummary";
+import CheckoutForm from "@/features/checkout/CheckoutForm/CheckoutForm";
+import CheckoutSummary from "@/features/checkout/CheckoutSummary/CheckoutSummary";
 import styles from "@/pages/CheckoutPage.module.css";
 
 function CheckoutPage() {

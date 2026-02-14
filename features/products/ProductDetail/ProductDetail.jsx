@@ -3,7 +3,7 @@ import styles from "@/features/products/ProductDetail/ProductDetail.module.css";
 import RelatedProducts from "@/features/products/RelatedProducts/RelatedProducts";
 import NotFound from "@/pages/NotFound";
 import { useProduct } from "../useProduct";
-import Loader from "@/ui/Loader";
+import Loader from "@/components/ui/Loader";
 import ProductGallery from "./components/ProductGallery";
 import ProductFeatures from "./components/ProductFeatures";
 import AddToCartMenu from "./components/AddToCartMenu";

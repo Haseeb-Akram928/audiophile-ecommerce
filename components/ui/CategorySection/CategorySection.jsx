@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import styles from "@/ui/CategorySection.module.css";
+import styles from "@/components/ui/CategorySection/CategorySection.module.css";
 
 const CategorySection = () => {
   const categories = [

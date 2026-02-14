@@ -1,5 +1,5 @@
-import BestGear from "@/ui/BestGear";
-import CategorySection from "@/ui/CategorySection";
+import BestGear from "@/components/ui/BestGear/BestGear";
+import CategorySection from "@/components/ui/CategorySection/CategorySection";
 import FeaturedProducts from "@/features/products/FeaturedProducts/FeaturedProducts";
 import Hero from "@/features/products/Hero/Hero";
 

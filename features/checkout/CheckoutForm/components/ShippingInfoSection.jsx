@@ -1,6 +1,6 @@
 import React from 'react';
 import FormInputGroup from './FormInputGroup';
-import styles from '../CheckoutForm.module.css'; // Import styles
+import styles from "@/features/checkout/CheckoutForm/CheckoutForm.module.css" // Import styles
 
 const ShippingInfoSection = ({ register, errors }) => {
   return (

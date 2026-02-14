@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCart, getTotalCartPrice } from "@/features/cart/cartSlice";
-import styles from "@/features/checkout/OrderConfirmation.module.css";
+import styles from "@/features/checkout/OrderConfirmation/OrderConfirmation.module.css";
 
 const OrderConfirmation = ({ isVisible }) => {
   const navigate = useNavigate();

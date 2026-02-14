@@ -1,4 +1,4 @@
-import styles from "@/ui/BestGear.module.css";
+import styles from "@/components/ui/BestGear/BestGear.module.css";
 
 const BestGear = () => {
   return (

@@ -1,15 +1,15 @@
-import { useForm } from "react-hook-form";
-import styles from "@/features/checkout/CheckoutForm.module.css";
+import { useUser } from "../../auth/useUser.js";
+import { clearCart } from "../../cart/cartSlice.js"; // Use clearCart instead of removeAll
+import { createOrder } from "../../../services/apiOrders.js"; // Corrected import
 import { useMutation, useQueryClient } from "@tanstack/react-query"; // Import useQueryClient
+import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../../services/apiOrders.js"; // Corrected import
+import styles from "@/features/checkout/CheckoutForm/CheckoutForm.module.css";
 // import { updateProductStockApi } from '../../api/products.js'; // Removed as it doesn't exist
-import { useUser } from "../../features/auth/useUser.js";
-import { clearCart } from "../cart/cartSlice.js"; // Use clearCart instead of removeAll
-import FormInputGroup from './components/FormInputGroup';
-import BillingDetailsSection from './components/BillingDetailsSection';
-import ShippingInfoSection from './components/ShippingInfoSection';
-import PaymentDetailsSection from './components/PaymentDetailsSection';
+// import FormInputGroup from "./components/FormInputGroup.jsx";
+import BillingDetailsSection from "@/features/checkout/CheckoutForm/components/BillingDetailsSection.jsx";
+import ShippingInfoSection from "@/features/checkout/CheckoutForm/components/ShippingInfoSection.jsx";
+import PaymentDetailsSection from "@/features/checkout/CheckoutForm/components/PaymentDetailsSection.jsx";
 
 const CheckoutForm = ({ onOrderSuccess }) => {
   const queryClient = useQueryClient(); // Initialize queryClient

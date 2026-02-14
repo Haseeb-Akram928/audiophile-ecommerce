@@ -2,8 +2,8 @@ import { useParams } from "react-router-dom";
 import NotFound from "@/pages/NotFound";
 import CategoryHeader from "@/features/products/CategoryHeader/CategoryHeader";
 import ProductPreview from "@/features/products/ProductPreview/ProductPreview";
-import CategorySection from "@/ui/CategorySection";
-import BestGear from "@/ui/BestGear";
+import CategorySection from "@/components/ui/CategorySection/CategorySection";
+import BestGear from "@/components/ui/BestGear/BestGear";
 
 function CategoryPage() {
   const { categoryName } = useParams();
