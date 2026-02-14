@@ -4,12 +4,10 @@ import {
   getCart,
   getTotalCartQuantity,
   getTotalCartPrice,
-  increaseItemQuantity,
-  decreaseItemQuantity,
   clearCart,
-  deleteItem,
 } from "@/features/cart/cartSlice";
 import styles from "@/features/cart/CartModal/CartModal.module.css";
+import CartItem from "./CartItem";
 
 const CartModal = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
@@ -40,30 +38,7 @@ const CartModal = ({ isOpen, onClose }) => {
         </div>
 
         <div className={styles.itemList}>
-          {cart.map((item) => (
-            <div key={item.id} className={styles.item}>
-              <div className={styles.itemInfo}>
-                <div className={styles.imgContainer}>
-                  <img src={item.image} alt={item.name} />
-                </div>
-                <div className={styles.itemText}>
-                  <p className={styles.itemName}>{item.name}</p>
-                  <p className={styles.itemPrice}>
-                    $ {item.price.toLocaleString()}
-                  </p>
-                </div>
-              </div>
-              <div className={styles.quantityControls}>
-                <button onClick={() => dispatch(decreaseItemQuantity(item.id))}>
-                  -
-                </button>
-                <span>{item.quantity}</span>
-                <button onClick={() => dispatch(increaseItemQuantity(item.id))}>
-                  +
-                </button>
-              </div>
-            </div>
-          ))}
+          {cart.map((item) => <CartItem key={item.id} item={item} />)}
         </div>
 
         <div className={styles.totalRow}>
