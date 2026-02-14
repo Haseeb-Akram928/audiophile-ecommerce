@@ -1,0 +1,67 @@
+.authPage {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Soft gradient using your brand colors */
+  background: radial-gradient(circle at top left, var(--off-white), #f1f1f1);
+  padding: 24px;
+  position: relative;
+}
+
+.homeLink {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  color: var(--color-text-dark);
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: var(--fs-100);
+  letter-spacing: 1px;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.homeLink:hover {
+  opacity: 1;
+  color: var(--color-primary);
+}
+
+.container {
+  width: 100%;
+  max-width: 450px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.footer p {
+  font-size: var(--fs-300);
+  opacity: 0.6;
+}
+
+.footer a {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 8px;
+  text-transform: uppercase;
+  font-size: var(--fs-100);
+}

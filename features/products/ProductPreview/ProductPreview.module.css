@@ -1,0 +1,108 @@
+.listWrapper {
+  padding-bottom: 28px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1110px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+}
+
+.imageContainer img {
+  border-radius: 8px;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.newProduct {
+  color: var(--color-primary);
+  font-size: var(--fs-200);
+  letter-spacing: var(--spacing-900);
+  margin-bottom: 24px;
+}
+
+.name {
+  font-size: var(--fs-600);
+  margin-bottom: 24px;
+  max-width: 300px;
+}
+
+.description {
+  opacity: 0.5;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .listWrapper {
+    padding-bottom: 24px;
+  }
+
+  .productCard {
+    gap: 52px;
+  }
+
+  .newProduct {
+    margin-bottom: 16px;
+  }
+
+  .name {
+    font-size: var(--fs-800);
+    margin-bottom: 32px;
+  }
+
+  .description {
+    max-width: 573px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .listWrapper {
+    padding-bottom: 40px;
+  }
+
+  .container {
+    gap: 160px;
+  }
+
+  .productCard {
+    flex-direction: row;
+    text-align: left;
+    gap: 125px;
+  }
+
+  /* Reverse layout for every second product */
+  .productCard:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .content {
+    max-width: 445px;
+    align-items: flex-start;
+  }
+
+  .description {
+    margin-bottom: 40px;
+  }
+
+  .name {
+    font-size: var(--fs-800);
+    max-width: 400px;
+  }
+}

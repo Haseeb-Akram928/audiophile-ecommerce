@@ -1,0 +1,32 @@
+.headerWrapper {
+  background-color: var(--color-bg-dark);
+  height: 102px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 64px;
+}
+
+.title {
+  color: var(--color-text-light);
+  font-size: var(--fs-600); /* 28px */
+  letter-spacing: var(--spacing-800); /*2px*/
+}
+
+@media (min-width: 768px) {
+  .headerWrapper {
+    height: 246px;
+    margin-bottom: 120px;
+  }
+
+  .title {
+    font-size: var(--fs-800); /* 40px */
+  }
+}
+
+@media (min-width: 1100px) {
+  .headerWrapper {
+    height: 239px;
+    margin-bottom: 160px;
+  }
+}

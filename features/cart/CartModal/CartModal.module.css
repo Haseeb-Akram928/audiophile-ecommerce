@@ -1,0 +1,140 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modalContainer {
+  position: absolute;
+  top: 110px;
+  right: 5%;
+  width: 90%;
+  max-width: 377px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  z-index: 1001;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 18px;
+  letter-spacing: 1.29px;
+  font-weight: 700;
+}
+
+.removeAll {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.removeAll:hover {
+  color: var(--color-primary);
+  opacity: 1;
+}
+
+.itemList {
+  margin-bottom: 32px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.imgContainer {
+  width: 64px;
+  height: 64px;
+  background: #f1f1f1;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgContainer img {
+  width: 40px;
+}
+
+.itemName {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.itemPrice {
+  opacity: 0.5;
+  font-weight: 700;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  background: #f1f1f1;
+  width: 96px;
+  height: 32px;
+}
+
+.quantityControls button {
+  flex: 1;
+  border: none;
+  background: none;
+  opacity: 0.25;
+  cursor: pointer;
+}
+
+.quantityControls span {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.totalLabel {
+  opacity: 0.5;
+  font-weight: 500;
+}
+
+.totalPrice {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+@media (min-width: 768px) {
+  .modalContainer {
+    right: 40px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .modalContainer {
+    right: calc((100vw - 1110px) / 2);
+  }
+}

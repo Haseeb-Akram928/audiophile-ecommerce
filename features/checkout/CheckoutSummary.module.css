@@ -1,0 +1,102 @@
+.summaryCard {
+  background-color: var(--color-text-light);
+  border-radius: 8px;
+  padding: 32px;
+  height: fit-content;
+}
+
+.summaryTitle {
+  font-size: 18px;
+  letter-spacing: 1.29px;
+  margin-bottom: 31px;
+  color: var(--color-text-dark);
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.itemImg {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background-color: var(--color-surface);
+}
+
+.itemName {
+  font-weight: 700;
+  font-size: var(--fs-300);
+  color: var(--color-text-dark);
+}
+
+.itemPrice {
+  font-weight: 700;
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.itemQuantity {
+  font-weight: 700;
+  opacity: 0.5;
+  font-size: var(--fs-300);
+}
+
+.totalsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalRow span {
+  opacity: 0.5;
+  font-size: var(--fs-300);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.totalRow strong {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.grandTotal {
+  margin-top: 16px;
+}
+
+.orangeText {
+  color: var(--color-primary) !important;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (min-width: 1100px) {
+  .summaryCard {
+    width: 350px; /* Fixed width for the desktop sidebar layout */
+  }
+}

@@ -1,0 +1,251 @@
+.sectionWrapper {
+  background-color: var(--color-bg-light);
+  padding-bottom: 120px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1110px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Space between the three featured blocks */
+}
+
+/* --- ZX9 SPEAKER (Orange) --- */
+.zx9Card {
+  background-color: var(--color-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  padding: 55px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pattern {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 558px;
+  z-index: 1;
+}
+
+.zx9Content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.speaker {
+  width: 172px;
+  margin-bottom: 32px;
+}
+
+.zx9TextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zx9Title {
+  font-size: var(--fs-750); /*40px */
+  color: var(--color-text-light);
+  line-height: 1.1;
+  margin-bottom: 24px;
+  max-width: 200px;
+  text-transform: uppercase;
+}
+
+.zx9Description {
+  font-size: var(--fs-300); /*15px */
+  color: var(--color-text-light);
+  opacity: 0.75;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 280px;
+}
+
+/* --- ZX7 SPEAKER (Full Width) --- */
+.zx7Card {
+  height: 320px;
+  border-radius: 8px;
+  background-image: url("../../../public/assets/home/mobile/image-speaker-zx7.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+}
+
+.zx7Title {
+  font-size: var(--fs-600); /* 28px */
+  margin-bottom: 32px;
+  text-transform: uppercase;
+  letter-spacing: var(--spacing-800);
+}
+
+/* --- YX1 EARPHONES (Split) --- */
+.yx1Container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.yx1Image {
+  height: 200px;
+  border-radius: 8px;
+  background-image: url("../../../public/assets/home/mobile/image-earphones-yx1.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.yx1Content {
+  height: 200px;
+  background-color: var(--color-surface);
+  border-radius: 8px;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.yx1Title {
+  font-size: var(--fs-600); /* 28px */
+  margin-bottom: 32px;
+  text-transform: uppercase;
+  letter-spacing: var(--spacing-800);
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (min-width: 768px) {
+  .sectionWrapper {
+    padding-bottom: 96px;
+  }
+
+  .container {
+    gap: 32px;
+  }
+
+  /* ZX9 Tablet */
+  .zx9Card {
+    padding: 52px 0 64px;
+  }
+
+  .pattern {
+    top: -280px;
+    width: 944px;
+  }
+
+  .speaker {
+    width: 197px;
+    margin-bottom: 64px;
+  }
+
+  .zx9Title {
+    font-size: var(--fs-900);
+    max-width: 300px;
+  }
+
+  .zx9Description {
+    max-width: 349px;
+    margin-bottom: 40px;
+  }
+
+  /* ZX7 Tablet */
+  .zx7Card {
+    background-image: url("../../../public/assets/home/tablet/image-speaker-zx7.jpg");
+    padding-left: 60px;
+  }
+
+  /* YX1 Tablet */
+  .yx1Container {
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+  }
+
+  .yx1Image {
+    height: 320px;
+    background-image: url("../../../public/assets/home/tablet/image-earphones-yx1.jpg");
+  }
+
+  .yx1Content {
+    height: 320px;
+    padding-left: 40px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .sectionWrapper {
+    padding-bottom: 200px;
+  }
+
+  .container {
+    gap: 48px;
+  }
+
+  /* ZX9 Desktop */
+  .zx9Card {
+    height: 560px;
+    padding: 0;
+    justify-content: flex-end;
+    text-align: left;
+  }
+
+  .zx9TextContainer {
+    align-items: flex-start;
+  }
+
+  .pattern {
+    left: -150px;
+    top: -40px;
+    transform: none;
+  }
+
+  .zx9Content {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: flex-end;
+  }
+
+  .zx9Title {
+    font-size: 58px;
+  }
+
+  .speaker {
+    width: 410px;
+    margin-bottom: -15px;
+  }
+
+  .zx9TextContainer {
+    margin-bottom: 124px;
+    max-width: 349px;
+  }
+
+  /* ZX7 Desktop */
+  .zx7Card {
+    background-image: url("../../../public/assets/home/desktop/image-speaker-zx7.jpg");
+    padding-left: 95px;
+  }
+
+  /* YX1 Desktop */
+  .yx1Container {
+    gap: 30px;
+  }
+
+  .yx1Image {
+    background-image: url("../../../public/assets/home/desktop/image-earphones-yx1.jpg");
+  }
+
+  .yx1Content {
+    padding-left: 95px;
+  }
+}

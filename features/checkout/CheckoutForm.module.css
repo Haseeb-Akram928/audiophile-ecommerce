@@ -1,0 +1,102 @@
+.formCard {
+  background-color: var(--color-text-light);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.mainTitle {
+  font-size: var(--fs-700);
+  margin-bottom: 32px;
+  color: var(--color-text-dark);
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+.sectionTitle {
+  color: var(--color-primary);
+  margin-bottom: 16px;
+  font-size: var(--fs-100);
+  letter-spacing: 0.93px;
+}
+
+.inputGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+/* Payment Section specific styles */
+.paymentFlex {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.paymentLabel {
+  font-size: var(--fs-50);
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cashNotice {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-top: 30px;
+}
+
+.cashNotice p {
+  opacity: 0.5;
+  font-size: var(--fs-300);
+  line-height: 1.6;
+}
+
+
+/* Tablet (768px) and Desktop (1100px) */
+@media (min-width: 768px) {
+  .formCard {
+    padding: 30px;
+  }
+
+  .mainTitle {
+    font-size: var(--fs-750);
+  }
+
+  /* Two-column grid for inputs */
+  .inputGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Address field should span full width in the grid */
+  .fullWidthInput {
+    grid-column: span 2;
+  }
+
+  .paymentFlex {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .radioGroup {
+    width: 309px; /* Matches the width from your index.css radio-container */
+  }
+}
+
+@media (min-width: 1100px) {
+  .formCard {
+    padding: 54px 48px;
+  }
+
+  .cashNotice {
+    max-width: 600px;
+  }
+}

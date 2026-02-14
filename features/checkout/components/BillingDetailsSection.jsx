@@ -1,0 +1,47 @@
+import React from 'react';
+import FormInputGroup from './FormInputGroup';
+import styles from '../CheckoutForm.module.css'; // Import styles
+
+const BillingDetailsSection = ({ register, errors }) => {
+  return (
+    <div className={styles.section}>
+      <h6 className={styles.sectionTitle}>BILLING DETAILS</h6>
+      <div className={styles.inputGrid}>
+        <FormInputGroup
+          label="Name"
+          id="name"
+          register={register}
+          validationRules={{ required: "Required" }}
+          error={errors.name}
+          placeholder="Haseeb akram"
+        />
+        <FormInputGroup
+          label="Email Address"
+          id="email"
+          type="email"
+          register={register}
+          validationRules={{
+            required: "Required",
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: "Wrong format",
+            },
+          }}
+          error={errors.email}
+          placeholder="Haseebakram@mail.com"
+        />
+        <FormInputGroup
+          label="Phone Number"
+          id="phone"
+          type="tel"
+          register={register}
+          validationRules={{ required: "Required" }}
+          error={errors.phone}
+          placeholder="+92 3001234567"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default BillingDetailsSection;

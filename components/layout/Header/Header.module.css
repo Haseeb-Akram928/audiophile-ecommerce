@@ -1,0 +1,263 @@
+/* --- MAIN NAVIGATION BAR --- */
+.navbarContainer {
+  background-color: var(--color-bg-dark);
+  width: 100%;
+  position: relative;
+  /* High z-index ensures logo and hamburger stay above the sliding menu */
+  z-index: 1000;
+}
+
+.navbarContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  width: 90%;
+  max-width: 1110px;
+  margin: 0 auto;
+}
+
+.desktopNav {
+  display: none;
+}
+
+/* --- DECORATIVE DIVIDER --- */
+.dividerWrapper {
+  width: 100%;
+}
+
+.navDivider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0;
+  width: 100%;
+}
+
+/* --- BUTTONS & LOGO --- */
+.iconButton {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  color: inherit;
+}
+
+.authButton {
+  background-color: transparent;
+  color: var(--color-text-light);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: var(--fs-200);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.authButton:hover {
+  color: var(--color-primary);
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.iconButton:focus-visible,
+.logoLink:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Default gap for mobile/tablet */
+}
+
+/* --- MOBILE MENU & OVERLAY LOGIC --- */
+
+.overlay {
+  position: fixed;
+  top: 90px; /* Aligns with bottom of navbar */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 90px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 800; /* Behind menu, above main page content */
+  animation: fadeIn 0.3s ease;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  /* Large padding-top allows floating CategoryMenu images to breathe */
+  padding: 80px 24px 32px;
+  z-index: 900; /* Below the navbar container but above overlay */
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.4s ease-out;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- TABLET DESIGN (768px+) --- */
+@media (min-width: 768px) {
+  .dividerWrapper {
+    width: 90%;
+    max-width: 1110px;
+    margin: 0 auto;
+  }
+
+  .navbarContainer {
+    padding: 0 40px;
+  }
+
+  .navbarContent {
+    justify-content: flex-start;
+    gap: 42px;
+    height: 90px;
+  }
+
+  .cartContainer {
+    margin-left: auto;
+  }
+
+  .overlay,
+  .mobileMenu {
+    top: 90px;
+  }
+
+  .mobileMenu {
+    padding: 100px 40px 64px;
+  }
+}
+
+/* --- DESKTOP DESIGN (1100px+) --- */
+@media (min-width: 1100px) {
+  .hamburgerContainer {
+    display: none;
+  }
+
+  .navbarContent {
+    height: 96px;
+    justify-content: space-between;
+    padding: 0;
+  }
+
+  .desktopNav {
+    display: block;
+  }
+
+  .navLinks {
+    display: flex;
+    list-style: none;
+    gap: 34px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navLinksA {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: var(--fs-100);
+    font-weight: 700;
+    letter-spacing: var(--spacing-800);
+    transition: color 0.3s ease;
+  }
+
+  .navLinksA:hover {
+    color: var(--color-primary);
+  }
+
+  .activeLink {
+    color: var(--color-primary) !important;
+  }
+
+  .cartContainer {
+    margin-left: 0;
+  }
+
+  .headerActions {
+    gap: 34px; /* Space between the auth button and cart */
+  }
+
+  /* Hide mobile elements on desktop */
+  .overlay,
+  .mobileMenu {
+    display: none;
+  }
+}
+
+.cartContainer {
+  position: relative; /* Context for absolute positioning */
+}
+
+.cartIconWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -8px; /* Move it above the icon */
+  right: -10px; /* Align to the right side */
+  background-color: var(--color-primary); /* Your copper color */
+  color: var(--color-text-light); /* White text */
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%; /* Make it circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  pointer-events: none; /* Icon remains clickable */
+}
+
+@media (min-width: 768px) {
+  .cartBadge {
+    top: -6px;
+    right: -8px;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none; /* Prevents click events */
+}

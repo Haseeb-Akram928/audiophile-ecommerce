@@ -1,0 +1,110 @@
+.categoryWrapper {
+  padding: 92px 0 120px 0; /* Space for the overlapping images */
+  background-color: var(--color-bg-light);
+}
+
+.container {
+  width: 90%;
+  max-width: 1110px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 68px; /* Vertical gap for mobile */
+}
+
+.categoryCard {
+  position: relative;
+  background-color: var(--color-surface); /* hsl(0, 0%, 95%) */
+  border-radius: 8px;
+  height: 165px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 16px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+}
+
+.imageWrapper {
+  position: absolute;
+  top: -52px; /* Pulls image above the gray box */
+  width: 150px;
+}
+
+.productImg {
+  filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.2));
+}
+
+.categoryName {
+  font-size: var(--fs-300); /* 15px */
+  letter-spacing: var(--spacing-300); /* 1px */
+  color: var(--color-text-dark);
+  font-weight: 700;
+}
+
+.shopLink {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-decoration: none;
+  font-size: var(--fs-100); /* 13px */
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.5);
+  letter-spacing: var(--spacing-300);
+  transition: color 0.2s ease;
+}
+
+.shopLink:hover {
+  color: var(--color-primary); /* --copper */
+}
+
+.arrow {
+  width: 8px;
+  height: 12px;
+}
+
+/* Tablet (768px) and Desktop (1100px) */
+@media (min-width: 768px) {
+  .categoryWrapper {
+    padding: 148px 0 96px 0;
+  }
+
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; /* Small gap between horizontal cards */
+  }
+
+  .categoryCard {
+    padding-bottom: 30px;
+  }
+
+  .imageWrapper {
+    top: -70px;
+    width: 180px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .categoryWrapper {
+    padding: 200px 0 168px 0;
+  }
+
+  .categoryCard {
+    height: 204px;
+  }
+
+  .categoryName{
+    font-size: var(--fs-400); /* 18px */
+    letter-spacing: 1.286px;
+  }
+
+  .container {
+    gap: 30px; /* Wider gap for desktop */
+  }
+}
