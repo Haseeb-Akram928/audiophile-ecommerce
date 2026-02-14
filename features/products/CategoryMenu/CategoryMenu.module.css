@@ -1,0 +1,90 @@
+.categoryMenu {
+  padding-bottom: 92px;
+}
+
+.categoryList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 68px; /* High gap to leave room for the overlapping images */
+}
+
+.categoryItem {
+  background-color: var(--color-surface); /* hsl(0, 0%, 95%) */
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px 22px;
+  position: relative;
+  text-align: center;
+}
+
+.categoryLink {
+  text-decoration: none;
+}
+
+.imageWrapper {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  /* This moves the image up so it sits outside the gray box */
+  margin-top: -52px;
+}
+
+.categoryImage {
+  width: 100%;
+  height: auto;
+  /* Standard shadow for the product thumbnails */
+  filter: drop-shadow(0px 20px 20px rgba(0, 0, 0, 0.2));
+}
+
+.categoryName {
+  font-size: var(--fs-300); /* 15px */
+  font-weight: 700;
+  letter-spacing: 1.07px;
+  color: var(--color-text-dark);
+  margin: 15px 0;
+  text-transform: uppercase;
+}
+
+.shopLink {
+  font-size: 13px;
+  font-weight: 700;
+  color: #000;
+  opacity: 0.5;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  transition: all 0.2s ease;
+}
+
+.shopLink:hover {
+  color: var(--color-primary); /* --copper */
+  opacity: 1;
+}
+
+/* Tablet & Desktop Layout (3 cards in a row) */
+@media (min-width: 768px) {
+  .categoryList {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px; /* Small gap as cards will take up equal width */
+  }
+
+  .categoryItem {
+    flex: 1;
+    margin-top: 52px; /* Adds space for the image overlap in the grid */
+  }
+}
+
+@media (min-width: 1100px) {
+  .categoryList {
+    gap: 30px;
+  }
+}

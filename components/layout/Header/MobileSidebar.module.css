@@ -1,0 +1,67 @@
+.overlay {
+  position: fixed;
+  top: 90px; /* Aligns with bottom of navbar */
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 90px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 800; /* Behind menu, above main page content */
+  animation: fadeIn 0.3s ease;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  /* Large padding-top allows floating CategoryMenu images to breathe */
+  padding: 80px 24px 32px;
+  z-index: 900; /* Below the navbar container but above overlay */
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.4s ease-out;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- TABLET DESIGN (768px+) --- */
+@media (min-width: 768px) {
+  .overlay,
+  .mobileMenu {
+    top: 90px;
+  }
+
+  .mobileMenu {
+    padding: 100px 40px 64px;
+  }
+}
+
+/* --- DESKTOP DESIGN (1100px+) --- */
+@media (min-width: 1100px) {
+  /* Hide mobile elements on desktop */
+  .overlay,
+  .mobileMenu {
+    display: none;
+  }
+}

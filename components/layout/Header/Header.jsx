@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import styles from "@/components/layout/Header/Header.module.css";
 import CategoryMenu from "@/components/layout/Header/CategoryMenu.jsx";
 import CartModal from "@/features/cart/CartModal/CartModal";
@@ -55,7 +56,12 @@ const Header = () => {
           className={styles.logoLink}
           aria-label="Audiophile home"
         >
-          <img src="/assets/logo.svg" alt="Audiophile Logo" aria-hidden="true" className={styles.logoImg} />
+          <img
+            src="/assets/logo.svg"
+            alt="Audiophile Logo"
+            aria-hidden="true"
+            className={styles.logoImg}
+          />
         </NavLink>
 
         <DesktopNav />
