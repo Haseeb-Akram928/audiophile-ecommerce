@@ -8,7 +8,7 @@ import styles from "@/components/layout/Header/Header.module.css"; // Assuming s
 const HeaderActions = ({ setIsCartOpen }) => {
   const totalQuantity = useSelector(getTotalCartQuantity);
   const { user, isLoading } = useUser();
-  const { logout, isLoading: isLoggingOut } = useLogout();
+  const { logout, isPending: isLoggingOut } = useLogout();
 
   return (
     <div className={styles.headerActions}>
@@ -24,7 +24,7 @@ const HeaderActions = ({ setIsCartOpen }) => {
               isLoggingOut || isLoading ? styles.disabled : ""
             }`}
           >
-            Logout
+            {isLoggingOut ? "Logging out..." : "Logout"}
           </button>
         </>
       ) : (

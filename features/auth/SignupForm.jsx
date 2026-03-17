@@ -5,7 +5,7 @@ import styles from "@/features/auth/AuthForm.module.css";
 function SignupForm() {
   const { register, handleSubmit, formState, getValues } = useForm();
   const { errors } = formState;
-  const { signup, isLoading } = useSignup();
+  const { signup, isPending } = useSignup();
 
   function onSubmit({ fullName, email, password }) {
     signup({ fullName, email, password });
@@ -22,7 +22,7 @@ function SignupForm() {
           id="fullName"
           {...register("fullName", { required: "Full name is required" })}
           className={styles.fieldInput}
-          disabled={isLoading}
+          disabled={isPending}
         />
         {errors.fullName && (
           <span className={styles.fieldError}>{errors.fullName.message}</span>
@@ -37,7 +37,7 @@ function SignupForm() {
           id="email"
           {...register("email", { required: "Email is required" })}
           className={styles.fieldInput}
-          disabled={isLoading}
+          disabled={isPending}
         />
         {errors.email && <span className={styles.fieldError}>{errors.email.message}</span>}
       </div>
@@ -50,7 +50,7 @@ function SignupForm() {
           id="password"
           {...register("password", { required: "Password is required" })}
           className={styles.fieldInput}
-          disabled={isLoading}
+          disabled={isPending}
         />
         {errors.password && (
           <span className={styles.fieldError}>{errors.password.message}</span>
@@ -69,14 +69,14 @@ function SignupForm() {
               value === getValues().password || "Passwords do not match",
           })}
           className={styles.fieldInput}
-          disabled={isLoading}
+          disabled={isPending}
         />
         {errors.passwordConfirm && (
           <span className={styles.fieldError}>{errors.passwordConfirm.message}</span>
         )}
       </div>
-      <button type="submit" className={styles.button} disabled={isLoading}>
-        {isLoading ? "Creating account..." : "Create new account"}
+      <button type="submit" className={styles.button} disabled={isPending}>
+        {isPending ? "Creating account..." : "Create new account"}
       </button>
     </form>
   );

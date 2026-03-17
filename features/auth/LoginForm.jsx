@@ -5,7 +5,7 @@ import styles from "@/features/auth/AuthForm.module.css";
 function LoginForm() {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
-  const { login, isLoading } = useLogin();
+  const { login, isPending } = useLogin();
 
   function onSubmit({ email, password }) {
     login({ email, password });
@@ -22,7 +22,7 @@ function LoginForm() {
           id="email"
           {...register("email", { required: "Email is required" })}
           className={styles.fieldInput}
-          disabled={isLoading}
+          disabled={isPending}
         />
         {errors.email && (
           <span className={styles.fieldError}>{errors.email.message}</span>
@@ -37,14 +37,14 @@ function LoginForm() {
           id="password"
           {...register("password", { required: "Password is required" })}
           className={styles.fieldInput}
-          disabled={isLoading}
+          disabled={isPending}
         />
         {errors.password && (
           <span className={styles.fieldError}>{errors.password.message}</span>
         )}
       </div>
-      <button type="submit" className={styles.button} disabled={isLoading}>
-        {isLoading ? "Logging in..." : "Login"}
+      <button type="submit" className={styles.button} disabled={isPending}>
+        {isPending ? "Logging in..." : "Login"}
       </button>
     </form>
   );
