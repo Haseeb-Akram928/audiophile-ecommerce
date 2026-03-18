@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styles from "@/components/layout/Header/Header.module.css";
-import CategoryMenu from "@/features/products/CategoryMenu/CategoryMenu";
 import CartModal from "@/features/cart/CartModal/CartModal";
 import DesktopNav from "@/components/layout/Header/DesktopNav";
 import HeaderActions from "@/components/layout/Header/HeaderActions";
+import SidebarNav from "@/components/layout/Header/SidebarNav";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,7 +51,7 @@ const Header = () => {
           />
         </button>
 
-        <NavLink // Still need NavLink for logo
+        <NavLink
           to="/"
           className={styles.logoLink}
           aria-label="Audiophile home"
@@ -73,14 +73,7 @@ const Header = () => {
         <hr className={styles.navDivider} />
       </div>
 
-      {isMenuOpen && (
-        <>
-          <div className={styles.overlay} onClick={closeMenu} />
-          <div className={styles.mobileMenu}>
-            <CategoryMenu closeMenu={closeMenu} />
-          </div>
-        </>
-      )}
+      <SidebarNav isOpen={isMenuOpen} onClose={closeMenu} />
 
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
