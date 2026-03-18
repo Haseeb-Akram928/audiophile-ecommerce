@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Toaster } from "react-hot-toast"; // Import Toaster
 import { Outlet, useLocation } from "react-router-dom";
 import Header from "@/components/layout/Header/Header.jsx";
 import Footer from "@/components/layout/Footer/Footer.jsx";
@@ -18,7 +17,6 @@ const RootLayout = () => {
         <Outlet />
       </main>
       <Footer />
-      <Toaster /> {/* Add Toaster component */}
     </>
   );
 };
