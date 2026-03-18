@@ -150,7 +150,7 @@
     height: 90px;
   }
 
-  .cartContainer {
+  .headerActions {
     margin-left: auto;
   }
 
@@ -180,6 +180,10 @@
     display: block;
   }
 
+  .headerActions {
+    margin-left: 0;
+  }
+
   .navLinks {
     display: flex;
     list-style: none;
@@ -206,7 +210,7 @@
   }
 
   .cartContainer {
-    margin-left: 0;
+    margin-left: auto;
   }
 
   .headerActions {
