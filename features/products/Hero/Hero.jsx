@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
-import data from "../../../../data.json";
+import { useProducts } from "../useProducts";
 import styles from "@/features/products/Hero/Hero.module.css";
+import Loader from "@/components/ui/Loader";
 
 const Hero = () => {
-  const newProduct = data.find(
+  const { isLoading, products } = useProducts();
+
+  if (isLoading) return <Loader />;
+
+  const newProduct = products?.find(
     (product) =>
       product.new === true && product.slug === "xx99-mark-two-headphones",
   );

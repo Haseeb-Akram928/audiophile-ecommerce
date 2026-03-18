@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
-import data from "../../../../data.json";
+import { useProducts } from "../useProducts";
 import styles from "@/features/products/FeaturedProducts/FeaturedProducts.module.css";
+import Loader from "@/components/ui/Loader";
 
 const FeaturedProducts = () => {
-  // Find products from JSON
-  const zx9 = data.find((p) => p.slug === "zx9-speaker");
-  const zx7 = data.find((p) => p.slug === "zx7-speaker");
-  const yx1 = data.find((p) => p.slug === "yx1-earphones");
+  const { isLoading, products } = useProducts();
+
+  if (isLoading) return <Loader />;
+
+  // Find products from fetched data
+  const zx9 = products?.find((p) => p.slug === "zx9-speaker");
+  const zx7 = products?.find((p) => p.slug === "zx7-speaker");
+  const yx1 = products?.find((p) => p.slug === "yx1-earphones");
 
   return (
     <section className={styles.sectionWrapper}>
