@@ -1,44 +1,23 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getTotalCartQuantity } from "@/features/cart/cartSlice";
 import { useUser } from "@/features/auth/useUser";
 import { useLogout } from "@/features/auth/useLogout";
-import styles from "@/components/layout/Header/Header.module.css"; // Assuming styles are imported from Header.module.css
+import { useOutsideClick } from "@/hooks/useOutsideClick";
+import styles from "@/components/layout/Header/Header.module.css";
 
 const HeaderActions = ({ setIsCartOpen }) => {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const totalQuantity = useSelector(getTotalCartQuantity);
   const { user, isLoading } = useUser();
   const { logout, isPending: isLoggingOut } = useLogout();
 
+  const closeDropdown = () => setIsProfileOpen(false);
+  const dropdownRef = useOutsideClick(closeDropdown);
+
   return (
     <div className={styles.headerActions}>
-      <div className={styles.authContainer}>
-        {user ? ( // User is logged in
-          <>
-            <span className={styles.userName}>
-              Hello, {user?.user_metadata?.fullName || "User"}
-            </span>
-            <button
-              onClick={logout}
-              disabled={isLoggingOut || isLoading}
-              className={`${styles.authButton} ${
-                isLoggingOut || isLoading ? styles.disabled : ""
-              }`}
-            >
-              {isLoggingOut ? "Logging out..." : "Logout"}
-            </button>
-          </>
-        ) : (
-          <NavLink
-            to="/login"
-            className={`${styles.authButton} ${isLoading ? styles.disabled : ""}`}
-            aria-disabled={isLoading}
-            onClick={(e) => isLoading && e.preventDefault()}
-          >
-            Login
-          </NavLink>
-        )}
-      </div>
       <button
         className={`${styles.iconButton} ${styles.cartContainer}`}
         aria-label="View shopping cart"
@@ -56,6 +35,52 @@ const HeaderActions = ({ setIsCartOpen }) => {
           )}
         </div>
       </button>
+
+      <div className={styles.authContainer} ref={dropdownRef}>
+        <button
+          className={`${styles.avatarBtn} ${isProfileOpen ? styles.avatarActive : ""}`}
+          onClick={() => setIsProfileOpen((prev) => !prev)}
+          aria-label="Profile menu"
+        >
+          <span className={`material-symbols-outlined ${styles.avatarIcon}`}>
+            person
+          </span>
+        </button>
+
+        {isProfileOpen && (
+          <div className={styles.profileDropdown}>
+            {user ? (
+              <>
+                <NavLink to="/profile" className={styles.dropdownItem} onClick={closeDropdown}>
+                  MY PROFILE
+                </NavLink>
+                <NavLink to="/orders" className={styles.dropdownItem} onClick={closeDropdown}>
+                  ORDERS
+                </NavLink>
+                <button
+                  className={`${styles.dropdownItem} ${styles.logoutOrange}`}
+                  onClick={() => {
+                    logout();
+                    closeDropdown();
+                  }}
+                  disabled={isLoggingOut}
+                >
+                  LOGOUT
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login" className={styles.dropdownItem} onClick={closeDropdown}>
+                  LOGIN
+                </NavLink>
+                <NavLink to="/signup" className={styles.dropdownItem} onClick={closeDropdown}>
+                  SIGNUP
+                </NavLink>
+              </>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

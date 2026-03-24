@@ -283,3 +283,76 @@
   cursor: not-allowed;
   pointer-events: none; /* Prevents click events */
 }
+
+/* --- PROFILE AVATAR & DROPDOWN --- */
+.authContainer {
+  position: relative; 
+}
+
+.avatarBtn {
+  background: #2a2c2c; /* Solid dark grey matching the image */
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: #ffffff;
+  padding: 0;
+}
+
+.avatarActive, .avatarBtn:hover {
+  background-color: var(--color-primary, #d87d4a);
+}
+
+.avatarIcon {
+  font-size: 24px;
+  font-variation-settings: 'FILL' 0;
+}
+
+.profileDropdown {
+  position: absolute;
+  top: 60px; /* Positions below the 44px button */
+  right: 0; /* Align dropdown to the right edge of avatar */
+  background-color: #ffffff;
+  border-radius: 2px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 32px;
+  gap: 20px;
+  z-index: 2000;
+  min-width: max-content;
+}
+
+.dropdownItem {
+  color: #101010;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s ease;
+}
+
+.dropdownItem:hover {
+  color: var(--color-primary, #d87d4a);
+}
+
+.logoutOrange {
+  color: var(--color-primary, #d87d4a);
+}
+
+.logoutOrange:hover {
+  color: #c0693a;
+}
+
