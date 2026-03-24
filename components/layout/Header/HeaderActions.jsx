@@ -12,31 +12,33 @@ const HeaderActions = ({ setIsCartOpen }) => {
 
   return (
     <div className={styles.headerActions}>
-      {user ? ( // User is logged in
-        <>
-          <span className={styles.userName}>
-            Hello, {user.user_metadata.fullName}
-          </span>
-          <button
-            onClick={logout}
-            disabled={isLoggingOut || isLoading}
-            className={`${styles.authButton} ${
-              isLoggingOut || isLoading ? styles.disabled : ""
-            }`}
+      <div className={styles.authContainer}>
+        {user ? ( // User is logged in
+          <>
+            <span className={styles.userName}>
+              Hello, {user?.user_metadata?.fullName || "User"}
+            </span>
+            <button
+              onClick={logout}
+              disabled={isLoggingOut || isLoading}
+              className={`${styles.authButton} ${
+                isLoggingOut || isLoading ? styles.disabled : ""
+              }`}
+            >
+              {isLoggingOut ? "Logging out..." : "Logout"}
+            </button>
+          </>
+        ) : (
+          <NavLink
+            to="/login"
+            className={`${styles.authButton} ${isLoading ? styles.disabled : ""}`}
+            aria-disabled={isLoading}
+            onClick={(e) => isLoading && e.preventDefault()}
           >
-            {isLoggingOut ? "Logging out..." : "Logout"}
-          </button>
-        </>
-      ) : (
-        <NavLink
-          to="/login"
-          className={`${styles.authButton} ${isLoading ? styles.disabled : ""}`}
-          aria-disabled={isLoading}
-          onClick={(e) => isLoading && e.preventDefault()}
-        >
-          Login
-        </NavLink>
-      )}
+            Login
+          </NavLink>
+        )}
+      </div>
       <button
         className={`${styles.iconButton} ${styles.cartContainer}`}
         aria-label="View shopping cart"

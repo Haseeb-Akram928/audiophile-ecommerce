@@ -15,6 +15,7 @@
   width: 90%;
   max-width: 1110px;
   margin: 0 auto;
+  position: relative;
 }
 
 .desktopNav {
@@ -69,12 +70,20 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+  /* Center logo absolutely on mobile/tablet */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .iconButton:focus-visible,
 .logoLink:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 4px;
+}
+
+.authContainer {
+  display: none;
 }
 
 .headerActions {
@@ -145,14 +154,11 @@
   }
 
   .navbarContent {
-    justify-content: flex-start;
-    gap: 42px;
+    justify-content: space-between;
     height: 90px;
   }
 
-  .headerActions {
-    margin-left: auto;
-  }
+  /* headerActions stays at the right via flex space-between, no margin-left needed */
 
   .overlay,
   .mobileMenu {
@@ -174,6 +180,12 @@
     height: 96px;
     justify-content: space-between;
     padding: 0;
+  }
+
+  /* Reset absolute centering on desktop — logo flows in flex layout naturally */
+  .logoLink {
+    position: static;
+    transform: none;
   }
 
   .desktopNav {
@@ -207,6 +219,12 @@
 
   .activeLink {
     color: var(--color-primary) !important;
+  }
+
+  .authContainer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
 
   .cartContainer {

@@ -1,67 +1,164 @@
 import { NavLink } from "react-router-dom";
+import { useUser } from "@/features/auth/useUser";
+import { useLogout } from "@/features/auth/useLogout";
 import styles from "./SidebarNav.module.css";
 
 const SidebarNav = ({ isOpen, onClose }) => {
+  const { user } = useUser();
+  const { logout, isPending } = useLogout();
+
+  const handleLogout = () => {
+    logout();
+    onClose();
+  };
+
+  const userName = user?.user_metadata?.fullName || "Guest User";
+  const userTier = user ? "Premium Tier Member" : "Welcome to Audiophile";
+
   return (
     <>
-      {/* Dark Overlay */}
       <div
         className={`${styles.overlay} ${isOpen ? styles.overlayOpen : ""}`}
         onClick={onClose}
       />
 
-      {/* Sidebar Drawer */}
       <nav className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ""}`}>
-        <ul className={styles.navLinks}>
-          <li>
-            <NavLink
-              to="/"
-              end
-              className={({ isActive }) =>
-                isActive ? `${styles.link} ${styles.active}` : styles.link
-              }
-              onClick={onClose}
+        {/* User Card */}
+        <div className={styles.userCard}>
+          <div className={styles.avatarWrapper}>
+            <span className={`material-symbols-outlined ${styles.avatarIcon}`}>
+              account_circle
+            </span>
+          </div>
+          <div className={styles.userInfo}>
+            <span className={styles.userName}>{userName}</span>
+            <span className={styles.userTier}>{userTier}</span>
+          </div>
+        </div>
+
+        <div className={styles.divider} />
+
+        {/* Collections */}
+        <div className={styles.navSection}>
+          <p className={styles.sectionTitle}>Collections</p>
+          <ul className={styles.navLinks}>
+            <li>
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `${styles.link} ${isActive ? styles.active : ""}`
+                }
+                onClick={onClose}
+              >
+                <span className={`material-symbols-outlined ${styles.linkIcon}`}>home</span>
+                <span>Home</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/headphones"
+                className={({ isActive }) =>
+                  `${styles.link} ${isActive ? styles.active : ""}`
+                }
+                onClick={onClose}
+              >
+                <span className={`material-symbols-outlined ${styles.linkIcon}`}>headphones</span>
+                <span>Headphones</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/speakers"
+                className={({ isActive }) =>
+                  `${styles.link} ${isActive ? styles.active : ""}`
+                }
+                onClick={onClose}
+              >
+                <span className={`material-symbols-outlined ${styles.linkIcon}`}>speaker</span>
+                <span>Speakers</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/earphones"
+                className={({ isActive }) =>
+                  `${styles.link} ${isActive ? styles.active : ""}`
+                }
+                onClick={onClose}
+              >
+                <span className={`material-symbols-outlined ${styles.linkIcon}`}>hearing</span>
+                <span>Earphones</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+
+        {/* Support */}
+        <div className={styles.navSection}>
+          <p className={styles.sectionTitle}>Support</p>
+          <ul className={styles.navLinks}>
+            {user ? (
+              <>
+                <li>
+                  <NavLink
+                    to="/orders"
+                    className={({ isActive }) =>
+                      `${styles.link} ${isActive ? styles.active : ""}`
+                    }
+                    onClick={onClose}
+                  >
+                    <span className={`material-symbols-outlined ${styles.linkIcon}`}>shopping_bag</span>
+                    <span>My Orders</span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/profile"
+                    className={({ isActive }) =>
+                      `${styles.link} ${isActive ? styles.active : ""}`
+                    }
+                    onClick={onClose}
+                  >
+                    <span className={`material-symbols-outlined ${styles.linkIcon}`}>settings</span>
+                    <span>Settings</span>
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <li>
+                <NavLink
+                  to="/login"
+                  className={styles.link}
+                  onClick={onClose}
+                >
+                  <span className={`material-symbols-outlined ${styles.linkIcon}`}>login</span>
+                  <span>Login</span>
+                </NavLink>
+              </li>
+            )}
+          </ul>
+        </div>
+
+        {/* Sign Out — pinned to bottom */}
+        {user && (
+          <div className={styles.signOutWrapper}>
+            <div className={styles.divider} />
+            <button
+              className={styles.signOutBtn}
+              onClick={handleLogout}
+              disabled={isPending}
             >
-              HOME
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/headphones"
-              className={({ isActive }) =>
-                isActive ? `${styles.link} ${styles.active}` : styles.link
-              }
-              onClick={onClose}
-            >
-              HEADPHONES
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/speakers"
-              className={({ isActive }) =>
-                isActive ? `${styles.link} ${styles.active}` : styles.link
-              }
-              onClick={onClose}
-            >
-              SPEAKERS
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/earphones"
-              className={({ isActive }) =>
-                isActive ? `${styles.link} ${styles.active}` : styles.link
-              }
-              onClick={onClose}
-            >
-              EARPHONES
-            </NavLink>
-          </li>
-        </ul>
+              <span className={`material-symbols-outlined ${styles.linkIcon}`}>logout</span>
+              <span>{isPending ? "Signing out..." : "Sign Out"}</span>
+            </button>
+          </div>
+        )}
       </nav>
     </>
   );
 };
 
 export default SidebarNav;
+
+
