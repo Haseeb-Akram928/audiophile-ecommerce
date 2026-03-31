@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "@/components/layout/Footer/Footer.module.css";
+import { getImageUrl } from "@/utils/helper";
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
 
         <div className={styles.topSection}>
           <a href="/" className={styles.logoLink} aria-label="Audiophile home">
-            <img src="/assets/logo.svg" alt="" aria-hidden="true" />
+            <img src={getImageUrl("/assets/logo.svg")} alt="" aria-hidden="true" />
           </a>
 
           <nav className={styles.footerNav} aria-label="Footer navigation">
@@ -63,21 +64,21 @@ const SocialIcons = () => (
       aria-label="Visit our Facebook page"
       className={styles.socialLink}
     >
-      <img src="/assets/icon-facebook.svg" alt="" aria-hidden="true" />
+      <img src={getImageUrl("/assets/icon-facebook.svg")} alt="" aria-hidden="true" />
     </a>
     <a
       href="https://twitter.com"
       aria-label="Visit our Twitter page"
       className={styles.socialLink}
     >
-      <img src="/assets/icon-twitter.svg" alt="" aria-hidden="true" />
+      <img src={getImageUrl("/assets/icon-twitter.svg")} alt="" aria-hidden="true" />
     </a>
     <a
       href="https://instagram.com"
       aria-label="Visit our Instagram page"
       className={styles.socialLink}
     >
-      <img src="/assets/icon-instagram.svg" alt="" aria-hidden="true" />
+      <img src={getImageUrl("/assets/icon-instagram.svg")} alt="" aria-hidden="true" />
     </a>
   </div>
 );

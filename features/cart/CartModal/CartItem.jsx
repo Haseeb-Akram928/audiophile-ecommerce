@@ -4,6 +4,7 @@ import {
   decreaseItemQuantity,
 } from "@/features/cart/cartSlice";
 import styles from "@/features/cart/CartModal/CartModal.module.css"; // Assuming styles are imported from CartModal.module.css
+import { getImageUrl } from "@/utils/helper";
 
 const CartItem = ({ item }) => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const CartItem = ({ item }) => {
     <div key={item.id} className={styles.item}>
       <div className={styles.itemInfo}>
         <div className={styles.imgContainer}>
-          <img src={item.image} alt={item.name} />
+          <img src={getImageUrl(item.image)} alt={item.name} />
         </div>
         <div className={styles.itemText}>
           <p className={styles.itemName}>{item.name}</p>

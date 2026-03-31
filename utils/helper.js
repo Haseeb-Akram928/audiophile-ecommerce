@@ -22,4 +22,32 @@ const saveToLocalStorage = (state) => {
   }
 };
 
-export { loadFromLocalStorage, saveToLocalStorage };
+/**
+ * Converts a stored relative path or asset path to the full Supabase Storage URL
+ * Example mapping: "./assets/shared/desktop/logo.svg" -> "https://ffjmbbpteojoephvtlsw.supabase.co/storage/v1/object/public/product-images/shared/desktop/logo.svg"
+ */
+const getImageUrl = (path) => {
+  if (!path) return "";
+  
+  // If it's already a full URL, just return it
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+  
+  // Normalize the path by removing any local "assets" prefixes
+  let cleanPath = path;
+  if (cleanPath.startsWith('./assets/')) {
+    cleanPath = cleanPath.substring(9);
+  } else if (cleanPath.startsWith('/assets/')) {
+    cleanPath = cleanPath.substring(8);
+  } else if (cleanPath.startsWith('assets/')) {
+    cleanPath = cleanPath.substring(7);
+  }
+  
+  // Base Supabase storage URL (using your project reference ID)
+  const BUCKET_URL = "https://ffjmbbpteojoephvtlsw.supabase.co/storage/v1/object/public/product-images/";
+  
+  return `${BUCKET_URL}${cleanPath}`;
+};
+
+export { loadFromLocalStorage, saveToLocalStorage, getImageUrl };

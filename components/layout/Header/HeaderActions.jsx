@@ -6,11 +6,12 @@ import { useUser } from "@/features/auth/useUser";
 import { useLogout } from "@/features/auth/useLogout";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import styles from "@/components/layout/Header/Header.module.css";
+import { getImageUrl } from "@/utils/helper";
 
 const HeaderActions = ({ setIsCartOpen }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const totalQuantity = useSelector(getTotalCartQuantity);
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
   const { logout, isPending: isLoggingOut } = useLogout();
 
   const closeDropdown = () => setIsProfileOpen(false);
@@ -25,7 +26,7 @@ const HeaderActions = ({ setIsCartOpen }) => {
       >
         <div className={styles.cartIconWrapper}>
           <img
-            src="/assets/icon-cart.svg"
+            src={getImageUrl("/assets/icon-cart.svg")}
             alt="cart image"
             aria-hidden="true"
             className={styles.cartIcon}

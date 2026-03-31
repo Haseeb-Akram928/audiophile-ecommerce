@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { getCart, getTotalCartPrice } from "@/features/cart/cartSlice";
 import styles from "@/features/checkout/CheckoutSummary/CheckoutSummary.module.css";
+import { getImageUrl } from "@/utils/helper";
 
 const CheckoutSummary = () => {
   const cart = useSelector(getCart);
@@ -17,7 +18,7 @@ const CheckoutSummary = () => {
         {cart.map((item) => (
           <div key={item.id} className={styles.item}>
             <div className={styles.itemInfo}>
-              <img src={item.image} alt="" className={styles.itemImg} />
+              <img src={getImageUrl(item.image)} alt="" className={styles.itemImg} />
               <div>
                 <p className={styles.itemName}>{item.name}</p>
                 <p className={styles.itemPrice}>

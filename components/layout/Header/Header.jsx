@@ -5,6 +5,7 @@ import CartModal from "@/features/cart/CartModal/CartModal";
 import DesktopNav from "@/components/layout/Header/DesktopNav";
 import HeaderActions from "@/components/layout/Header/HeaderActions";
 import SidebarNav from "@/components/layout/Header/SidebarNav";
+import { getImageUrl } from "@/utils/helper";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -45,7 +46,7 @@ const Header = () => {
           onClick={toggleMenu}
         >
           <img
-            src="/assets/icon-hamburger.svg"
+            src={getImageUrl("/assets/icon-hamburger.svg")}
             alt="hamburger menu icon"
             aria-hidden="true"
           />
@@ -57,7 +58,7 @@ const Header = () => {
           aria-label="Audiophile home"
         >
           <img
-            src="/assets/logo.svg"
+            src={getImageUrl("/assets/logo.svg")}
             alt="Audiophile Logo"
             aria-hidden="true"
             className={styles.logoImg}

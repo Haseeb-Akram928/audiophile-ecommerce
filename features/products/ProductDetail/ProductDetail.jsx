@@ -7,6 +7,7 @@ import Loader from "@/components/ui/Loader";
 import ProductGallery from "./components/ProductGallery";
 import ProductFeatures from "./components/ProductFeatures";
 import AddToCartMenu from "./components/AddToCartMenu";
+import { getImageUrl } from "@/utils/helper";
 
 const ProductDetail = () => {
   const { slug } = useParams();
@@ -29,13 +30,13 @@ const ProductDetail = () => {
               <picture>
                 <source
                   media="(min-width: 1100px)"
-                  srcSet={product.image.desktop}
+                  srcSet={getImageUrl(product.image.desktop)}
                 />
                 <source
                   media="(min-width: 768px)"
-                  srcSet={product.image.tablet}
+                  srcSet={getImageUrl(product.image.tablet)}
                 />
-                <img src={product.image.mobile} alt={product.name} />
+                <img src={getImageUrl(product.image.mobile)} alt={product.name} />
               </picture>
             </div>
             <div className={styles.textContainer}>

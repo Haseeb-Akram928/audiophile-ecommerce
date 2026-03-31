@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useProducts } from "../useProducts";
 import styles from "@/features/products/FeaturedProducts/FeaturedProducts.module.css";
 import Loader from "@/components/ui/Loader";
+import { getImageUrl } from "@/utils/helper";
 
 const FeaturedProducts = () => {
   const { isLoading, products } = useProducts();
@@ -19,7 +20,7 @@ const FeaturedProducts = () => {
         {/* 1. ZX9 Speaker - Large Orange Card */}
         <div className={styles.zx9Card}>
           <img
-            src="/assets/home/desktop/pattern-circles.svg"
+            src={getImageUrl("/assets/home/desktop/pattern-circles.svg")}
             alt=""
             aria-hidden="true"
             className={styles.pattern}
@@ -27,7 +28,7 @@ const FeaturedProducts = () => {
           <div className={styles.zx9Content}>
             <div className={styles.zx9ImageContainer}>
               <img
-                src="/assets/home/desktop/image-speaker-zx9.png"
+                src={getImageUrl("/assets/home/desktop/image-speaker-zx9.png")}
                 alt=""
                 aria-hidden="true"
                 className={styles.speaker}
