@@ -9,8 +9,8 @@ function SignupForm() {
   const { signup, isPending } = useSignup();
   const { loginWithGoogle, isPending: isGooglePending } = useGoogleLogin();
 
-  function onSubmit({ fullName, email, password }) {
-    signup({ fullName, email, password });
+  function onSubmit({ fullName, username, email, password }) {
+    signup({ fullName, username, email, password });
   }
 
   return (
@@ -28,6 +28,21 @@ function SignupForm() {
         />
         {errors.fullName && (
           <span className={styles.fieldError}>{errors.fullName.message}</span>
+        )}
+      </div>
+      <div className={styles.field}>
+        <label htmlFor="username" className={styles.fieldLabel}>
+          Username
+        </label>
+        <input
+          type="text"
+          id="username"
+          {...register("username", { required: "Username is required" })}
+          className={styles.fieldInput}
+          disabled={isPending || isGooglePending}
+        />
+        {errors.username && (
+          <span className={styles.fieldError}>{errors.username.message}</span>
         )}
       </div>
       <div className={styles.field}>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getTotalCartQuantity } from "@/features/cart/cartSlice";
 import { useUser } from "@/features/auth/useUser";
@@ -13,9 +13,21 @@ const HeaderActions = ({ setIsCartOpen }) => {
   const totalQuantity = useSelector(getTotalCartQuantity);
   const { user } = useUser();
   const { logout, isPending: isLoggingOut } = useLogout();
+  const navigate = useNavigate();
 
   const closeDropdown = () => setIsProfileOpen(false);
   const dropdownRef = useOutsideClick(closeDropdown);
+
+  const displayUsername = user?.profile?.username || user?.user_metadata?.username;
+
+  const handleAvatarClick = () => {
+    if (window.innerWidth < 1100) {
+      navigate("/profile");
+      closeDropdown();
+    } else {
+      setIsProfileOpen((prev) => !prev);
+    }
+  };
 
   return (
     <div className={styles.headerActions}>
@@ -40,13 +52,16 @@ const HeaderActions = ({ setIsCartOpen }) => {
       <div className={styles.authContainer} ref={dropdownRef}>
         <button
           className={`${styles.avatarBtn} ${isProfileOpen ? styles.avatarActive : ""}`}
-          onClick={() => setIsProfileOpen((prev) => !prev)}
+          onClick={handleAvatarClick}
           aria-label="Profile menu"
         >
           <span className={`material-symbols-outlined ${styles.avatarIcon}`}>
             person
           </span>
         </button>
+        {user && displayUsername && (
+          <span className={styles.headerUserName}>{displayUsername}</span>
+        )}
 
         {isProfileOpen && (
           <div className={styles.profileDropdown}>

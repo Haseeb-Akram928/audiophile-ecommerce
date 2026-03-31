@@ -12,8 +12,8 @@ const SidebarNav = ({ isOpen, onClose }) => {
     onClose();
   };
 
-  const userName = user?.user_metadata?.fullName || "Guest User";
-  const userTier = user ? "Premium Tier Member" : "Welcome to Audiophile";
+  const rawHandle = user?.profile?.username || user?.user_metadata?.username;
+  const displayUser = user ? (rawHandle || "Member") : "Guest User";
 
   return (
     <>
@@ -31,8 +31,7 @@ const SidebarNav = ({ isOpen, onClose }) => {
             </span>
           </div>
           <div className={styles.userInfo}>
-            <span className={styles.userName}>{userName}</span>
-            <span className={styles.userTier}>{userTier}</span>
+            <span className={styles.userName}>{displayUser}</span>
           </div>
         </div>
 
