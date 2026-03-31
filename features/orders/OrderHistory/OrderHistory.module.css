@@ -1,95 +1,160 @@
 .orderHistoryContainer {
-  max-width: 900px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background-color: var(--color-grey-0);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
 }
 
-.orderHistoryContainer h2 {
+.sectionHeader {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.emptyState {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 64px 24px;
   text-align: center;
-  margin-bottom: 2rem;
-  color: var(--color-brand-600);
 }
 
-.emptyOrders {
-  text-align: center;
-  margin-top: 4rem;
-  padding: 2rem;
-  background-color: var(--color-grey-0);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-sm);
+.emptyText {
+  font-size: 16px;
+  color: #7d7d7d;
+  font-weight: 500;
+  margin-bottom: 32px;
 }
 
-.emptyOrders p {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  color: var(--color-grey-700);
+.homeBtn {
+  background-color: #d87d4a;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.homeBtn:hover {
+  background-color: #fbaf85;
+}
+
+.orderList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .orderCard {
-  background-color: var(--color-grey-50);
-  border: 1px solid var(--color-grey-100);
-  border-radius: var(--border-radius-md);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-xs);
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.orderSummary h3 {
-  color: var(--color-brand-500);
-  margin-bottom: 0.8rem;
-  font-size: 1.6rem;
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 24px;
 }
 
-.orderSummary p {
-  font-size: 1.4rem;
-  color: var(--color-grey-600);
-  margin-bottom: 0.5rem;
+.orderId {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000;
+}
+.orderDate {
+  font-size: 14px;
+  color: #7d7d7d;
 }
 
-.orderSummary .status {
-  font-weight: 500;
-  padding: 0.2rem 0.8rem;
-  border-radius: var(--border-radius-sm);
+.statusBadge {
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.statusBadge.pending {
+  background: rgba(216, 125, 74, 0.15);
+  color: #d87d4a;
+}
+.statusBadge.shipped {
+  background: rgba(0, 113, 227, 0.1);
+  color: #0071e3;
+}
+.statusBadge.delivered {
+  background: rgba(46, 160, 67, 0.1);
+  color: #2ea043;
 }
 
-.status.pending {
-  background-color: var(--color-yellow-100);
-  color: var(--color-yellow-700);
+.itemsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.status.shipped {
-  background-color: var(--color-green-100);
-  color: var(--color-green-700);
+.itemRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
-.status.delivered {
-  background-color: var(--color-blue-100);
-  color: var(--color-blue-700);
+.itemInfo {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
-
-.orderDetails {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px dashed var(--color-grey-200);
+.itemImage {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: contain;
+  background: #f1f1f1;
 }
-
-.orderDetails h4 {
-  color: var(--color-grey-700);
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-}
-
-.orderDetails ul {
-  list-style: none;
-  padding: 0;
+.itemDetails h4 {
+  font-size: 15px;
+  font-weight: 700;
   margin: 0;
+  color: #000;
+}
+.itemDetails p {
+  font-size: 14px;
+  color: #7d7d7d;
+  margin: 4px 0 0 0;
+  font-weight: 700;
+}
+.itemQuantity {
+  font-size: 15px;
+  font-weight: 700;
+  color: #7d7d7d;
 }
 
-.orderDetails li {
-  font-size: 1.3rem;
-  color: var(--color-grey-600);
-  margin-bottom: 0.4rem;
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 24px;
+  border-top: 1px solid #efefef;
+}
+.orderTotalLabel {
+  font-size: 14px;
+  color: #7d7d7d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.orderTotalAmount {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
 }

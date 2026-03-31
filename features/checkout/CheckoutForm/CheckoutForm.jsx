@@ -1,4 +1,5 @@
 import { useUser } from "@/features/auth/useUser"; // Import useUser to get authenticated user
+import { useOrders } from "@/features/orders/useOrders"; // Import useOrders to get past shipping address
 import { createOrder } from "@/services/apiOrders.js"; // Corrected import
 import { useMutation, useQueryClient } from "@tanstack/react-query"; // Import useQueryClient
 import { useForm } from "react-hook-form";
@@ -19,10 +20,27 @@ const CheckoutForm = ({ onOrderSuccess }) => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: { paymentMethod: "cash" },
   });
+
+  const { orders } = useOrders();
+  const savedAddress = orders?.[0]?.shipping_address;
+
+  const handleUseSavedAddress = (e) => {
+    e.preventDefault();
+    if (savedAddress) {
+      setValue("name", savedAddress.name, { shouldValidate: true });
+      setValue("email", savedAddress.email, { shouldValidate: true });
+      setValue("phone", savedAddress.phone, { shouldValidate: true });
+      setValue("address", savedAddress.address, { shouldValidate: true });
+      setValue("zip", savedAddress.zip, { shouldValidate: true });
+      setValue("city", savedAddress.city, { shouldValidate: true });
+      setValue("country", savedAddress.country, { shouldValidate: true });
+    }
+  };
 
   const paymentMethod = watch("paymentMethod");
   const dispatch = useDispatch();
@@ -78,7 +96,31 @@ const CheckoutForm = ({ onOrderSuccess }) => {
       className={styles.formCard}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className={styles.mainTitle}>CHECKOUT</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <h1 className={styles.mainTitle} style={{ marginBottom: 0 }}>CHECKOUT</h1>
+        {savedAddress && (
+          <button 
+            type="button" 
+            onClick={handleUseSavedAddress}
+            style={{ 
+              background: '#f1f1f1', 
+              border: 'none', 
+              padding: '10px 16px', 
+              borderRadius: '8px', 
+              cursor: 'pointer', 
+              fontWeight: '700', 
+              fontSize: '13px', 
+              color: '#d87d4a',
+              transition: 'background 0.2s ease',
+              marginTop: '16px'
+            }}
+            onMouseOver={(e) => e.target.style.background = '#e2e2e2'}
+            onMouseOut={(e) => e.target.style.background = '#f1f1f1'}
+          >
+            USE SAVED ADDRESS
+          </button>
+        )}
+      </div>
 
       <BillingDetailsSection register={register} errors={errors} />
       <ShippingInfoSection register={register} errors={errors} />
