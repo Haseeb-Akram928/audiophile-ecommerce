@@ -6,8 +6,14 @@ import OrderHistory from '@/features/orders/OrderHistory/OrderHistory';
 import { getImageUrl } from '@/utils/helper';
 import styles from './ProfilePage.module.css';
 
-function SavedAddresses() {
+function SavedAddresses({ addressData }) {
   const [isEditing, setIsEditing] = useState(false);
+  
+  const address = addressData?.address || "1137 Williams Avenue";
+  const zip = addressData?.zip || "10001";
+  const city = addressData?.city || "New York";
+  const country = addressData?.country || "United States";
+  
   return (
     <section className={styles.detailsContainer}>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
@@ -18,29 +24,30 @@ function SavedAddresses() {
       </div>
       <div className={styles.formGroup}>
         <label className={styles.label}>ADDRESS</label>
-        <input type="text" className={styles.inputField} defaultValue="1137 Williams Avenue" readOnly={!isEditing} />
+        <input type="text" className={styles.inputField} defaultValue={address} readOnly={!isEditing} />
       </div>
       <div className={styles.formGroup}>
         <label className={styles.label}>ZIP CODE</label>
-        <input type="text" className={styles.inputField} defaultValue="10001" readOnly={!isEditing} />
+        <input type="text" className={styles.inputField} defaultValue={zip} readOnly={!isEditing} />
       </div>
       <div className={styles.formGroup}>
         <label className={styles.label}>CITY</label>
-        <input type="text" className={styles.inputField} defaultValue="New York" readOnly={!isEditing} />
+        <input type="text" className={styles.inputField} defaultValue={city} readOnly={!isEditing} />
       </div>
       <div className={styles.formGroup}>
         <label className={styles.label}>COUNTRY</label>
-        <input type="text" className={styles.inputField} defaultValue="United States" readOnly={!isEditing} />
+        <input type="text" className={styles.inputField} defaultValue={country} readOnly={!isEditing} />
       </div>
       {isEditing && <button className={styles.saveBtn}>SAVE ADDRESS</button>}
     </section>
   );
 }
 
-function PaymentInformation() {
+function PaymentInformation({ currentMethod }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("e-Money");
-  const [editingMethod, setEditingMethod] = useState("e-Money");
+  const defaultMethod = currentMethod === "cash" ? "Cash on Delivery" : "e-Money";
+  const [paymentMethod, setPaymentMethod] = useState(defaultMethod);
+  const [editingMethod, setEditingMethod] = useState(defaultMethod);
 
   const handleEditToggle = () => {
     if (isEditing) {
@@ -165,6 +172,8 @@ const ProfilePage = () => {
   }
 
   const recentOrder = orders?.[0];
+  const shippingAddress = recentOrder?.shipping_address;
+  
   const recentItem = recentOrder?.order_items?.[0];
   const recentProductName = recentItem?.products?.name || "XX99 MARK II HEADPHONES";
   const recentProductPrice = recentOrder?.total_amount || 2999;
@@ -186,17 +195,17 @@ const ProfilePage = () => {
         </div>
       </section>
 
-      {/* Tabs */}
-      <nav className={styles.tabsContainer}>
-        <div className={styles.tabsScroll}>
-          <button 
-            className={`${styles.tabBtn} ${activeTab === 'PROFILE' ? styles.activeTab : ''}`}
-            onClick={() => setActiveTab('PROFILE')}
-          >
-            MY PROFILE
-          </button>
-          {hasOrders && (
-            <>
+      {hasOrders && (
+        <>
+          {/* Tabs */}
+          <nav className={styles.tabsContainer}>
+            <div className={styles.tabsScroll}>
+              <button 
+                className={`${styles.tabBtn} ${activeTab === 'PROFILE' ? styles.activeTab : ''}`}
+                onClick={() => setActiveTab('PROFILE')}
+              >
+                MY PROFILE
+              </button>
               <button 
                 className={`${styles.tabBtn} ${activeTab === 'ORDERS' ? styles.activeTab : ''}`}
                 onClick={() => setActiveTab('ORDERS')}
@@ -215,74 +224,72 @@ const ProfilePage = () => {
               >
                 PAYMENT INFORMATION
               </button>
-            </>
-          )}
-        </div>
-      </nav>
+            </div>
+          </nav>
 
-      {/* Content Area */}
-      <div className={styles.tabContent}>
-        {activeTab === 'PROFILE' && (
-          <>
-            {/* Account Details Box */}
-            <section className={styles.detailsContainer}>
-              <h2 className={styles.sectionTitle}>ACCOUNT DETAILS</h2>
-              <div className={styles.formGroup}>
-                <label className={styles.label}>NAME</label>
-                <input type="text" className={styles.inputField} defaultValue={fullName} />
-              </div>
-              <div className={styles.formGroup}>
-                <label className={styles.label}>EMAIL ADDRESS</label>
-                <input type="email" className={styles.inputField} defaultValue={user?.email || 'alex.sterling@audiophile.com'} />
-              </div>
-              <div className={styles.formGroup}>
-                <label className={styles.label}>PHONE NUMBER</label>
-                <input type="tel" className={styles.inputField} defaultValue={user?.user_metadata?.phone || '+1 (555) 000-1234'} />
-              </div>
-              <button className={styles.saveBtn}>SAVE CHANGES</button>
-            </section>
-
-            {/* Recent Order Section */}
-            {hasOrders && (
-              <section className={styles.recentOrderSection}>
-                <h2 className={styles.sectionTitle}>RECENT ORDER</h2>
-                <div className={styles.orderCard}>
-                  <div className={styles.orderImageWrapper}>
-                    <img 
-                      src={getImageUrl("/assets/cart/image-xx99-mark-two-headphones.jpg")} 
-                      alt={recentProductName} 
-                      className={styles.orderImage} 
-                    />
+          {/* Content Area */}
+          <div className={styles.tabContent}>
+            {activeTab === 'PROFILE' && (
+              <>
+                {/* Account Details Box */}
+                <section className={styles.detailsContainer}>
+                  <h2 className={styles.sectionTitle}>ACCOUNT DETAILS</h2>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>NAME</label>
+                    <input type="text" className={styles.inputField} defaultValue={shippingAddress?.name || fullName} />
                   </div>
-                  <div className={styles.orderDetails}>
-                    <p className={styles.deliveredStatus}>{recentOrderStatus}</p>
-                    <h3 className={styles.productName}>{recentProductName}</h3>
-                    <p className={styles.orderMeta}>Order #{recentOrderId} &bull; {recentOrderDate}</p>
-                    <div className={styles.orderFooter}>
-                      <span className={styles.orderPrice}>$ {recentProductPrice.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
-                      <button className={styles.viewDetailsBtn} onClick={() => setActiveTab('ORDERS')}>VIEW DETAILS</button>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>EMAIL ADDRESS</label>
+                    <input type="email" className={styles.inputField} defaultValue={shippingAddress?.email || user?.email || 'alex.sterling@audiophile.com'} />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label className={styles.label}>PHONE NUMBER</label>
+                    <input type="tel" className={styles.inputField} defaultValue={shippingAddress?.phone || user?.user_metadata?.phone || '+1 (555) 000-1234'} />
+                  </div>
+                  <button className={styles.saveBtn}>SAVE CHANGES</button>
+                </section>
+
+                {/* Recent Order Section */}
+                <section className={styles.recentOrderSection}>
+                  <h2 className={styles.sectionTitle}>RECENT ORDER</h2>
+                  <div className={styles.orderCard}>
+                    <div className={styles.orderImageWrapper}>
+                      <img 
+                        src={getImageUrl("/assets/cart/image-xx99-mark-two-headphones.jpg")} 
+                        alt={recentProductName} 
+                        className={styles.orderImage} 
+                      />
+                    </div>
+                    <div className={styles.orderDetails}>
+                      <p className={styles.deliveredStatus}>{recentOrderStatus}</p>
+                      <h3 className={styles.productName}>{recentProductName}</h3>
+                      <p className={styles.orderMeta}>Order #{recentOrderId} &bull; {recentOrderDate}</p>
+                      <div className={styles.orderFooter}>
+                        <span className={styles.orderPrice}>$ {recentProductPrice.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+                        <button className={styles.viewDetailsBtn} onClick={() => setActiveTab('ORDERS')}>VIEW DETAILS</button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
+                </section>
+              </>
             )}
-          </>
-        )}
 
-        {activeTab === 'ORDERS' && (
-          <div style={{ marginTop: '24px', marginBottom: '48px' }}>
-            <OrderHistory />
+            {activeTab === 'ORDERS' && (
+              <div style={{ marginTop: '24px', marginBottom: '48px' }}>
+                <OrderHistory />
+              </div>
+            )}
+
+            {activeTab === 'ADDRESSES' && (
+              <SavedAddresses addressData={shippingAddress} />
+            )}
+
+            {activeTab === 'PAYMENT' && (
+              <PaymentInformation currentMethod={recentOrder.payment_method} />
+            )}
           </div>
-        )}
-
-        {activeTab === 'ADDRESSES' && (
-          <SavedAddresses />
-        )}
-
-        {activeTab === 'PAYMENT' && (
-          <PaymentInformation />
-        )}
-      </div>
+        </>
+      )}
 
       {/* Logout Button */}
       <div style={{ marginTop: '48px' }}>
