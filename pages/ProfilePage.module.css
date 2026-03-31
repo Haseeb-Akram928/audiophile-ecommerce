@@ -251,3 +251,99 @@
 .logoutIcon {
   font-size: 20px;
 }
+
+/* Tablet & Desktop Layout */
+@media (min-width: 768px) {
+  .container {
+    max-width: 1110px;
+    padding: 64px 40px;
+  }
+
+  .profileHeader {
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 32px;
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .avatarWrapper {
+    margin-bottom: 0;
+  }
+
+  .userInfo {
+    align-items: flex-start;
+  }
+
+  .userName {
+    font-size: 32px;
+  }
+
+  .profileLayout {
+    display: flex;
+    gap: 64px;
+    align-items: flex-start;
+  }
+
+  .tabsContainer {
+    flex: 0 0 250px;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .tabsScroll {
+    flex-direction: column;
+    gap: 8px;
+    overflow-x: visible;
+  }
+
+  .tabBtn {
+    text-align: left;
+    padding: 16px 24px;
+    font-size: 13px;
+    border-bottom: none;
+    border-left: 2px solid transparent;
+    margin-bottom: 0;
+    transition: all 0.2s ease;
+  }
+
+  .activeTab {
+    color: #d87d4a;
+    border-left-color: #d87d4a;
+    background-color: rgba(216, 125, 74, 0.05);
+  }
+
+  .tabContent {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .detailsContainer, .recentOrderSection {
+    margin-bottom: 32px;
+  }
+
+  /* Make forms display two columns if possible on desktop */
+  .detailsContainer {
+    padding: 48px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .container {
+    padding: 80px 0;
+  }
+
+  .profileLayout {
+    gap: 120px;
+  }
+
+  .tabsContainer {
+    flex: 0 0 300px;
+  }
+
+  .formGroup {
+    max-width: 450px;
+  }
+}

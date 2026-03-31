@@ -176,6 +176,7 @@ const ProfilePage = () => {
   
   const recentItem = recentOrder?.order_items?.[0];
   const recentProductName = recentItem?.products?.name || "XX99 MARK II HEADPHONES";
+  const productImages = recentItem?.products?.image;
   const recentProductPrice = recentOrder?.total_amount || 2999;
   const recentOrderId = recentOrder?.id ? recentOrder.id.slice(0, 8) : "982173";
   const recentOrderDate = recentOrder?.created_at ? new Date(recentOrder.created_at).toLocaleDateString() : "Nov 12, 2023";
@@ -196,7 +197,7 @@ const ProfilePage = () => {
       </section>
 
       {hasOrders && (
-        <>
+        <div className={styles.profileLayout}>
           {/* Tabs */}
           <nav className={styles.tabsContainer}>
             <div className={styles.tabsScroll}>
@@ -254,11 +255,23 @@ const ProfilePage = () => {
                   <h2 className={styles.sectionTitle}>RECENT ORDER</h2>
                   <div className={styles.orderCard}>
                     <div className={styles.orderImageWrapper}>
-                      <img 
-                        src={getImageUrl("/assets/cart/image-xx99-mark-two-headphones.jpg")} 
-                        alt={recentProductName} 
-                        className={styles.orderImage} 
-                      />
+                      {productImages ? (
+                        <picture>
+                          <source media="(min-width: 1024px)" srcSet={getImageUrl(productImages.desktop)} />
+                          <source media="(min-width: 768px)" srcSet={getImageUrl(productImages.tablet)} />
+                          <img 
+                            src={getImageUrl(productImages.mobile)} 
+                            alt={recentProductName} 
+                            className={styles.orderImage} 
+                          />
+                        </picture>
+                      ) : (
+                        <img 
+                          src={getImageUrl("/assets/cart/image-xx99-mark-two-headphones.jpg")} 
+                          alt={recentProductName} 
+                          className={styles.orderImage} 
+                        />
+                      )}
                     </div>
                     <div className={styles.orderDetails}>
                       <p className={styles.deliveredStatus}>{recentOrderStatus}</p>
@@ -288,7 +301,7 @@ const ProfilePage = () => {
               <PaymentInformation currentMethod={recentOrder.payment_method} />
             )}
           </div>
-        </>
+        </div>
       )}
 
       {/* Logout Button */}
