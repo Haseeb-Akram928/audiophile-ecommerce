@@ -17,16 +17,16 @@ function SavedAddresses() {
         </button>
       </div>
       <div className={styles.formGroup}>
-        <label className={styles.label}>STREET ADDRESS</label>
+        <label className={styles.label}>ADDRESS</label>
         <input type="text" className={styles.inputField} defaultValue="1137 Williams Avenue" readOnly={!isEditing} />
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>CITY</label>
-        <input type="text" className={styles.inputField} defaultValue="New York" readOnly={!isEditing} />
       </div>
       <div className={styles.formGroup}>
         <label className={styles.label}>ZIP CODE</label>
         <input type="text" className={styles.inputField} defaultValue="10001" readOnly={!isEditing} />
+      </div>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>CITY</label>
+        <input type="text" className={styles.inputField} defaultValue="New York" readOnly={!isEditing} />
       </div>
       <div className={styles.formGroup}>
         <label className={styles.label}>COUNTRY</label>
@@ -39,23 +39,112 @@ function SavedAddresses() {
 
 function PaymentInformation() {
   const [isEditing, setIsEditing] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState("e-Money");
+  const [editingMethod, setEditingMethod] = useState("e-Money");
+
+  const handleEditToggle = () => {
+    if (isEditing) {
+      setEditingMethod(paymentMethod);
+    } else {
+      setEditingMethod(paymentMethod);
+    }
+    setIsEditing(!isEditing);
+  };
+
+  const handleSave = () => {
+    setPaymentMethod(editingMethod);
+    setIsEditing(false);
+  };
+
   return (
     <section className={styles.detailsContainer}>
       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
         <h2 className={styles.sectionTitle} style={{margin: 0}}>PAYMENT INFORMATION</h2>
-        <button className={styles.viewDetailsBtn} onClick={() => setIsEditing(!isEditing)}>
+        <button className={styles.viewDetailsBtn} onClick={handleEditToggle}>
           {isEditing ? 'CANCEL' : 'EDIT'}
         </button>
       </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>e-Money Number</label>
-        <input type="text" className={styles.inputField} defaultValue="238521993" readOnly={!isEditing} />
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>e-Money PIN</label>
-        <input type="password" className={styles.inputField} defaultValue="6891" readOnly={!isEditing} />
-      </div>
-      {isEditing && <button className={styles.saveBtn}>SAVE PAYMENT INFO</button>}
+
+      {isEditing ? (
+        <>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px', border: editingMethod === 'e-Money' ? '1px solid #d87d4a' : '1px solid #cfcfcf', borderRadius: '8px', cursor: 'pointer', background: '#fff' }}>
+              <input 
+                type="radio" 
+                name="paymentMethod" 
+                value="e-Money" 
+                checked={editingMethod === "e-Money"} 
+                onChange={(e) => setEditingMethod(e.target.value)} 
+                style={{ accentColor: '#d87d4a', width: '20px', height: '20px' }}
+              />
+              <span style={{ fontSize: '14px', fontWeight: '700' }}>e-Money</span>
+            </label>
+
+            <label style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px', border: editingMethod === 'Cash on Delivery' ? '1px solid #d87d4a' : '1px solid #cfcfcf', borderRadius: '8px', cursor: 'pointer', background: '#fff' }}>
+              <input 
+                type="radio" 
+                name="paymentMethod" 
+                value="Cash on Delivery" 
+                checked={editingMethod === "Cash on Delivery"} 
+                onChange={(e) => setEditingMethod(e.target.value)} 
+                style={{ accentColor: '#d87d4a', width: '20px', height: '20px' }}
+              />
+              <span style={{ fontSize: '14px', fontWeight: '700' }}>Cash on Delivery</span>
+            </label>
+          </div>
+
+          {editingMethod === "e-Money" && (
+            <>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>e-Money Number</label>
+                <input type="text" className={styles.inputField} defaultValue="238521993" />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>e-Money PIN</label>
+                <input type="password" className={styles.inputField} defaultValue="6891" />
+              </div>
+            </>
+          )}
+
+          {editingMethod === "Cash on Delivery" && (
+            <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '24px' }}>
+              <img src={getImageUrl("/assets/checkout/icon-cash-on-delivery.svg")} alt="cash on delivery icon" style={{ width: "48px", height: "48px" }} />
+              <p style={{ color: '#7d7d7d', fontSize: '15px', lineHeight: '25px', margin: 0 }}>
+                The 'Cash on Delivery' option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct.
+              </p>
+            </div>
+          )}
+
+          <button className={styles.saveBtn} onClick={handleSave}>SAVE PAYMENT INFO</button>
+        </>
+      ) : (
+        <>
+          <div className={styles.formGroup}>
+            <label className={styles.label}>PAYMENT METHOD</label>
+            <input type="text" className={styles.inputField} value={paymentMethod} readOnly />
+          </div>
+          {paymentMethod === "e-Money" && (
+            <>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>e-Money Number</label>
+                <input type="text" className={styles.inputField} defaultValue="238521993" readOnly />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>e-Money PIN</label>
+                <input type="password" className={styles.inputField} defaultValue="6891" readOnly />
+              </div>
+            </>
+          )}
+          {paymentMethod === "Cash on Delivery" && (
+            <div style={{ marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '24px' }}>
+              <img src={getImageUrl("/assets/checkout/icon-cash-on-delivery.svg")} alt="cash on delivery icon" style={{ width: "48px", height: "48px" }} />
+              <p style={{ color: '#7d7d7d', fontSize: '15px', lineHeight: '25px', margin: 0 }}>
+                The 'Cash on Delivery' option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct.
+              </p>
+            </div>
+          )}
+        </>
+      )}
     </section>
   );
 }
@@ -67,8 +156,8 @@ const ProfilePage = () => {
   
   const [activeTab, setActiveTab] = useState('PROFILE');
 
-  const userName = user?.profile?.full_name || user?.user_metadata?.fullName || 'Alex Sterling';
-  const handle = user?.profile?.username || user?.user_metadata?.username || 'alexsterling';
+  const displayUser = user?.profile?.username || user?.user_metadata?.username || 'Member';
+  const fullName = user?.profile?.full_name || user?.user_metadata?.fullName || 'Alex Sterling';
   const hasOrders = orders && orders.length > 0;
 
   if (isUserLoading || isOrdersLoading) {
@@ -89,15 +178,11 @@ const ProfilePage = () => {
       <section className={styles.profileHeader}>
         <div className={styles.avatarWrapper}>
           <span className={`material-symbols-outlined ${styles.mainAvatar}`}>
-            person
+            account_circle
           </span>
         </div>
         <div className={styles.userInfo}>
-          <p className={styles.premiumText}>PREMIUM MEMBER</p>
-          <h1 className={styles.userName}>{userName}</h1>
-          <p className={styles.userHandle}>@{handle}</p>
-          <p className={styles.memberSinceLabel}>MEMBER SINCE</p>
-          <p className={styles.memberSinceDate}>NOVEMBER 2023</p>
+          <h1 className={styles.userName}>{displayUser}</h1>
         </div>
       </section>
 
@@ -143,8 +228,8 @@ const ProfilePage = () => {
             <section className={styles.detailsContainer}>
               <h2 className={styles.sectionTitle}>ACCOUNT DETAILS</h2>
               <div className={styles.formGroup}>
-                <label className={styles.label}>FULL NAME</label>
-                <input type="text" className={styles.inputField} defaultValue={userName} />
+                <label className={styles.label}>NAME</label>
+                <input type="text" className={styles.inputField} defaultValue={fullName} />
               </div>
               <div className={styles.formGroup}>
                 <label className={styles.label}>EMAIL ADDRESS</label>
@@ -153,10 +238,6 @@ const ProfilePage = () => {
               <div className={styles.formGroup}>
                 <label className={styles.label}>PHONE NUMBER</label>
                 <input type="tel" className={styles.inputField} defaultValue={user?.user_metadata?.phone || '+1 (555) 000-1234'} />
-              </div>
-              <div className={styles.formGroup}>
-                <label className={styles.label}>DATE OF BIRTH</label>
-                <input type="text" className={styles.inputField} defaultValue="05 / 12 / 1992" />
               </div>
               <button className={styles.saveBtn}>SAVE CHANGES</button>
             </section>
