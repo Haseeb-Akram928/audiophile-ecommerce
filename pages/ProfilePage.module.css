@@ -351,9 +351,107 @@
     margin-bottom: 32px;
   }
 
+  /* Wishlist styles */
+  .wishlistGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .wishlistCard {
+    display: flex;
+    gap: 16px;
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .wishlistImgWrapper {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .wishlistImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .wishlistInfo {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .wishlistName {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    color: #000;
+  }
+
+  .wishlistPrice {
+    font-size: 14px;
+    color: #7d7d7d;
+    font-weight: 700;
+  }
+
+  .removeWishlistBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #cfcfcf;
+    padding: 4px;
+    transition: color 0.2s;
+  }
+
+  .removeWishlistBtn:hover {
+    color: #d87d4a;
+  }
+
+  .wishlistAction {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .viewProductLink {
+    font-size: 11px;
+    font-weight: 700;
+    color: #d87d4a;
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+
+  .viewProductLink:hover {
+    text-decoration: underline;
+  }
+
+  .emptyWishlist {
+    text-align: center;
+    padding: 48px 0;
+    color: #7d7d7d;
+  }
+
   /* Make forms display two columns if possible on desktop */
   .detailsContainer {
     padding: 48px;
+  }
+}
+
+@media (min-width: 768px) {
+  .wishlistGrid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 }
 

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useUser } from '@/features/auth/useUser';
 import { useLogout } from '@/features/auth/useLogout';
 import { useOrders } from '@/features/orders/useOrders';
 import OrderHistory from '@/features/orders/OrderHistory/OrderHistory';
+import { useWishlist, useToggleWishlist } from '@/features/products/useWishlist';
+import { useProducts } from '@/features/products/useProducts';
 import { getImageUrl } from '@/utils/helper';
 import ImageWithLoader from "@/components/ui/ImageWithLoader/ImageWithLoader";
 import { useUpdateAvatar } from '@/features/auth/useUpdateAvatar';
@@ -10,6 +13,7 @@ import imageCompression from 'browser-image-compression';
 import { toast } from 'react-hot-toast';
 import ProfileSkeleton from './components/ProfileSkeleton/ProfileSkeleton';
 import styles from './ProfilePage.module.css';
+import Loader from '@/components/ui/Loader';
 
 function SavedAddresses({ addressData }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -161,6 +165,69 @@ function PaymentInformation({ currentMethod }) {
   );
 }
 
+function WishlistSection() {
+  const { products, isLoading: isProductsLoading } = useProducts();
+  const { wishlistIds, isLoading: isWishlistLoading } = useWishlist();
+  const { toggleWishlist } = useToggleWishlist();
+
+  if (isProductsLoading || isWishlistLoading) return <Loader />;
+
+  const wishlistedProducts = products?.filter((product) =>
+    wishlistIds.includes(product.id)
+  );
+
+  return (
+    <section className={styles.detailsContainer}>
+      <h2 className={styles.sectionTitle}>MY WISHLIST</h2>
+      {wishlistedProducts?.length > 0 ? (
+        <div className={styles.wishlistGrid}>
+          {wishlistedProducts.map((product) => (
+            <div key={product.id} className={styles.wishlistCard}>
+              <div className={styles.wishlistImgWrapper}>
+                <img
+                  src={getImageUrl(product.categoryImage.mobile)}
+                  alt={product.name}
+                  className={styles.wishlistImg}
+                />
+              </div>
+              <div className={styles.wishlistInfo}>
+                <h3 className={styles.wishlistName}>{product.name}</h3>
+                <span className={styles.wishlistPrice}>
+                  $ {product.price.toLocaleString()}
+                </span>
+                <Link
+                  to={`/product/${product.slug}`}
+                  className={styles.viewProductLink}
+                >
+                  VIEW PRODUCT
+                </Link>
+              </div>
+              <div className={styles.wishlistAction}>
+                <button
+                  className={styles.removeWishlistBtn}
+                  onClick={() =>
+                    toggleWishlist({ productId: product.id, isWishlisted: true })
+                  }
+                  aria-label="Remove from wishlist"
+                >
+                  <span className="material-symbols-outlined">delete</span>
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className={styles.emptyWishlist}>
+          <p>Your wishlist is currently empty.</p>
+          <Link to="/" className="btn orange" style={{ marginTop: '16px', display: 'inline-block' }}>
+            START SHOPPING
+          </Link>
+        </div>
+      )}
+    </section>
+  );
+}
+
 const ProfilePage = () => {
   const { user, isLoading: isUserLoading } = useUser();
   const { logout, isPending: isLoggingOut } = useLogout();
@@ -257,61 +324,67 @@ const ProfilePage = () => {
         </div>
       </section>
 
-      {hasOrders && (
-        <div className={styles.profileLayout}>
-          {/* Tabs */}
-          <nav className={styles.tabsContainer}>
-            <div className={styles.tabsScroll}>
-              <button 
-                className={`${styles.tabBtn} ${activeTab === 'PROFILE' ? styles.activeTab : ''}`}
-                onClick={() => setActiveTab('PROFILE')}
-              >
-                MY PROFILE
-              </button>
-              <button 
-                className={`${styles.tabBtn} ${activeTab === 'ORDERS' ? styles.activeTab : ''}`}
-                onClick={() => setActiveTab('ORDERS')}
-              >
-                ORDER HISTORY
-              </button>
-              <button 
-                className={`${styles.tabBtn} ${activeTab === 'ADDRESSES' ? styles.activeTab : ''}`}
-                onClick={() => setActiveTab('ADDRESSES')}
-              >
-                SAVED ADDRESSES
-              </button>
-              <button 
-                className={`${styles.tabBtn} ${activeTab === 'PAYMENT' ? styles.activeTab : ''}`}
-                onClick={() => setActiveTab('PAYMENT')}
-              >
-                PAYMENT INFORMATION
-              </button>
-            </div>
-          </nav>
+      <div className={styles.profileLayout}>
+        {/* Tabs */}
+        <nav className={styles.tabsContainer}>
+          <div className={styles.tabsScroll}>
+            <button 
+              className={`${styles.tabBtn} ${activeTab === 'PROFILE' ? styles.activeTab : ''}`}
+              onClick={() => setActiveTab('PROFILE')}
+            >
+              MY PROFILE
+            </button>
+            <button 
+              className={`${styles.tabBtn} ${activeTab === 'WISHLIST' ? styles.activeTab : ''}`}
+              onClick={() => setActiveTab('WISHLIST')}
+            >
+              MY WISHLIST
+            </button>
+            <button 
+              className={`${styles.tabBtn} ${activeTab === 'ORDERS' ? styles.activeTab : ''}`}
+              onClick={() => setActiveTab('ORDERS')}
+            >
+              ORDER HISTORY
+            </button>
+            <button 
+              className={`${styles.tabBtn} ${activeTab === 'ADDRESSES' ? styles.activeTab : ''}`}
+              onClick={() => setActiveTab('ADDRESSES')}
+            >
+              SAVED ADDRESSES
+            </button>
+            <button 
+              className={`${styles.tabBtn} ${activeTab === 'PAYMENT' ? styles.activeTab : ''}`}
+              onClick={() => setActiveTab('PAYMENT')}
+            >
+              PAYMENT INFORMATION
+            </button>
+          </div>
+        </nav>
 
-          {/* Content Area */}
-          <div className={styles.tabContent}>
-            {activeTab === 'PROFILE' && (
-              <>
-                {/* Account Details Box */}
-                <section className={styles.detailsContainer}>
-                  <h2 className={styles.sectionTitle}>ACCOUNT DETAILS</h2>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>NAME</label>
-                    <input type="text" className={styles.inputField} defaultValue={shippingAddress?.name || fullName} />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>EMAIL ADDRESS</label>
-                    <input type="email" className={styles.inputField} defaultValue={shippingAddress?.email || user?.email || 'alex.sterling@audiophile.com'} />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>PHONE NUMBER</label>
-                    <input type="tel" className={styles.inputField} defaultValue={shippingAddress?.phone || user?.user_metadata?.phone || '+1 (555) 000-1234'} />
-                  </div>
-                  <button className={styles.saveBtn}>SAVE CHANGES</button>
-                </section>
+        {/* Content Area */}
+        <div className={styles.tabContent}>
+          {activeTab === 'PROFILE' && (
+            <>
+              {/* Account Details Box */}
+              <section className={styles.detailsContainer}>
+                <h2 className={styles.sectionTitle}>ACCOUNT DETAILS</h2>
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>NAME</label>
+                  <input type="text" className={styles.inputField} defaultValue={shippingAddress?.name || fullName} />
+                </div>
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>EMAIL ADDRESS</label>
+                  <input type="email" className={styles.inputField} defaultValue={shippingAddress?.email || user?.email || 'alex.sterling@audiophile.com'} />
+                </div>
+                <div className={styles.formGroup}>
+                  <label className={styles.label}>PHONE NUMBER</label>
+                  <input type="tel" className={styles.inputField} defaultValue={shippingAddress?.phone || user?.user_metadata?.phone || '+1 (555) 000-1234'} />
+                </div>
+                <button className={styles.saveBtn}>SAVE CHANGES</button>
+              </section>
 
-                {/* Recent Order Section */}
+              {/* Recent Order Section */}
+              {hasOrders && (
                 <section className={styles.recentOrderSection}>
                   <h2 className={styles.sectionTitle}>RECENT ORDER</h2>
                   <div className={styles.orderCard}>
@@ -355,25 +428,29 @@ const ProfilePage = () => {
                     </div>
                   </div>
                 </section>
-              </>
-            )}
+              )}
+            </>
+          )}
 
-            {activeTab === 'ORDERS' && (
-              <div style={{ marginTop: '24px', marginBottom: '48px' }}>
-                <OrderHistory />
-              </div>
-            )}
+          {activeTab === 'WISHLIST' && (
+            <WishlistSection />
+          )}
 
-            {activeTab === 'ADDRESSES' && (
-              <SavedAddresses addressData={shippingAddress} />
-            )}
+          {activeTab === 'ORDERS' && (
+            <div style={{ marginTop: '24px', marginBottom: '48px' }}>
+              <OrderHistory />
+            </div>
+          )}
 
-            {activeTab === 'PAYMENT' && (
-              <PaymentInformation currentMethod={recentOrder.payment_method} />
-            )}
-          </div>
+          {activeTab === 'ADDRESSES' && (
+            <SavedAddresses addressData={shippingAddress} />
+          )}
+
+          {activeTab === 'PAYMENT' && (
+            <PaymentInformation currentMethod={recentOrder?.payment_method || 'cash'} />
+          )}
         </div>
-      )}
+      </div>
 
       {/* Logout Button */}
       <div style={{ marginTop: '48px' }}>
