@@ -1,36 +1,61 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import styles from "@/features/products/ProductPreview/ProductPreview.module.css";
 import { useProducts } from "../useProducts";
+import { useWishlist, useToggleWishlist } from "../useWishlist";
+import { useUser } from "@/features/auth/useUser";
 import Loader from "@/components/ui/Loader";
 import ImageWithLoader from "@/components/ui/ImageWithLoader/ImageWithLoader";
 import { getImageUrl } from "@/utils/helper";
 
 const ProductPreview = ({ categoryName }) => {
   const { isLoading, products, error } = useProducts();
+  const [searchParams] = useSearchParams();
+  const { wishlistIds } = useWishlist();
+  const { toggleWishlist } = useToggleWishlist();
+  const { user } = useUser();
 
   if (isLoading) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;
 
-  const filteredProducts = products
-    .filter((p) => p.category === categoryName.toLowerCase())
-    .sort((a, b) => b.new - a.new);
+  let filteredProducts = products.filter(
+    (p) => p.category === categoryName.toLowerCase()
+  );
+
+  if (!searchParams.has("sort")) {
+    filteredProducts = filteredProducts.sort((a, b) => b.new - a.new);
+  }
 
   return (
     <section className={styles.listWrapper}>
       <div className={styles.container}>
-        {filteredProducts.map((product) => (
-          <div key={product.id} className={styles.productCard}>
-            <div className={styles.imageContainer}>
-              <ImageWithLoader
-                src={getImageUrl(product.categoryImage?.mobile) || ""}
-                alt={product.name}
-                sources={[
-                  { media: "(min-width: 1100px)", srcSet: getImageUrl(product.categoryImage?.desktop) || "" },
-                  { media: "(min-width: 768px)", srcSet: getImageUrl(product.categoryImage?.tablet) || "" }
-                ]}
-                style={{ display: 'block', width: '100%', height: '100%', borderRadius: '8px' }}
-              />
-            </div>
+        {filteredProducts.map((product) => {
+          const isWishlisted = wishlistIds.includes(product.id);
+          return (
+            <div key={product.id} className={styles.productCard}>
+              <div className={styles.imageContainer}>
+                {user && (
+                  <button
+                    className={styles.wishlistBtn}
+                    onClick={() => toggleWishlist({ productId: product.id, isWishlisted })}
+                    aria-label="Toggle Wishlist"
+                  >
+                    <span 
+                      className={`material-symbols-outlined ${isWishlisted ? styles.wishlisted : ""}`}
+                    >
+                      favorite
+                    </span>
+                  </button>
+                )}
+                <ImageWithLoader
+                  src={getImageUrl(product.categoryImage?.mobile) || ""}
+                  alt={product.name}
+                  sources={[
+                    { media: "(min-width: 1100px)", srcSet: getImageUrl(product.categoryImage?.desktop) || "" },
+                    { media: "(min-width: 768px)", srcSet: getImageUrl(product.categoryImage?.tablet) || "" }
+                  ]}
+                  style={{ display: 'block', width: '100%', height: '100%', borderRadius: '8px' }}
+                />
+              </div>
 
             <div className={styles.content}>
               {product.new && <p className={styles.newProduct}>NEW PRODUCT</p>}
@@ -41,9 +66,10 @@ const ProductPreview = ({ categoryName }) => {
               </Link>
             </div>
           </div>
-        ))}
-      </div>
-    </section>
+        );
+      })}
+    </div>
+  </section>
   );
 };
 

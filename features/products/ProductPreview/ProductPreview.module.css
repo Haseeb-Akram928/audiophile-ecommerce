@@ -19,9 +19,48 @@
   gap: 32px;
 }
 
+.imageContainer {
+  position: relative;
+  width: 100%;
+}
+
 .imageContainer img {
   border-radius: 8px;
   width: 100%;
+}
+
+.wishlistBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.wishlistBtn:hover {
+  transform: scale(1.1);
+}
+
+.wishlistBtn span {
+  color: #cfcfcf;
+  font-size: 24px;
+  font-variation-settings: 'FILL' 0;
+  transition: color 0.2s ease, font-variation-settings 0.2s ease;
+}
+
+.wishlistBtn span.wishlisted {
+  color: var(--color-primary);
+  font-variation-settings: 'FILL' 1;
 }
 
 .content {

@@ -5,6 +5,7 @@ import { getTotalCartQuantity } from "@/features/cart/cartSlice";
 import { useUser } from "@/features/auth/useUser";
 import { useLogout } from "@/features/auth/useLogout";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
+import SearchBar from "./SearchBar";
 import styles from "@/components/layout/Header/Header.module.css";
 import { getImageUrl } from "@/utils/helper";
 
@@ -31,6 +32,8 @@ const HeaderActions = ({ setIsCartOpen }) => {
 
   return (
     <div className={styles.headerActions}>
+      <SearchBar />
+      
       <button
         className={`${styles.iconButton} ${styles.cartContainer}`}
         aria-label="View shopping cart"
