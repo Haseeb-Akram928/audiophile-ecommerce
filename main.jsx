@@ -8,6 +8,7 @@ import { store } from "./store.js";
 import App from "./App.jsx";
 import "./index.css";
 import { config } from "./lib/env.js";
+import { HelmetProvider } from "react-helmet-async";
 
 if (config.EMAILJS_PUBLIC_KEY) {
   emailjs.init(config.EMAILJS_PUBLIC_KEY);
@@ -23,11 +24,13 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </QueryClientProvider>
+    </HelmetProvider>
   </StrictMode>
 );

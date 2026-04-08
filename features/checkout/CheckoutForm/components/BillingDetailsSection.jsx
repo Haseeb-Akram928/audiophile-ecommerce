@@ -10,7 +10,6 @@ const BillingDetailsSection = ({ register, errors }) => {
           label="Name"
           id="name"
           register={register}
-          validationRules={{ required: "Required" }}
           error={errors.name}
           placeholder="Haseeb akram"
         />
@@ -19,13 +18,6 @@ const BillingDetailsSection = ({ register, errors }) => {
           id="email"
           type="email"
           register={register}
-          validationRules={{
-            required: "Required",
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: "Wrong format",
-            },
-          }}
           error={errors.email}
           placeholder="Haseebakram@mail.com"
         />
@@ -34,7 +26,6 @@ const BillingDetailsSection = ({ register, errors }) => {
           id="phone"
           type="tel"
           register={register}
-          validationRules={{ required: "Required" }}
           error={errors.phone}
           placeholder="+92 3001234567"
         />

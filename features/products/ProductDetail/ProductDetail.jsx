@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { getImageUrl } from "@/utils/helper";
 import { useProduct } from "../useProduct";
 import styles from "@/features/products/ProductDetail/ProductDetail.module.css";
@@ -20,6 +21,10 @@ const ProductDetail = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{product.name} | Audiophile</title>
+        <meta name="description" content={product.description} />
+      </Helmet>
       <main className={styles.detailWrapper}>
         <div className={styles.container}>
           <button onClick={() => navigate(-1)} className={styles.backBtn}>

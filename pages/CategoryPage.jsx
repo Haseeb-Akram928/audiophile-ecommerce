@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import NotFound from "@/pages/NotFound";
 import CategoryHeader from "@/features/products/CategoryHeader/CategoryHeader";
 import CategoryFilters from "@/features/products/CategoryFilters";
@@ -15,6 +16,10 @@ function CategoryPage() {
   }
   return (
     <>
+      <Helmet>
+        <title>{categoryName.charAt(0).toUpperCase() + categoryName.slice(1)} | Audiophile</title>
+        <meta name="description" content={`Explore our premium range of ${categoryName}. High-fidelity sound and modern design.`} />
+      </Helmet>
       <CategoryHeader title={categoryName.toUpperCase()} />
       <CategoryFilters />
       <ProductPreview categoryName={categoryName} />

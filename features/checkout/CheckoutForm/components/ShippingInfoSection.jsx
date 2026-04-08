@@ -10,7 +10,6 @@ const ShippingInfoSection = ({ register, errors }) => {
           label="Address"
           id="address"
           register={register}
-          validationRules={{ required: "Required" }}
           error={errors.address}
           placeholder="Lahore, Pakistan"
           wrapperClassName={`${styles.fullWidthInput}`}
@@ -19,7 +18,6 @@ const ShippingInfoSection = ({ register, errors }) => {
           label="ZIP Code"
           id="zip"
           register={register}
-          validationRules={{ required: "Required" }}
           error={errors.zip}
           placeholder="10001"
         />
@@ -27,7 +25,6 @@ const ShippingInfoSection = ({ register, errors }) => {
           label="City"
           id="city"
           register={register}
-          validationRules={{ required: "Required" }}
           error={errors.city}
           placeholder="Lahore"
         />
@@ -35,7 +32,6 @@ const ShippingInfoSection = ({ register, errors }) => {
           label="Country"
           id="country"
           register={register}
-          validationRules={{ required: "Required" }}
           error={errors.country}
           placeholder="Pakistan"
         />

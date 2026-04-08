@@ -1,32 +1,40 @@
-import { useUser } from "@/features/auth/useUser"; // Import useUser to get authenticated user
-import { useOrders } from "@/features/orders/useOrders"; // Import useOrders to get past shipping address
-import { createOrder } from "@/services/apiOrders.js"; // Corrected import
-import { useMutation, useQueryClient } from "@tanstack/react-query"; // Import useQueryClient
+import { useUser } from "@/features/auth/useUser";
+import { useOrders } from "@/features/orders/useOrders";
+import { createOrder } from "@/services/apiOrders.js";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { checkoutSchema } from "@/utils/validation";
+import { useSelector } from "react-redux";
 import { getCart, getTotalCartPrice } from "@/features/cart/cartSlice";
 import styles from "@/features/checkout/CheckoutForm/CheckoutForm.module.css";
-import toast from "react-hot-toast"; // Import toast
+import toast from "react-hot-toast";
 
-// import FormInputGroup from "./components/FormInputGroup.jsx";
 import BillingDetailsSection from "@/features/checkout/CheckoutForm/components/BillingDetailsSection.jsx";
 import ShippingInfoSection from "@/features/checkout/CheckoutForm/components/ShippingInfoSection.jsx";
 import PaymentDetailsSection from "@/features/checkout/CheckoutForm/components/PaymentDetailsSection.jsx";
 
 const CheckoutForm = ({ onOrderSuccess }) => {
-  const queryClient = useQueryClient(); // Initialize queryClient
+  const { user } = useUser();
+  const { orders } = useOrders();
+  const cartItems = useSelector(getCart);
+  const grandTotal = useSelector(getTotalCartPrice);
 
   const {
     register,
     handleSubmit,
     watch,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm({
-    defaultValues: { paymentMethod: "cash" },
+    resolver: zodResolver(checkoutSchema),
+    defaultValues: { 
+      paymentMethod: "cash",
+      name: user?.profile?.full_name || user?.user_metadata?.fullName || "",
+      email: user?.email || ""
+    },
   });
 
-  const { orders } = useOrders();
   const savedAddress = orders?.[0]?.shipping_address;
 
   const handleUseSavedAddress = (e) => {
@@ -43,14 +51,10 @@ const CheckoutForm = ({ onOrderSuccess }) => {
   };
 
   const paymentMethod = watch("paymentMethod");
-  const dispatch = useDispatch();
-  const { user, isAuthenticated } = useUser(); // Get authenticated user
-  const cartItems = useSelector(getCart);
-  const grandTotal = useSelector(getTotalCartPrice);
 
   const createOrderMutation = useMutation({
     mutationFn: createOrder,
-    onSuccess: async () => {
+    onSuccess: () => {
       onOrderSuccess();
     },
     onError: (err) => {
@@ -59,12 +63,6 @@ const CheckoutForm = ({ onOrderSuccess }) => {
   });
 
   const onSubmit = async (formData) => {
-    if (!isAuthenticated || !user?.id) {
-      toast.error("You must be logged in to place an order.");
-      return;
-    }
-
-    // Construct shipping address object
     const shippingAddress = {
       name: formData.name,
       email: formData.email,
@@ -76,7 +74,7 @@ const CheckoutForm = ({ onOrderSuccess }) => {
     };
 
     const orderData = {
-      userId: user.id,
+      userId: user?.id || null, // Allow guest checkout (null userId)
       cartItems: cartItems.map((item) => ({
         productId: item.id,
         quantity: item.quantity,

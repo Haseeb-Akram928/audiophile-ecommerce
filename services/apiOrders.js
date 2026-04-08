@@ -9,21 +9,21 @@ export async function createOrder({
 }) {
   try {
     // 1. Create the order
+    const orderData = {
+      total_amount: totalAmount,
+      shipping_address: shippingAddress,
+      payment_method: paymentMethod,
+    };
+
+    if (userId) {
+      orderData.user_id = userId;
+    }
+
     const { data: order, error: orderError } = await supabase
       .from("orders")
-      .insert({
-        user_id: userId,
-        total_amount: totalAmount,
-        shipping_address: shippingAddress,
-        payment_method: paymentMethod,
-      })
+      .insert(orderData)
       .select()
       .single();
-
-    if (orderError) {
-      console.error("Supabase order creation error:", orderError);
-      throw new Error("Could not create order.");
-    }
 
     // 2. Create order items
     const orderItems = cartItems.map((item) => ({

@@ -20,7 +20,7 @@ const FormInputGroup = ({
       <input
         id={id}
         type={type}
-        {...registerFn(id, validationRules)} // Use registerFn here with validationRules
+        {...registerFn(id, validationRules || {})} 
         className={`input-field ${error ? "error" : ""} ${inputClassName || ""}`}
         placeholder={placeholder}
       />

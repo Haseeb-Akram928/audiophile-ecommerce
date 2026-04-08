@@ -41,7 +41,6 @@ const PaymentDetailsSection = ({ register, errors, paymentMethod, watch }) => {
             label="e-Money Number"
             id="eMoneyNumber"
             register={register}
-            validationRules={{ required: true }}
             error={errors.eMoneyNumber}
             placeholder="238521993"
           />
@@ -50,7 +49,6 @@ const PaymentDetailsSection = ({ register, errors, paymentMethod, watch }) => {
             id="eMoneyPin"
             type="password"
             register={register}
-            validationRules={{ required: true }}
             error={errors.eMoneyPin}
             placeholder="6891"
           />
