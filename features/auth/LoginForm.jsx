@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/utils/validation";
 import { useLogin } from "@/features/auth/useLogin";
 import { useGoogleLogin } from "@/features/auth/useGoogleLogin";
 import styles from "@/features/auth/AuthForm.module.css";
 
 function LoginForm() {
-  const { register, handleSubmit, formState } = useForm();
-  const { errors } = formState;
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(loginSchema)
+  });
   const { login, isPending } = useLogin();
   const { loginWithGoogle, isPending: isGooglePending } = useGoogleLogin();
 
@@ -22,7 +25,7 @@ function LoginForm() {
           <input
             type="email"
             id="email"
-            {...register("email", { required: "Email is required" })}
+            {...register("email")}
             className={styles.fieldInput}
             disabled={isPending || isGooglePending}
           />
@@ -37,7 +40,7 @@ function LoginForm() {
           <input
             type="password"
             id="password"
-            {...register("password", { required: "Password is required" })}
+            {...register("password")}
             className={styles.fieldInput}
             disabled={isPending || isGooglePending}
           />

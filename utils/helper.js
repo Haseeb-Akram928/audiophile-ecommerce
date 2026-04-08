@@ -1,3 +1,5 @@
+import { config } from "../lib/env.js";
+
 const loadFromLocalStorage = () => {
   try {
     const serializedState = localStorage.getItem("cartState");
@@ -45,7 +47,7 @@ const getImageUrl = (path) => {
   }
   
   // Base Supabase storage URL (using your project reference ID)
-  const BUCKET_URL = "https://ffjmbbpteojoephvtlsw.supabase.co/storage/v1/object/public/product-images/";
+  const BUCKET_URL = `${config.SUPABASE_URL}/storage/v1/object/public/product-images/`;
   
   return `${BUCKET_URL}${cleanPath}`;
 };

@@ -36,6 +36,33 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatarOverlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+  text-align: center;
+  flex-direction: column;
+}
+
+.avatarWrapper:hover .avatarOverlay {
+  opacity: 1;
+}
+
+.avatarInput {
+  display: none;
 }
 
 .mainAvatar {

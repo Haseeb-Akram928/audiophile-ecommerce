@@ -97,3 +97,44 @@ export async function loginWithGoogle() {
 
   return data;
 }
+
+export async function updateAvatar({ userId, file }) {
+  // 1. Upload to Supabase Storage avatars bucket
+  const fileName = `avatar-${userId}-${Date.now()}`;
+  const { data: uploadData, error: uploadError } = await supabase.storage
+    .from("avatars")
+    .upload(fileName, file, { cacheControl: '3600', upsert: true });
+
+  if (uploadError) {
+    console.error("Storage upload error:", uploadError);
+    throw new Error(uploadError.message);
+  }
+
+  // 2. Extract public URL
+  const { data: urlData } = supabase.storage
+    .from("avatars")
+    .getPublicUrl(fileName);
+
+  const newAvatarUrl = urlData.publicUrl;
+
+  // 3. Update profiles table
+  const { data: profileData, error: profileError } = await supabase
+    .from("profiles")
+    .update({ avatar_url: newAvatarUrl })
+    .eq("id", userId)
+    .select()
+    .single();
+
+  if (profileError) {
+    console.error("Profiles table update error:", profileError);
+    throw new Error(profileError.message);
+  }
+
+  // 4. Update core auth metadata cache
+  await supabase.auth.updateUser({
+    data: { avatar: newAvatarUrl },
+  });
+
+  return newAvatarUrl;
+}
+

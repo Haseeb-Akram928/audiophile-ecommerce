@@ -1,10 +1,11 @@
 import emailjs from "@emailjs/browser";
+import { config } from "../lib/env.js";
 
 export async function sendOrderConfirmation(order) {
   try {
     await emailjs.send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      config.EMAILJS_SERVICE_ID,
+      config.EMAILJS_TEMPLATE_ID,
       {
         to_name: order.name,
         to_email: order.email,
@@ -21,8 +22,8 @@ export async function sendOrderConfirmation(order) {
 export async function sendWelcomeEmail({ fullName, email }) {
   try {
     await emailjs.send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_WELCOME_EMAIL_TEMPLATE_ID,
+      config.EMAILJS_SERVICE_ID,
+      config.WELCOME_EMAIL_TEMPLATE_ID,
       {
         to_name: fullName,
         to_email: email,

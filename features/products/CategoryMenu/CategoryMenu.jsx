@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "@/features/products/CategoryMenu/CategoryMenu.module.css";
 import { getImageUrl } from "@/utils/helper";
+import ImageWithLoader from "@/components/ui/ImageWithLoader/ImageWithLoader";
 
 const categories = [
   {
@@ -25,7 +26,14 @@ const CategoryMenu = ({ closeMenu }) => {
     <div className={styles.menuGrid}>
       {categories.map((cat) => (
         <div key={cat.name} className={styles.card}>
-          <img src={getImageUrl(cat.image)} alt={cat.name} className={styles.thumb} />
+          <div style={{ height: '140px', width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <ImageWithLoader 
+              src={getImageUrl(cat.image)} 
+              alt={cat.name} 
+              imageClassName={styles.thumb} 
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
           <h3 className={styles.name}>{cat.name}</h3>
           <Link to={cat.link} className={styles.shopLink} onClick={closeMenu}>
             SHOP <span className={styles.arrow}>&gt;</span>

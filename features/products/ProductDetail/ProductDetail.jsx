@@ -1,13 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { getImageUrl } from "@/utils/helper";
 import { useProduct } from "../useProduct";
 import styles from "@/features/products/ProductDetail/ProductDetail.module.css";
 import RelatedProducts from "@/features/products/RelatedProducts/RelatedProducts";
 import NotFound from "@/pages/NotFound";
 import Loader from "@/components/ui/Loader";
+import ImageWithLoader from "@/components/ui/ImageWithLoader/ImageWithLoader";
 import ProductGallery from "./components/ProductGallery";
 import ProductFeatures from "./components/ProductFeatures";
 import AddToCartMenu from "./components/AddToCartMenu";
-import { getImageUrl } from "@/utils/helper";
 
 const ProductDetail = () => {
   const { slug } = useParams();
@@ -27,17 +28,15 @@ const ProductDetail = () => {
 
           <section className={styles.mainInfo}>
             <div className={styles.imageContainer}>
-              <picture>
-                <source
-                  media="(min-width: 1100px)"
-                  srcSet={getImageUrl(product.image.desktop)}
-                />
-                <source
-                  media="(min-width: 768px)"
-                  srcSet={getImageUrl(product.image.tablet)}
-                />
-                <img src={getImageUrl(product.image.mobile)} alt={product.name} />
-              </picture>
+              <ImageWithLoader
+                src={getImageUrl(product.image.mobile)}
+                alt={product.name}
+                sources={[
+                  { media: "(min-width: 1100px)", srcSet: getImageUrl(product.image.desktop) },
+                  { media: "(min-width: 768px)", srcSet: getImageUrl(product.image.tablet) }
+                ]}
+                style={{ display: 'block', width: '100%', height: '100%', borderRadius: '8px' }}
+              />
             </div>
             <div className={styles.textContainer}>
               {product.new && <p className={styles.overline}>NEW PRODUCT</p>}

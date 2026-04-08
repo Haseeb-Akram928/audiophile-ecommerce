@@ -96,7 +96,7 @@ const CheckoutForm = ({ onOrderSuccess }) => {
       className={styles.formCard}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+      <div className={styles.headerContainer}>
         <h1 className={styles.mainTitle} style={{ marginBottom: 0 }}>CHECKOUT</h1>
         {savedAddress && (
           <button 
@@ -111,8 +111,7 @@ const CheckoutForm = ({ onOrderSuccess }) => {
               fontWeight: '700', 
               fontSize: '13px', 
               color: '#d87d4a',
-              transition: 'background 0.2s ease',
-              marginTop: '16px'
+              transition: 'background 0.2s ease'
             }}
             onMouseOver={(e) => e.target.style.background = '#e2e2e2'}
             onMouseOut={(e) => e.target.style.background = '#f1f1f1'}

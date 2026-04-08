@@ -7,8 +7,11 @@ import emailjs from "@emailjs/browser";
 import { store } from "./store.js";
 import App from "./App.jsx";
 import "./index.css";
+import { config } from "./lib/env.js";
 
-emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+if (config.EMAILJS_PUBLIC_KEY) {
+  emailjs.init(config.EMAILJS_PUBLIC_KEY);
+}
 
 const queryClient = new QueryClient({
   defaultOptions: {

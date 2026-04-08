@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signupSchema } from "@/utils/validation";
 import { useSignup } from "@/features/auth/useSignup";
 import { useGoogleLogin } from "@/features/auth/useGoogleLogin";
 import styles from "@/features/auth/AuthForm.module.css";
 
 function SignupForm() {
-  const { register, handleSubmit, formState, getValues } = useForm();
-  const { errors } = formState;
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(signupSchema)
+  });
   const { signup, isPending } = useSignup();
   const { loginWithGoogle, isPending: isGooglePending } = useGoogleLogin();
 
@@ -22,7 +25,7 @@ function SignupForm() {
         <input
           type="text"
           id="fullName"
-          {...register("fullName", { required: "Full name is required" })}
+          {...register("fullName")}
           className={styles.fieldInput}
           disabled={isPending || isGooglePending}
         />
@@ -37,7 +40,7 @@ function SignupForm() {
         <input
           type="text"
           id="username"
-          {...register("username", { required: "Username is required" })}
+          {...register("username")}
           className={styles.fieldInput}
           disabled={isPending || isGooglePending}
         />
@@ -52,7 +55,7 @@ function SignupForm() {
         <input
           type="email"
           id="email"
-          {...register("email", { required: "Email is required" })}
+          {...register("email")}
           className={styles.fieldInput}
           disabled={isPending || isGooglePending}
         />
@@ -67,7 +70,7 @@ function SignupForm() {
         <input
           type="password"
           id="password"
-          {...register("password", { required: "Password is required" })}
+          {...register("password")}
           className={styles.fieldInput}
           disabled={isPending || isGooglePending}
         />
@@ -82,11 +85,7 @@ function SignupForm() {
         <input
           type="password"
           id="passwordConfirm"
-          {...register("passwordConfirm", {
-            required: "Please confirm your password",
-            validate: (value) =>
-              value === getValues().password || "Passwords do not match",
-          })}
+          {...register("passwordConfirm")}
           className={styles.fieldInput}
           disabled={isPending || isGooglePending}
         />

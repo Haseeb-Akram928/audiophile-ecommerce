@@ -10,6 +10,7 @@ import SignupPage from "@/pages/SignupPage";
 import ProtectedRoute from "./features/auth/ProtectedRoute";
 import OrderPage from "./pages/OrderPage";
 import ProfilePage from "./pages/ProfilePage";
+import NotFound from "@/pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,14 @@ const router = createBrowserRouter([
         path: "/product/:slug",
         element: <ProductDetailPage />,
       },
-
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/signup",
+        element: <SignupPage />,
+      },
       // Protected Routes
       {
         element: <ProtectedRoute />,
@@ -47,17 +55,12 @@ const router = createBrowserRouter([
           },
         ],
       },
+      // Catch-all route
+      {
+        path: "*",
+        element: <NotFound />
+      }
     ],
-  },
-
-  // Public Auth Routes (Moved outside of ProtectedRoute)
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/signup",
-    element: <SignupPage />,
   },
 ]);
 

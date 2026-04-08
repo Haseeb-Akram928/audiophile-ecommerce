@@ -4,6 +4,11 @@ import { useLogout } from '@/features/auth/useLogout';
 import { useOrders } from '@/features/orders/useOrders';
 import OrderHistory from '@/features/orders/OrderHistory/OrderHistory';
 import { getImageUrl } from '@/utils/helper';
+import ImageWithLoader from "@/components/ui/ImageWithLoader/ImageWithLoader";
+import { useUpdateAvatar } from '@/features/auth/useUpdateAvatar';
+import imageCompression from 'browser-image-compression';
+import { toast } from 'react-hot-toast';
+import ProfileSkeleton from './components/ProfileSkeleton/ProfileSkeleton';
 import styles from './ProfilePage.module.css';
 
 function SavedAddresses({ addressData }) {
@@ -160,15 +165,49 @@ const ProfilePage = () => {
   const { user, isLoading: isUserLoading } = useUser();
   const { logout, isPending: isLoggingOut } = useLogout();
   const { orders, isLoading: isOrdersLoading } = useOrders();
+  const { updateAvatar, isUpdating } = useUpdateAvatar();
   
   const [activeTab, setActiveTab] = useState('PROFILE');
+
+  const handleAvatarChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      return toast.error("File size must be less than 5MB");
+    }
+
+    try {
+      const options = {
+        maxSizeMB: 0.2, // Compress heavily down to 200KB or less
+        maxWidthOrHeight: 400, // Small dimensions since it's just an avatar
+        useWebWorker: true,
+      };
+
+      toast.loading("Compressing and uploading...", { id: "avatar-upload" });
+
+      const compressedFile = await imageCompression(file, options);
+
+      updateAvatar(
+        { userId: user.id, file: compressedFile },
+        {
+          onSuccess: () => toast.dismiss("avatar-upload"),
+          onError: () => toast.dismiss("avatar-upload"),
+        }
+      );
+    } catch (error) {
+      console.error(error);
+      toast.error("Error compressing image");
+      toast.dismiss("avatar-upload");
+    }
+  };
 
   const displayUser = user?.profile?.username || user?.user_metadata?.username || 'Member';
   const fullName = user?.profile?.full_name || user?.user_metadata?.fullName || 'Alex Sterling';
   const hasOrders = orders && orders.length > 0;
 
   if (isUserLoading || isOrdersLoading) {
-    return <div className={styles.loading}>Loading Profile...</div>;
+    return <ProfileSkeleton />;
   }
 
   const recentOrder = orders?.[0];
@@ -187,9 +226,31 @@ const ProfilePage = () => {
       {/* Header Section */}
       <section className={styles.profileHeader}>
         <div className={styles.avatarWrapper}>
-          <span className={`material-symbols-outlined ${styles.mainAvatar}`}>
-            account_circle
-          </span>
+          {isUpdating ? (
+            <div className={styles.loading} style={{ minHeight: 'unset', fontSize: '24px' }}>⏳</div>
+          ) : user?.profile?.avatar_url || user?.user_metadata?.avatar ? (
+            <ImageWithLoader 
+              src={user?.profile?.avatar_url || user?.user_metadata?.avatar} 
+              alt="avatar" 
+              style={{ width: '100%', height: '100%', borderRadius: '50%' }} 
+            />
+          ) : (
+            <span className={`material-symbols-outlined ${styles.mainAvatar}`}>
+              account_circle
+            </span>
+          )}
+          
+          <label className={styles.avatarOverlay}>
+            <span className="material-symbols-outlined" style={{ fontSize: '24px', marginBottom: '4px' }}>photo_camera</span>
+            <span>UPDATE</span>
+            <input 
+              type="file" 
+              accept="image/*" 
+              onChange={handleAvatarChange} 
+              className={styles.avatarInput} 
+              disabled={isUpdating} 
+            />
+          </label>
         </div>
         <div className={styles.userInfo}>
           <h1 className={styles.userName}>{displayUser}</h1>
@@ -256,20 +317,22 @@ const ProfilePage = () => {
                   <div className={styles.orderCard}>
                     <div className={styles.orderImageWrapper}>
                       {productImages ? (
-                        <picture>
-                          <source media="(min-width: 1024px)" srcSet={getImageUrl(productImages.desktop)} />
-                          <source media="(min-width: 768px)" srcSet={getImageUrl(productImages.tablet)} />
-                          <img 
-                            src={getImageUrl(productImages.mobile)} 
-                            alt={recentProductName} 
-                            className={styles.orderImage} 
-                          />
-                        </picture>
+                        <ImageWithLoader
+                          src={getImageUrl(productImages.mobile)}
+                          alt={recentProductName}
+                          imageClassName={styles.orderImage}
+                          sources={[
+                            { media: "(min-width: 1024px)", srcSet: getImageUrl(productImages.desktop) },
+                            { media: "(min-width: 768px)", srcSet: getImageUrl(productImages.tablet) }
+                          ]}
+                          style={{ width: '100%', height: '100%', borderRadius: '8px' }}
+                        />
                       ) : (
-                        <img 
+                        <ImageWithLoader 
                           src={getImageUrl("/assets/cart/image-xx99-mark-two-headphones.jpg")} 
                           alt={recentProductName} 
-                          className={styles.orderImage} 
+                          imageClassName={styles.orderImage} 
+                          style={{ width: '100%', height: '100%', borderRadius: '8px' }}
                         />
                       )}
                     </div>
@@ -279,7 +342,15 @@ const ProfilePage = () => {
                       <p className={styles.orderMeta}>Order #{recentOrderId} &bull; {recentOrderDate}</p>
                       <div className={styles.orderFooter}>
                         <span className={styles.orderPrice}>$ {recentProductPrice.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
-                        <button className={styles.viewDetailsBtn} onClick={() => setActiveTab('ORDERS')}>VIEW DETAILS</button>
+                        <button 
+                          className={styles.viewDetailsBtn} 
+                          onClick={() => {
+                            setActiveTab('ORDERS');
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
+                        >
+                          VIEW DETAILS
+                        </button>
                       </div>
                     </div>
                   </div>

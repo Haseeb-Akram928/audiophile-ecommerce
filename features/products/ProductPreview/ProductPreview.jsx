@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "@/features/products/ProductPreview/ProductPreview.module.css";
 import { useProducts } from "../useProducts";
 import Loader from "@/components/ui/Loader";
+import ImageWithLoader from "@/components/ui/ImageWithLoader/ImageWithLoader";
 import { getImageUrl } from "@/utils/helper";
 
 const ProductPreview = ({ categoryName }) => {
@@ -20,20 +21,15 @@ const ProductPreview = ({ categoryName }) => {
         {filteredProducts.map((product) => (
           <div key={product.id} className={styles.productCard}>
             <div className={styles.imageContainer}>
-              <picture>
-                <source
-                  media="(min-width: 1100px)"
-                  srcSet={getImageUrl(product.categoryImage?.desktop) || ""}
-                />
-                <source
-                  media="(min-width: 768px)"
-                  srcSet={getImageUrl(product.categoryImage?.tablet) || ""}
-                />
-                <img
-                  src={getImageUrl(product.categoryImage?.mobile) || ""}
-                  alt={product.name}
-                />
-              </picture>
+              <ImageWithLoader
+                src={getImageUrl(product.categoryImage?.mobile) || ""}
+                alt={product.name}
+                sources={[
+                  { media: "(min-width: 1100px)", srcSet: getImageUrl(product.categoryImage?.desktop) || "" },
+                  { media: "(min-width: 768px)", srcSet: getImageUrl(product.categoryImage?.tablet) || "" }
+                ]}
+                style={{ display: 'block', width: '100%', height: '100%', borderRadius: '8px' }}
+              />
             </div>
 
             <div className={styles.content}>

@@ -4,6 +4,14 @@
   padding: 24px;
 }
 
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
 .mainTitle {
   font-size: var(--fs-700);
   margin-bottom: 32px;
@@ -65,6 +73,12 @@
 @media (min-width: 768px) {
   .formCard {
     padding: 30px;
+  }
+
+  .headerContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .mainTitle {
