@@ -1,0 +1,157 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  margin: 0;
+}
+
+.cancelBtn {
+  background: transparent;
+  color: var(--admin-text-secondary);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.cancelBtn:hover {
+  background-color: var(--admin-bg-tertiary);
+  color: var(--admin-text-primary);
+}
+
+.formContainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .formContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formMain {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  background-color: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius);
+  border: 1px solid var(--admin-border);
+  padding: 24px;
+  box-shadow: var(--admin-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  margin: 0 0 4px 0;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.inputGroup label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--admin-text-secondary);
+}
+
+.input {
+  background-color: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--admin-text-primary);
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: var(--admin-accent);
+}
+
+.inputRow {
+  display: flex;
+  gap: 16px;
+}
+
+.error {
+  color: var(--admin-danger);
+  font-size: 12px;
+}
+
+.toggleGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.toggleGroup:last-of-type {
+  border-bottom: none;
+}
+
+.toggleGroup label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--admin-text-primary);
+}
+
+.submitBtn {
+  background-color: var(--admin-accent);
+  color: white;
+  border: none;
+  border-radius: var(--admin-radius);
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background-color 0.2s;
+}
+
+.submitBtn:hover {
+  background-color: var(--admin-accent-hover);
+}
+
+.note {
+  font-size: 13px;
+  color: var(--admin-text-tertiary);
+  font-style: italic;
+}

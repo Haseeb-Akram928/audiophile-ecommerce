@@ -15,6 +15,8 @@ import NotFound from "@/pages/NotFound";
 import AdminProtectedRoute from "@/features/admin/auth/AdminProtectedRoute";
 import AdminLayout from "@/features/admin/components/AdminLayout";
 import AdminDashboard from "@/features/admin/dashboard/AdminDashboard";
+import ProductList from "@/features/admin/products/ProductList";
+import ProductForm from "@/features/admin/products/ProductForm";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,18 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <AdminDashboard />,
+          },
+          {
+            path: "products",
+            element: <ProductList />,
+          },
+          {
+            path: "products/new",
+            element: <ProductForm />,
+          },
+          {
+            path: "products/:id/edit",
+            element: <ProductForm />,
           },
         ],
       },

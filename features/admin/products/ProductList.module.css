@@ -1,0 +1,125 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--admin-text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--admin-accent);
+  color: white;
+  border: none;
+  border-radius: var(--admin-radius);
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.addButton:hover {
+  background-color: var(--admin-accent-hover);
+}
+
+.tableWrapper {
+  background-color: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow);
+  overflow: hidden;
+}
+
+.imageCell {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--admin-bg-primary);
+}
+
+.productImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.placeholderImg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--admin-text-tertiary);
+  border: 1px dashed var(--admin-border);
+}
+
+.productName {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.category {
+  text-transform: capitalize;
+  color: var(--admin-text-secondary);
+}
+
+.stockGood {
+  color: var(--admin-success);
+  font-weight: 600;
+}
+
+.stockLow {
+  color: var(--admin-danger);
+  font-weight: 600;
+}
+
+.actionsCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  color: var(--admin-text-secondary);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.actionBtn:hover {
+  background-color: var(--admin-bg-tertiary);
+  color: var(--admin-text-primary);
+}
+
+.actionDelete:hover {
+  color: var(--admin-danger);
+  background-color: rgba(231, 76, 60, 0.1);
+}
