@@ -1,0 +1,75 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--admin-text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.tableWrapper {
+  background-color: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow);
+  overflow: hidden;
+}
+
+.orderId {
+  font-family: monospace;
+  color: var(--admin-text-secondary);
+  background-color: var(--admin-bg-primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--admin-border);
+}
+
+.customer {
+  font-weight: 500;
+}
+
+.total {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.payment {
+  text-transform: capitalize;
+  color: var(--admin-text-tertiary);
+}
+
+.viewBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-primary);
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.viewBtn:hover {
+  background-color: var(--admin-bg-tertiary);
+  border-color: var(--admin-accent);
+  color: var(--admin-accent);
+}

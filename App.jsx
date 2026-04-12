@@ -17,6 +17,8 @@ import AdminLayout from "@/features/admin/components/AdminLayout";
 import AdminDashboard from "@/features/admin/dashboard/AdminDashboard";
 import ProductList from "@/features/admin/products/ProductList";
 import ProductForm from "@/features/admin/products/ProductForm";
+import OrderList from "@/features/admin/orders/OrderList";
+import OrderDetail from "@/features/admin/orders/OrderDetail";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,14 @@ const router = createBrowserRouter([
           {
             path: "products/:id/edit",
             element: <ProductForm />,
+          },
+          {
+            path: "orders",
+            element: <OrderList />,
+          },
+          {
+            path: "orders/:id",
+            element: <OrderDetail />,
           },
         ],
       },
