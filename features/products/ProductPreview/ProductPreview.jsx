@@ -39,7 +39,7 @@ const ProductPreview = ({ categoryName }) => {
                     onClick={() => toggleWishlist({ productId: product.id, isWishlisted })}
                     aria-label="Toggle Wishlist"
                   >
-                    <span 
+                    <span
                       className={`material-symbols-outlined ${isWishlisted ? styles.wishlisted : ""}`}
                     >
                       favorite
@@ -57,20 +57,19 @@ const ProductPreview = ({ categoryName }) => {
                 />
               </div>
 
-            <div className={styles.content}>
-              {product.new && <p className={styles.newProduct}>NEW PRODUCT</p>}
-              <h2 className={styles.name}>{product.name}</h2>
-              <p className={styles.description}>{product.description}</p>
-              <Link to={`/product/${product.slug}`} className="btn orange">
-                SEE PRODUCT
-              </Link>
+              <div className={styles.content}>
+                {product.new && <p className={styles.newProduct}>NEW PRODUCT</p>}
+                <h2 className={styles.name}>{product.name}</h2>
+                <p className={styles.description}>{product.description}</p>
+                <Link to={`/product/${product.slug}`} className="btn orange">
+                  SEE PRODUCT
+                </Link>
+              </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
-  </section>
+          );
+        })}
+      </div>
+    </section>
   );
-};
-
+}
 export default ProductPreview;

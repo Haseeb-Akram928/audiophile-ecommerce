@@ -1,0 +1,23 @@
+.adminLayout {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--admin-bg-primary);
+  color: var(--admin-text-primary);
+  font-family: 'Inter', sans-serif;
+}
+
+.mainWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 24px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  overflow-y: auto;
+}

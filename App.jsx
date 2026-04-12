@@ -12,7 +12,26 @@ import OrderPage from "./pages/OrderPage";
 import ProfilePage from "./pages/ProfilePage";
 import NotFound from "@/pages/NotFound";
 
+import AdminProtectedRoute from "@/features/admin/auth/AdminProtectedRoute";
+import AdminLayout from "@/features/admin/components/AdminLayout";
+import AdminDashboard from "@/features/admin/dashboard/AdminDashboard";
+
 const router = createBrowserRouter([
+  {
+    path: "/admin",
+    element: <AdminProtectedRoute />,
+    children: [
+      {
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <AdminDashboard />,
+          },
+        ],
+      },
+    ],
+  },
   {
     path: "/",
     element: <RootLayout />,

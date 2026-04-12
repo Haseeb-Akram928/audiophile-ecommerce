@@ -1,0 +1,28 @@
+:root {
+  /* Admin Design Tokens */
+  --admin-bg-primary: hsl(222, 47%, 11%);        /* Deep navy */
+  --admin-bg-secondary: hsl(217, 33%, 17%);      /* Card backgrounds */
+  --admin-bg-tertiary: hsl(215, 28%, 22%);       /* Hover states */
+  --admin-sidebar-bg: hsl(222, 47%, 8%);         /* Darker sidebar */
+
+  --admin-text-primary: hsl(210, 40%, 96%);      /* Near-white */
+  --admin-text-secondary: hsl(215, 20%, 65%);    /* Muted text */
+  --admin-text-tertiary: hsl(215, 16%, 47%);     /* Very muted */
+
+  --admin-accent: hsl(22, 65%, 57%);             /* Audiophile copper — brand consistency */
+  --admin-accent-hover: hsl(21, 94%, 75%);       /* Peach hover */
+
+  --admin-success: hsl(142, 71%, 45%);           /* Green */
+  --admin-warning: hsl(38, 92%, 50%);            /* Amber */
+  --admin-danger: hsl(0, 72%, 51%);              /* Red */
+  --admin-info: hsl(199, 89%, 48%);              /* Blue */
+
+  --admin-border: hsl(215, 28%, 25%);
+  --admin-radius: 10px;
+  --admin-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+body:has(.admin-app) {
+  background-color: var(--admin-bg-primary);
+  color: var(--admin-text-primary);
+}
