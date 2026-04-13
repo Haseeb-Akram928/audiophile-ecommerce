@@ -27,6 +27,7 @@ import UserList from "@/features/admin/users/UserList";
 import ReviewModeration from "@/features/admin/content/ReviewModeration";
 import CouponManager from "@/features/admin/content/CouponManager";
 import SiteSettings from "@/features/admin/content/SiteSettings";
+import AdminSettings from "@/features/admin/settings/AdminSettings";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
           {
             path: "content",
             element: <SiteSettings />,
+          },
+          {
+            path: "settings",
+            element: <AdminSettings />,
           },
         ],
       },

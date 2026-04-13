@@ -1,0 +1,217 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--admin-text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.settingsCol, .logsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  background-color: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius);
+  border: 1px solid var(--admin-border);
+  padding: 24px;
+  box-shadow: var(--admin-shadow);
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  margin: 0 0 16px 0;
+}
+
+.cardDesc {
+  color: var(--admin-text-secondary);
+  font-size: 14px;
+  margin: -10px 0 20px 0;
+}
+
+/* Profile Box */
+.profileBox {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.profileAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--admin-accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.profileAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profileName {
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  font-size: 16px;
+}
+
+.profileEmail {
+  color: var(--admin-text-tertiary);
+  font-size: 13px;
+}
+
+.profileRoleBadge {
+  display: inline-block;
+  background-color: rgba(216, 125, 74, 0.15); /* Accent color wash */
+  color: var(--admin-accent);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+
+.note {
+  font-size: 13px;
+  color: var(--admin-text-tertiary);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* Activity Logs */
+.logList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.logItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.logItem:hover {
+  background-color: var(--admin-bg-tertiary);
+}
+
+.logIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--admin-bg-secondary);
+  color: var(--admin-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--admin-border);
+}
+
+.logContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.logHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logUser {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  font-size: 14px;
+}
+
+.logAction {
+  background-color: var(--admin-bg-secondary);
+  color: var(--admin-text-secondary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.logMeta {
+  color: var(--admin-text-tertiary);
+  font-size: 13px;
+}
+
+.logDetail {
+  color: var(--admin-text-secondary);
+}
+
+.logTime {
+  color: var(--admin-text-tertiary);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.emptyLogs {
+  padding: 40px;
+  text-align: center;
+  color: var(--admin-text-tertiary);
+  font-style: italic;
+}
