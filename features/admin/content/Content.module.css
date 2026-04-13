@@ -1,0 +1,222 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--admin-text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.primaryBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--admin-accent);
+  color: white;
+  border: none;
+  border-radius: var(--admin-radius);
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.primaryBtn:hover {
+  background-color: var(--admin-accent-hover);
+}
+
+.tableWrapper {
+  background-color: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow);
+  overflow: hidden;
+}
+
+/* Reviews Mod */
+.productName {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.rating {
+  display: flex;
+  color: #f1c40f;
+  font-size: 16px;
+}
+
+.starFilled { color: #f1c40f; }
+.starEmpty { color: var(--admin-text-tertiary); }
+
+.comment {
+  display: inline-block;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--admin-text-secondary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.approveBtn { color: var(--admin-success); }
+.approveBtn:hover:not(:disabled) { background-color: rgba(46, 204, 113, 0.1); }
+
+.rejectBtn { color: var(--admin-danger); }
+.rejectBtn:hover:not(:disabled) { background-color: rgba(231, 76, 60, 0.1); }
+
+.actionBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Coupons */
+.couponCode {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  background-color: var(--admin-bg-primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.discount {
+  font-weight: 700;
+  color: var(--admin-accent);
+}
+
+.formCard {
+  background-color: var(--admin-bg-secondary);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--admin-text-secondary);
+}
+
+.input {
+  background-color: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-primary);
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-family: inherit;
+}
+
+.submitBtn {
+  background-color: var(--admin-success);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Settings */
+.settingsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.settingsCard {
+  background-color: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius);
+  border: 1px solid var(--admin-border);
+  padding: 24px;
+  box-shadow: var(--admin-shadow);
+}
+
+.cardTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  margin: 0 0 8px 0;
+}
+
+.cardDesc {
+  color: var(--admin-text-secondary);
+  font-size: 14px;
+  margin: 0 0 20px 0;
+}
+
+.settingsForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+}
+
+.textarea {
+  background-color: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-primary);
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.saveBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  background-color: var(--admin-accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.saveBtn:disabled {
+  opacity: 0.7;
+}
+

@@ -24,6 +24,9 @@ import AnalyticsDashboard from "@/features/admin/analytics/AnalyticsDashboard";
 import ProductAnalytics from "@/features/admin/analytics/ProductAnalytics";
 import CustomerAnalytics from "@/features/admin/analytics/CustomerAnalytics";
 import UserList from "@/features/admin/users/UserList";
+import ReviewModeration from "@/features/admin/content/ReviewModeration";
+import CouponManager from "@/features/admin/content/CouponManager";
+import SiteSettings from "@/features/admin/content/SiteSettings";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +72,18 @@ const router = createBrowserRouter([
           {
             path: "users",
             element: <UserList />,
+          },
+          {
+            path: "reviews",
+            element: <ReviewModeration />,
+          },
+          {
+            path: "coupons",
+            element: <CouponManager />,
+          },
+          {
+            path: "content",
+            element: <SiteSettings />,
           },
         ],
       },
