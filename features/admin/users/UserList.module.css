@@ -1,0 +1,117 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--admin-text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.tableWrapper {
+  background-color: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius);
+  box-shadow: var(--admin-shadow);
+  overflow: hidden;
+}
+
+.userCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background-color: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.username {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.email {
+  font-size: 13px;
+  color: var(--admin-text-tertiary);
+}
+
+.lastActive {
+  color: var(--admin-text-secondary);
+}
+
+.customerRole {
+  display: inline-block;
+  background-color: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-secondary);
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--admin-border);
+  background-color: var(--admin-bg-primary);
+  color: var(--admin-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.actionBtn:hover:not(:disabled) {
+  background-color: var(--admin-bg-tertiary);
+  color: var(--admin-accent);
+  border-color: var(--admin-accent);
+}
+
+.dangerBtn:hover:not(:disabled) {
+  color: var(--admin-danger);
+  border-color: var(--admin-danger);
+}
+
+.actionBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

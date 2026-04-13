@@ -1,0 +1,62 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: var(--spacing-6);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary, #fff);
+  margin-bottom: var(--spacing-1);
+}
+
+.subtitle {
+  color: var(--text-secondary, #a1a1aa);
+  font-size: 0.95rem;
+}
+
+.navTabs {
+  display: flex;
+  gap: var(--spacing-4);
+  border-bottom: 1px solid var(--border-color, #27272a);
+  padding-bottom: var(--spacing-2);
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  color: var(--text-secondary, #a1a1aa);
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  background-color: var(--admin-bg-tertiary, #27272a);
+  color: var(--text-primary, #fff);
+}
+
+.activeTab {
+  background-color: rgba(var(--primary-color-rgb, 216, 125, 74), 0.1);
+  color: var(--primary-color, #d87d4a);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}

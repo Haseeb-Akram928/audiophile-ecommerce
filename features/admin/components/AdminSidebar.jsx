@@ -7,7 +7,8 @@ import {
   Settings,
   MessageSquare,
   Ticket,
-  LayoutTemplate
+  LayoutTemplate,
+  BarChart3
 } from "lucide-react";
 import styles from "./AdminSidebar.module.css";
 import PermissionGate from "../auth/PermissionGate";
@@ -23,6 +24,7 @@ function AdminSidebar() {
     { name: "Reviews", path: "/admin/reviews", icon: MessageSquare, permission: "view_products" },
     { name: "Coupons", path: "/admin/coupons", icon: Ticket, permission: "view_orders" },
     { name: "Content", path: "/admin/content", icon: LayoutTemplate, permission: "manage_settings" },
+    { name: "Analytics", path: "/admin/analytics", icon: BarChart3, permission: "view_dashboard" },
   ];
 
   return (

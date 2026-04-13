@@ -20,3 +20,9 @@ export async function getCategoryRevenue() {
   if (error) throw new Error("Could not fetch category revenue");
   return data;
 }
+
+export async function getTopProducts(lim = 10) {
+  const { data, error } = await supabase.rpc("get_top_products", { lim });
+  if (error) throw new Error("Could not fetch top products");
+  return data;
+}

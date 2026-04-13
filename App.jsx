@@ -19,6 +19,11 @@ import ProductList from "@/features/admin/products/ProductList";
 import ProductForm from "@/features/admin/products/ProductForm";
 import OrderList from "@/features/admin/orders/OrderList";
 import OrderDetail from "@/features/admin/orders/OrderDetail";
+import AnalyticsLayout from "@/features/admin/analytics/AnalyticsLayout";
+import AnalyticsDashboard from "@/features/admin/analytics/AnalyticsDashboard";
+import ProductAnalytics from "@/features/admin/analytics/ProductAnalytics";
+import CustomerAnalytics from "@/features/admin/analytics/CustomerAnalytics";
+import UserList from "@/features/admin/users/UserList";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +56,19 @@ const router = createBrowserRouter([
           {
             path: "orders/:id",
             element: <OrderDetail />,
+          },
+          {
+            path: "analytics",
+            element: <AnalyticsLayout />,
+            children: [
+              { index: true, element: <AnalyticsDashboard /> },
+              { path: "products", element: <ProductAnalytics /> },
+              { path: "customers", element: <CustomerAnalytics /> },
+            ],
+          },
+          {
+            path: "users",
+            element: <UserList />,
           },
         ],
       },

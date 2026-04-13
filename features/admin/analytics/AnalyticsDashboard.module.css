@@ -1,0 +1,88 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header {
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--admin-text-secondary);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.overviewGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .overviewGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background-color: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius);
+  border: 1px solid var(--admin-border);
+  box-shadow: var(--admin-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.cardTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--admin-text-primary);
+  margin: 0;
+}
+
+.badge {
+  background-color: var(--admin-bg-tertiary);
+  color: var(--admin-text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+
+.productName {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.category {
+  text-transform: capitalize;
+  color: var(--admin-text-secondary);
+}
+
+.units {
+  font-weight: 600;
+  color: var(--admin-text-primary);
+}
+
+.revenue {
+  font-weight: 600;
+  color: var(--admin-success);
+}
