@@ -5,7 +5,10 @@ const ProductFeatures = ({ features, includes }) => {
     <section className={styles.featuresSection}>
       <div className={styles.featuresText}>
         <h2 className={styles.subTitle}>FEATURES</h2>
-        <p className={styles.featurePara}>{features}</p>
+        <div 
+          className={styles.featurePara}
+          dangerouslySetInnerHTML={{ __html: features }}
+        />
       </div>
       <div className={styles.inTheBox}>
         <h2 className={styles.subTitle}>IN THE BOX</h2>

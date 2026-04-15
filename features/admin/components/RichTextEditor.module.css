@@ -1,0 +1,90 @@
+.editorWrapper {
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  background-color: var(--admin-bg-primary);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.menuBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 8px;
+  background-color: var(--admin-bg-secondary);
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.menuItem {
+  background: none;
+  border: none;
+  color: var(--admin-text-secondary);
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.menuItem:hover {
+  background-color: var(--admin-bg-tertiary);
+  color: var(--admin-text-primary);
+}
+
+.isActive {
+  background-color: var(--admin-accent);
+  color: white !important;
+}
+
+.divider {
+  width: 1px;
+  background-color: var(--admin-border);
+  margin: 4px 8px;
+  align-self: stretch;
+}
+
+.editorContent {
+  padding: 16px;
+  min-height: 200px;
+  max-height: 500px;
+  overflow-y: auto;
+  color: var(--admin-text-primary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Tiptap content styles */
+.editorContent :global(.ProseMirror) {
+  outline: none;
+}
+
+.editorContent :global(.ProseMirror p) {
+  margin-bottom: 12px;
+}
+
+.editorContent :global(.ProseMirror h2) {
+  font-size: 1.5rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.editorContent :global(.ProseMirror h3) {
+  font-size: 1.25rem;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.editorContent :global(.ProseMirror ul),
+.editorContent :global(.ProseMirror ol) {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.editorContent :global(.ProseMirror blockquote) {
+  border-left: 4px solid var(--admin-accent);
+  padding-left: 1rem;
+  margin-left: 0;
+  color: var(--admin-text-secondary);
+  font-style: italic;
+}

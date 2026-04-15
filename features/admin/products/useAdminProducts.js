@@ -32,4 +32,36 @@ export function useDeleteProduct() {
   return { isDeleting, deleteProduct: deleteProductFn };
 }
 
-// Will add useCreateProduct and useUpdateProduct when forms are ready
+export function useCreateProduct() {
+  const queryClient = useQueryClient();
+
+  const { mutate: createProductFn, isPending: isCreating } = useMutation({
+    mutationFn: createProduct,
+    onSuccess: () => {
+      toast.success("Product successfully created");
+      queryClient.invalidateQueries({ queryKey: ["admin_products"] });
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  return { isCreating, createProduct: createProductFn };
+}
+
+export function useUpdateProduct() {
+  const queryClient = useQueryClient();
+
+  const { mutate: updateProductFn, isPending: isUpdating } = useMutation({
+    mutationFn: updateProduct,
+    onSuccess: () => {
+      toast.success("Product successfully updated");
+      queryClient.invalidateQueries({ queryKey: ["admin_products"] });
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+
+  return { isUpdating, updateProduct: updateProductFn };
+}
