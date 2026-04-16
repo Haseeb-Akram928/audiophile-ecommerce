@@ -10,6 +10,7 @@ import ImageWithLoader from "@/components/ui/ImageWithLoader/ImageWithLoader";
 import ProductGallery from "./components/ProductGallery";
 import ProductFeatures from "./components/ProductFeatures";
 import AddToCartMenu from "./components/AddToCartMenu";
+import ProductReviews from "./components/ProductReviews/ProductReviews";
 
 const ProductDetail = () => {
   const { slug } = useParams();
@@ -60,6 +61,8 @@ const ProductDetail = () => {
           <ProductGallery gallery={product.gallery} />
 
           <RelatedProducts others={product.others} />
+
+          <ProductReviews productId={product.id} />
         </div>
       </main>
     </>

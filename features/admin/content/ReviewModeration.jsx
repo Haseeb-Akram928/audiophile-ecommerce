@@ -36,7 +36,7 @@ export default function ReviewModeration() {
       },
       {
         header: "Comment",
-        accessorKey: "comment",
+        accessorKey: "body",
         cell: (info) => <span className={styles.comment}>{info.getValue()}</span>
       },
       {
@@ -46,9 +46,9 @@ export default function ReviewModeration() {
       },
       {
         header: "Status",
-        accessorKey: "is_approved",
+        accessorKey: "status",
         cell: (info) => (
-          <StatusBadge status={info.getValue() ? "approved" : "pending"} />
+          <StatusBadge status={info.getValue() === "approved" ? "approved" : "pending"} />
         )
       },
       {
@@ -58,7 +58,7 @@ export default function ReviewModeration() {
           const review = info.row.original;
           return (
             <div className={styles.actions}>
-              {!review.is_approved && (
+              {review.status !== "approved" && (
                 <button 
                   className={`${styles.actionBtn} ${styles.approveBtn}`}
                   onClick={() => moderateReview({ reviewId: review.id, isApproved: true })}
@@ -68,7 +68,7 @@ export default function ReviewModeration() {
                   <CheckCircle size={18} />
                 </button>
               )}
-              {review.is_approved && (
+              {review.status === "approved" && (
                 <button 
                   className={`${styles.actionBtn} ${styles.rejectBtn}`}
                   onClick={() => moderateReview({ reviewId: review.id, isApproved: false })}

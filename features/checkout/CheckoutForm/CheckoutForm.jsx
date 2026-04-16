@@ -14,11 +14,19 @@ import BillingDetailsSection from "@/features/checkout/CheckoutForm/components/B
 import ShippingInfoSection from "@/features/checkout/CheckoutForm/components/ShippingInfoSection.jsx";
 import PaymentDetailsSection from "@/features/checkout/CheckoutForm/components/PaymentDetailsSection.jsx";
 
-const CheckoutForm = ({ onOrderSuccess }) => {
+const CheckoutForm = ({ onOrderSuccess, appliedCoupon }) => {
   const { user } = useUser();
   const { orders } = useOrders();
   const cartItems = useSelector(getCart);
-  const grandTotal = useSelector(getTotalCartPrice);
+  const totalCartPrice = useSelector(getTotalCartPrice);
+
+  const discountAmount = appliedCoupon 
+    ? (appliedCoupon.discount_type === 'percentage' 
+        ? Math.floor(totalCartPrice * (appliedCoupon.discount_value / 100))
+        : appliedCoupon.discount_value)
+    : 0;
+  
+  const grandTotal = totalCartPrice - discountAmount + 50; // +50 for shipping
 
   const {
     register,
@@ -83,6 +91,7 @@ const CheckoutForm = ({ onOrderSuccess }) => {
       totalAmount: grandTotal,
       shippingAddress: shippingAddress,
       paymentMethod: formData.paymentMethod,
+      couponId: appliedCoupon?.id || null,
     };
 
     createOrderMutation.mutate(orderData);

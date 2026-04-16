@@ -139,6 +139,30 @@
   color: #7d7d7d;
 }
 
+.itemActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.rateBtn {
+  font-size: 11px;
+  font-weight: 700;
+  color: #d87d4a;
+  text-decoration: none;
+  border: 1px solid #d87d4a;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.rateBtn:hover {
+  background-color: #d87d4a;
+  color: #fff;
+}
+
 .orderFooter {
   display: flex;
   justify-content: space-between;

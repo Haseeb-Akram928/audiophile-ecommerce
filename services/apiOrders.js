@@ -1,4 +1,5 @@
 import { supabase } from "@/lib/supabase";
+import { incrementCouponUsage } from "./apiCoupons";
 
 export async function createOrder({
   userId,
@@ -6,6 +7,7 @@ export async function createOrder({
   shippingAddress,
   paymentMethod,
   totalAmount,
+  couponId,
 }) {
   try {
     // 1. Create the order
@@ -13,6 +15,7 @@ export async function createOrder({
       total_amount: totalAmount,
       shipping_address: shippingAddress,
       payment_method: paymentMethod,
+      coupon_id: couponId,
     };
 
     if (userId) {
@@ -24,6 +27,11 @@ export async function createOrder({
       .insert(orderData)
       .select()
       .single();
+
+    if (orderError) {
+      console.error("Supabase order creation error:", orderError);
+      throw new Error(`Order could not be created: ${orderError.message}`);
+    }
 
     // 2. Create order items
     const orderItems = cartItems.map((item) => ({
@@ -39,12 +47,12 @@ export async function createOrder({
 
     if (orderItemsError) {
       console.error("Supabase order items creation error:", orderItemsError);
-      // Ideally, here you'd also want to roll back the order creation if order items fail.
-      // Supabase's client-side library doesn't directly support transactions spanning multiple inserts
-      // in a single call. For true transactional integrity across two different table inserts,
-      // you'd typically need a stored procedure/database function in Supabase.
-      // For now, we'll just throw an error.
       throw new Error("Could not create order items.");
+    }
+
+    // 3. Increment coupon usage if applied
+    if (couponId) {
+      await incrementCouponUsage(couponId);
     }
 
     return { status: "success", orderId: order.id };

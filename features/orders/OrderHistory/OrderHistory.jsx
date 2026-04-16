@@ -62,7 +62,18 @@ function OrderHistory() {
                         <p>$ {item.price.toLocaleString(undefined, {minimumFractionDigits: 2})}</p>
                       </div>
                     </div>
-                    <span className={styles.itemQuantity}>x{item.quantity}</span>
+                    <div className={styles.itemActions}>
+                      <span className={styles.itemQuantity}>x{item.quantity}</span>
+                      {orderStatus === 'delivered' && (
+                        <Link 
+                          to={`/product/${item.products?.slug}`}
+                          state={{ writeReview: true }}
+                          className={styles.rateBtn}
+                        >
+                          RATE PRODUCT
+                        </Link>
+                      )}
+                    </div>
                   </div>
                 );
               })}

@@ -14,7 +14,7 @@ export async function getAdminReviews() {
 export async function approveReview({ reviewId, isApproved, adminId }) {
   const { data, error } = await supabase
     .from("product_reviews")
-    .update({ is_approved: isApproved })
+    .update({ status: isApproved ? "approved" : "pending" })
     .eq("id", reviewId)
     .select()
     .single();

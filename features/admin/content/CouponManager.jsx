@@ -14,9 +14,11 @@ export default function CouponManager() {
   const [showForm, setShowForm] = useState(false);
   const [newCoupon, setNewCoupon] = useState({
     code: "",
-    discount_percent: 10,
+    description: "",
+    discount_type: "percentage",
+    discount_value: 10,
     max_uses: 100,
-    valid_until: ""
+    expires_at: ""
   });
 
   const columns = useMemo(
@@ -28,8 +30,12 @@ export default function CouponManager() {
       },
       {
         header: "Discount",
-        accessorKey: "discount_percent",
-        cell: (info) => <span className={styles.discount}>{info.getValue()}% OFF</span>
+        accessorKey: "discount_value",
+        cell: (info) => (
+          <span className={styles.discount}>
+            {info.getValue()}{info.row.original.discount_type === 'percentage' ? '%' : '$'} OFF
+          </span>
+        )
       },
       {
         header: "Usage",
@@ -37,8 +43,8 @@ export default function CouponManager() {
         cell: (info) => <span>{info.getValue()}</span>
       },
       {
-        header: "Valid Until",
-        accessorKey: "valid_until",
+        header: "Expires",
+        accessorKey: "expires_at",
         cell: (info) => (
           <span>{info.getValue() ? format(new Date(info.getValue()), "MMM dd, yyyy") : "Never"}</span>
         )
@@ -75,10 +81,26 @@ export default function CouponManager() {
 
   const handleCreate = (e) => {
     e.preventDefault();
-    addCoupon(newCoupon, {
+    
+    // Prepare data: convert empty date to null and set default status
+    const couponData = {
+      ...newCoupon,
+      expires_at: newCoupon.expires_at || null,
+      is_active: true,
+      current_uses: 0
+    };
+
+    addCoupon(couponData, {
       onSuccess: () => {
         setShowForm(false);
-        setNewCoupon({ code: "", discount_percent: 10, max_uses: 100, valid_until: "" });
+        setNewCoupon({ 
+          code: "", 
+          description: "",
+          discount_type: "percentage",
+          discount_value: 10, 
+          max_uses: 100, 
+          expires_at: "" 
+        });
       }
     });
   };
@@ -107,13 +129,32 @@ export default function CouponManager() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label>Discount Percentage</label>
+            <label>Description (Optional)</label>
             <input 
-              type="number" required min="1" max="100" 
               className={styles.input} 
-              value={newCoupon.discount_percent} 
-              onChange={e => setNewCoupon({...newCoupon, discount_percent: Number(e.target.value)})}
+              value={newCoupon.description} 
+              onChange={e => setNewCoupon({...newCoupon, description: e.target.value})}
+              placeholder="e.g. Summer Sale"
             />
+          </div>
+          <div className={styles.inputGroup}>
+            <label>Discount Value</label>
+            <div className={styles.inputRow}>
+              <input 
+                type="number" required min="1" 
+                className={styles.input} 
+                value={newCoupon.discount_value} 
+                onChange={e => setNewCoupon({...newCoupon, discount_value: Number(e.target.value)})}
+              />
+              <select 
+                className={styles.input}
+                value={newCoupon.discount_type}
+                onChange={e => setNewCoupon({...newCoupon, discount_type: e.target.value})}
+              >
+                <option value="percentage">Percentage (%)</option>
+                <option value="fixed">Fixed Amount ($)</option>
+              </select>
+            </div>
           </div>
           <div className={styles.inputGroup}>
             <label>Max Uses</label>
@@ -125,12 +166,12 @@ export default function CouponManager() {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label>Valid Until</label>
+            <label>Expires At</label>
             <input 
-              type="date" required 
+              type="date" 
               className={styles.input} 
-              value={newCoupon.valid_until} 
-              onChange={e => setNewCoupon({...newCoupon, valid_until: e.target.value})}
+              value={newCoupon.expires_at} 
+              onChange={e => setNewCoupon({...newCoupon, expires_at: e.target.value})}
             />
           </div>
           <button type="submit" className={styles.submitBtn} disabled={isCreating}>
