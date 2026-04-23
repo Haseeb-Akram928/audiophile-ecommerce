@@ -56,7 +56,7 @@ function AnalyticsDashboard() {
         </div>
       </div>
 
-      <div className={styles.overviewGrid} style={{ marginTop: 'var(--spacing-6)' }}>
+      <div className={styles.fullWidthCard}>
          <ChartCard title="Orders Trend" subtitle="Last 90 Days">
             <OrdersTrendChart data={revenueData || []} />
          </ChartCard>

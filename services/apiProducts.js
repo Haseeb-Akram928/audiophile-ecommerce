@@ -10,14 +10,12 @@ export async function getProducts({ sort, search } = {}) {
   if (sort) {
     const [field, direction] = sort.split("-");
     const isAscending = direction === "asc";
-    // Check if it's newness sort (which usually relies on a created_at or is_new column)
     if (field === "newness") {
       query = query.order("new", { ascending: false });
     } else {
       query = query.order(field, { ascending: isAscending });
     }
   } else {
-    // Default sort or maybe sort by id? Let's just leave it neutral
   }
 
   let { data, error } = await query;

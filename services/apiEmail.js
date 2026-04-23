@@ -10,7 +10,6 @@ export async function sendOrderConfirmation(order) {
         to_name: order.name,
         to_email: order.email,
         order_id: order.id,
-        // Add other template variables here
       }
     );
     console.log("Order confirmation email sent successfully");

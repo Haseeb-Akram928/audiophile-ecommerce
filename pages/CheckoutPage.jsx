@@ -19,15 +19,14 @@ function CheckoutPage() {
         </button>
 
         <div className={styles.layoutGrid}>
-          <CheckoutForm 
-            onOrderSuccess={() => setIsModalOpen(true)} 
+          <CheckoutForm
+            onOrderSuccess={() => setIsModalOpen(true)}
             appliedCoupon={couponData.appliedCoupon}
           />
           <CheckoutSummary {...couponData} />
         </div>
       </div>
 
-      {/* Render the modal here */}
       <OrderConfirmation isVisible={isModalOpen} />
     </main>
   );

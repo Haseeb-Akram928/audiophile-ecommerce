@@ -23,7 +23,6 @@ export async function fetchSupabaseCart(userId) {
     .single();
 
   if (error && error.code !== "PGRST116") {
-    // Ignore PGRST116 (No rows found)
     throw new Error(error.message);
   }
 
@@ -33,20 +32,18 @@ export async function fetchSupabaseCart(userId) {
 export async function syncCartWithSupabase(userId, localCartState) {
   try {
     const existingState = await fetchSupabaseCart(userId);
-    
+
     const mergedStateMap = new Map();
-    // Add existing from supabase first
     existingState.forEach(item => {
-       mergedStateMap.set(item.id, { ...item });
+      mergedStateMap.set(item.id, { ...item });
     });
-    // Add local items (merging quantities if duplicates exist)
     localCartState.forEach(item => {
       if (mergedStateMap.has(item.id)) {
-         const existing = mergedStateMap.get(item.id);
-         existing.quantity += item.quantity;
-         existing.totalPrice = existing.quantity * existing.price;
+        const existing = mergedStateMap.get(item.id);
+        existing.quantity += item.quantity;
+        existing.totalPrice = existing.quantity * existing.price;
       } else {
-         mergedStateMap.set(item.id, { ...item });
+        mergedStateMap.set(item.id, { ...item });
       }
     });
 

@@ -27,9 +27,9 @@ export async function createReview({ productId, userId, rating, comment, title }
         product_id: productId,
         user_id: userId,
         rating,
-        body: comment, // Using 'body' per schema
-        title: title || "", // Using 'title' per schema
-        status: "pending" // Using 'status' per schema
+        body: comment,
+        title: title || "",
+        status: "pending"
       }
     ])
     .select()
@@ -38,7 +38,7 @@ export async function createReview({ productId, userId, rating, comment, title }
   if (error) {
     console.error("Error creating review:", error);
     if (error.code === '23505') {
-       throw new Error("You have already reviewed this product.");
+      throw new Error("You have already reviewed this product.");
     }
     throw new Error("Review could not be submitted");
   }

@@ -15,7 +15,6 @@ export async function getAdminProducts() {
 }
 
 export async function deleteProduct(id) {
-  // Soft delete for admin interface (deactivate)
   const { data, error } = await supabase
     .from("products")
     .update({ is_active: false })

@@ -23,7 +23,6 @@ const SidebarNav = ({ isOpen, onClose }) => {
       />
 
       <nav className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ""}`}>
-        {/* User Card */}
         <div className={styles.userCard}>
           <div className={styles.avatarWrapper}>
             <span className={`material-symbols-outlined ${styles.avatarIcon}`}>
@@ -37,7 +36,6 @@ const SidebarNav = ({ isOpen, onClose }) => {
 
         <div className={styles.divider} />
 
-        {/* Collections */}
         <div className={styles.navSection}>
           <p className={styles.sectionTitle}>Collections</p>
           <ul className={styles.navLinks}>
@@ -139,7 +137,6 @@ const SidebarNav = ({ isOpen, onClose }) => {
           </ul>
         </div>
 
-        {/* Sign Out — pinned to bottom */}
         {user && (
           <div className={styles.signOutWrapper}>
             <div className={styles.divider} />

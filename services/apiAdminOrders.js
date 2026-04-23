@@ -30,7 +30,6 @@ export async function getAdminOrderDetails(id) {
 }
 
 export async function updateOrderStatus({ id, status, adminId }) {
-  // 1. Fetch current status
   const { data: currOrder, error: currErr } = await supabase
     .from("orders")
     .select("status")
@@ -39,7 +38,6 @@ export async function updateOrderStatus({ id, status, adminId }) {
 
   if (currErr) throw new Error("Could not check current order status");
 
-  // 2. Update status
   const { data, error } = await supabase
     .from("orders")
     .update({ status })
@@ -52,7 +50,6 @@ export async function updateOrderStatus({ id, status, adminId }) {
     throw new Error("Order status could not be updated");
   }
 
-  // 3. Log to activity
   if (adminId) {
     await supabase.from("admin_activity_log").insert({
       user_id: adminId,

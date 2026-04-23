@@ -17,16 +17,16 @@ import Loader from '@/components/ui/Loader';
 
 function SavedAddresses({ addressData }) {
   const [isEditing, setIsEditing] = useState(false);
-  
+
   const address = addressData?.address || "1137 Williams Avenue";
   const zip = addressData?.zip || "10001";
   const city = addressData?.city || "New York";
   const country = addressData?.country || "United States";
-  
+
   return (
     <section className={styles.detailsContainer}>
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
-        <h2 className={styles.sectionTitle} style={{margin: 0}}>SAVED ADDRESSES</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <h2 className={styles.sectionTitle} style={{ margin: 0 }}>SAVED ADDRESSES</h2>
         <button className={styles.viewDetailsBtn} onClick={() => setIsEditing(!isEditing)}>
           {isEditing ? 'CANCEL' : 'EDIT'}
         </button>
@@ -74,8 +74,8 @@ function PaymentInformation({ currentMethod }) {
 
   return (
     <section className={styles.detailsContainer}>
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px'}}>
-        <h2 className={styles.sectionTitle} style={{margin: 0}}>PAYMENT INFORMATION</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+        <h2 className={styles.sectionTitle} style={{ margin: 0 }}>PAYMENT INFORMATION</h2>
         <button className={styles.viewDetailsBtn} onClick={handleEditToggle}>
           {isEditing ? 'CANCEL' : 'EDIT'}
         </button>
@@ -85,24 +85,24 @@ function PaymentInformation({ currentMethod }) {
         <>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '24px' }}>
             <label style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px', border: editingMethod === 'e-Money' ? '1px solid #d87d4a' : '1px solid #cfcfcf', borderRadius: '8px', cursor: 'pointer', background: '#fff' }}>
-              <input 
-                type="radio" 
-                name="paymentMethod" 
-                value="e-Money" 
-                checked={editingMethod === "e-Money"} 
-                onChange={(e) => setEditingMethod(e.target.value)} 
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="e-Money"
+                checked={editingMethod === "e-Money"}
+                onChange={(e) => setEditingMethod(e.target.value)}
                 style={{ accentColor: '#d87d4a', width: '20px', height: '20px' }}
               />
               <span style={{ fontSize: '14px', fontWeight: '700' }}>e-Money</span>
             </label>
 
             <label style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px', border: editingMethod === 'Cash on Delivery' ? '1px solid #d87d4a' : '1px solid #cfcfcf', borderRadius: '8px', cursor: 'pointer', background: '#fff' }}>
-              <input 
-                type="radio" 
-                name="paymentMethod" 
-                value="Cash on Delivery" 
-                checked={editingMethod === "Cash on Delivery"} 
-                onChange={(e) => setEditingMethod(e.target.value)} 
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="Cash on Delivery"
+                checked={editingMethod === "Cash on Delivery"}
+                onChange={(e) => setEditingMethod(e.target.value)}
                 style={{ accentColor: '#d87d4a', width: '20px', height: '20px' }}
               />
               <span style={{ fontSize: '14px', fontWeight: '700' }}>Cash on Delivery</span>
@@ -233,7 +233,7 @@ const ProfilePage = () => {
   const { logout, isPending: isLoggingOut } = useLogout();
   const { orders, isLoading: isOrdersLoading } = useOrders();
   const { updateAvatar, isUpdating } = useUpdateAvatar();
-  
+
   const [activeTab, setActiveTab] = useState('PROFILE');
 
   const handleAvatarChange = async (e) => {
@@ -246,8 +246,8 @@ const ProfilePage = () => {
 
     try {
       const options = {
-        maxSizeMB: 0.2, // Compress heavily down to 200KB or less
-        maxWidthOrHeight: 400, // Small dimensions since it's just an avatar
+        maxSizeMB: 0.2,
+        maxWidthOrHeight: 400,
         useWebWorker: true,
       };
 
@@ -279,7 +279,7 @@ const ProfilePage = () => {
 
   const recentOrder = orders?.[0];
   const shippingAddress = recentOrder?.shipping_address;
-  
+
   const recentItem = recentOrder?.order_items?.[0];
   const recentProductName = recentItem?.products?.name || "XX99 MARK II HEADPHONES";
   const productImages = recentItem?.products?.image;
@@ -290,32 +290,31 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.container}>
-      {/* Header Section */}
       <section className={styles.profileHeader}>
         <div className={styles.avatarWrapper}>
           {isUpdating ? (
             <div className={styles.loading} style={{ minHeight: 'unset', fontSize: '24px' }}>⏳</div>
           ) : user?.profile?.avatar_url || user?.user_metadata?.avatar ? (
-            <ImageWithLoader 
-              src={user?.profile?.avatar_url || user?.user_metadata?.avatar} 
-              alt="avatar" 
-              style={{ width: '100%', height: '100%', borderRadius: '50%' }} 
+            <ImageWithLoader
+              src={user?.profile?.avatar_url || user?.user_metadata?.avatar}
+              alt="avatar"
+              style={{ width: '100%', height: '100%', borderRadius: '50%' }}
             />
           ) : (
             <span className={`material-symbols-outlined ${styles.mainAvatar}`}>
               account_circle
             </span>
           )}
-          
+
           <label className={styles.avatarOverlay}>
             <span className="material-symbols-outlined" style={{ fontSize: '24px', marginBottom: '4px' }}>photo_camera</span>
             <span>UPDATE</span>
-            <input 
-              type="file" 
-              accept="image/*" 
-              onChange={handleAvatarChange} 
-              className={styles.avatarInput} 
-              disabled={isUpdating} 
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarChange}
+              className={styles.avatarInput}
+              disabled={isUpdating}
             />
           </label>
         </div>
@@ -325,34 +324,33 @@ const ProfilePage = () => {
       </section>
 
       <div className={styles.profileLayout}>
-        {/* Tabs */}
         <nav className={styles.tabsContainer}>
           <div className={styles.tabsScroll}>
-            <button 
+            <button
               className={`${styles.tabBtn} ${activeTab === 'PROFILE' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('PROFILE')}
             >
               MY PROFILE
             </button>
-            <button 
+            <button
               className={`${styles.tabBtn} ${activeTab === 'WISHLIST' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('WISHLIST')}
             >
               MY WISHLIST
             </button>
-            <button 
+            <button
               className={`${styles.tabBtn} ${activeTab === 'ORDERS' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('ORDERS')}
             >
               ORDER HISTORY
             </button>
-            <button 
+            <button
               className={`${styles.tabBtn} ${activeTab === 'ADDRESSES' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('ADDRESSES')}
             >
               SAVED ADDRESSES
             </button>
-            <button 
+            <button
               className={`${styles.tabBtn} ${activeTab === 'PAYMENT' ? styles.activeTab : ''}`}
               onClick={() => setActiveTab('PAYMENT')}
             >
@@ -361,11 +359,9 @@ const ProfilePage = () => {
           </div>
         </nav>
 
-        {/* Content Area */}
         <div className={styles.tabContent}>
           {activeTab === 'PROFILE' && (
             <>
-              {/* Account Details Box */}
               <section className={styles.detailsContainer}>
                 <h2 className={styles.sectionTitle}>ACCOUNT DETAILS</h2>
                 <div className={styles.formGroup}>
@@ -383,7 +379,6 @@ const ProfilePage = () => {
                 <button className={styles.saveBtn}>SAVE CHANGES</button>
               </section>
 
-              {/* Recent Order Section */}
               {hasOrders && (
                 <section className={styles.recentOrderSection}>
                   <h2 className={styles.sectionTitle}>RECENT ORDER</h2>
@@ -401,10 +396,10 @@ const ProfilePage = () => {
                           style={{ width: '100%', height: '100%', borderRadius: '8px' }}
                         />
                       ) : (
-                        <ImageWithLoader 
-                          src={getImageUrl("/assets/cart/image-xx99-mark-two-headphones.jpg")} 
-                          alt={recentProductName} 
-                          imageClassName={styles.orderImage} 
+                        <ImageWithLoader
+                          src={getImageUrl("/assets/cart/image-xx99-mark-two-headphones.jpg")}
+                          alt={recentProductName}
+                          imageClassName={styles.orderImage}
                           style={{ width: '100%', height: '100%', borderRadius: '8px' }}
                         />
                       )}
@@ -414,9 +409,9 @@ const ProfilePage = () => {
                       <h3 className={styles.productName}>{recentProductName}</h3>
                       <p className={styles.orderMeta}>Order #{recentOrderId} &bull; {recentOrderDate}</p>
                       <div className={styles.orderFooter}>
-                        <span className={styles.orderPrice}>$ {recentProductPrice.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
-                        <button 
-                          className={styles.viewDetailsBtn} 
+                        <span className={styles.orderPrice}>$ {recentProductPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+                        <button
+                          className={styles.viewDetailsBtn}
                           onClick={() => {
                             setActiveTab('ORDERS');
                             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -452,11 +447,10 @@ const ProfilePage = () => {
         </div>
       </div>
 
-      {/* Logout Button */}
       <div style={{ marginTop: '48px' }}>
-        <button 
-          className={styles.logoutBtn} 
-          disabled={isLoggingOut} 
+        <button
+          className={styles.logoutBtn}
+          disabled={isLoggingOut}
           onClick={logout}
         >
           <span className={`material-symbols-outlined ${styles.logoutIcon}`}>logout</span>

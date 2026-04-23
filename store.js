@@ -18,7 +18,6 @@ store.subscribe(async () => {
   const cart = store.getState().cart;
   saveToLocalStorage(cart);
 
-  // Sync to backend conditionally
   const { data: { session } } = await supabase.auth.getSession();
   if (session?.user) {
     pushCartToSupabase(session.user.id, cart);

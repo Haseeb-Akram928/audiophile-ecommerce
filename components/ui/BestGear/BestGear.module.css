@@ -27,7 +27,7 @@
 }
 
 .title {
-  font-size: var(--fs-600); /* 28px */
+  font-size: var(--fs-600);
   line-height: 1.2;
   margin-bottom: 32px;
   color: var(--color-text-dark);
@@ -36,17 +36,16 @@
 }
 
 .highlight {
-  color: var(--color-primary); /* --copper */
+  color: var(--color-primary);
 }
 
 .description {
-  font-size: var(--fs-300); /* 15px */
+  font-size: var(--fs-300);
   line-height: 1.6;
   opacity: 0.5;
   color: var(--color-text-dark);
 }
 
-/* Tablet Breakpoint (768px) */
 @media (min-width: 768px) {
   .sectionWrapper {
     padding: 0 0 96px 0;
@@ -65,19 +64,17 @@
   }
 
   .title {
-    font-size: var(--fs-800); /* 40px */
-    /* padding: 0 50px; */
+    font-size: var(--fs-800);
   }
 }
 
-/* Desktop Breakpoint (1100px) */
 @media (min-width: 1100px) {
   .sectionWrapper {
     padding: 0 0 200px 0;
   }
 
   .container {
-    flex-direction: row-reverse; /* Image on right, text on left */
+    flex-direction: row-reverse;
     align-items: center;
     gap: 125px;
   }

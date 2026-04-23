@@ -12,11 +12,11 @@ function ProductForm() {
   const { id } = useParams();
   const isEditSession = Boolean(id);
   const navigate = useNavigate();
-  
+
   const { products, isLoading: isLoadingProducts } = useAdminProducts();
   const { createProduct, isCreating } = useCreateProduct();
   const { updateProduct, isUpdating } = useUpdateProduct();
-  
+
   const productToEdit = isEditSession ? products?.find((p) => p.id === Number(id)) : null;
 
   const { register, handleSubmit, formState, reset, control } = useForm({
@@ -78,12 +78,12 @@ function ProductForm() {
         <div className={styles.formMain}>
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>Basic Details</h2>
-            
+
             <div className={styles.inputGroup}>
               <label>Product Name</label>
-              <input 
-                type="text" 
-                {...register("name", { required: "Name is required" })} 
+              <input
+                type="text"
+                {...register("name", { required: "Name is required" })}
                 className={styles.input}
                 placeholder="e.g. XX99 Mark II Headphones"
               />
@@ -93,19 +93,19 @@ function ProductForm() {
             <div className={styles.inputRow}>
               <div className={styles.inputGroup}>
                 <label>Slug</label>
-                <input 
-                  type="text" 
-                  {...register("slug", { required: "Slug is required" })} 
+                <input
+                  type="text"
+                  {...register("slug", { required: "Slug is required" })}
                   className={styles.input}
                   placeholder="e.g. xx99-mark-two-headphones"
                 />
               </div>
-              
+
               <div className={styles.inputGroup}>
                 <label>SKU</label>
-                <input 
-                  type="text" 
-                  {...register("sku")} 
+                <input
+                  type="text"
+                  {...register("sku")}
                   className={styles.input}
                   placeholder="e.g. XX99-MK2"
                 />
@@ -124,8 +124,8 @@ function ProductForm() {
 
             <div className={styles.inputGroup}>
               <label>Description</label>
-              <textarea 
-                {...register("description", { required: "Description is required" })} 
+              <textarea
+                {...register("description", { required: "Description is required" })}
                 className={`${styles.input} ${styles.textarea}`}
                 rows={4}
               />
@@ -151,15 +151,15 @@ function ProductForm() {
               <label className={styles.label}>In the Box</label>
               {fields.map((field, index) => (
                 <div key={field.id} className={styles.boxRow}>
-                  <input 
-                    type="number" 
-                    {...register(`includes.${index}.quantity`, { required: true, min: 1 })} 
+                  <input
+                    type="number"
+                    {...register(`includes.${index}.quantity`, { required: true, min: 1 })}
                     className={`${styles.input} ${styles.qtyInput}`}
                     placeholder="Qty"
                   />
-                  <input 
-                    type="text" 
-                    {...register(`includes.${index}.item`, { required: true })} 
+                  <input
+                    type="text"
+                    {...register(`includes.${index}.item`, { required: true })}
                     className={styles.input}
                     placeholder="Item name"
                   />
@@ -168,9 +168,9 @@ function ProductForm() {
                   </button>
                 </div>
               ))}
-              <button 
-                type="button" 
-                onClick={() => append({ item: "", quantity: 1 })} 
+              <button
+                type="button"
+                onClick={() => append({ item: "", quantity: 1 })}
                 className={styles.addIncludeBtn}
               >
                 <Plus size={16} /> Add Item
@@ -183,33 +183,33 @@ function ProductForm() {
             <div className={styles.inputRow}>
               <div className={styles.inputGroup}>
                 <label>Price ($)</label>
-                <input 
-                  type="number" 
-                  {...register("price", { required: "Price is required", min: 0, valueAsNumber: true })} 
+                <input
+                  type="number"
+                  {...register("price", { required: "Price is required", min: 0, valueAsNumber: true })}
                   className={styles.input}
                 />
               </div>
-              
+
               <div className={styles.inputGroup}>
                 <label>Cost Price ($)</label>
-                <input 
-                  type="number" 
-                  {...register("cost_price", { min: 0, valueAsNumber: true })} 
+                <input
+                  type="number"
+                  {...register("cost_price", { min: 0, valueAsNumber: true })}
                   className={styles.input}
                 />
               </div>
 
               <div className={styles.inputGroup}>
                 <label>Stock</label>
-                <input 
-                  type="number" 
-                  {...register("stock", { required: "Stock is required", min: 0, valueAsNumber: true })} 
+                <input
+                  type="number"
+                  {...register("stock", { required: "Stock is required", min: 0, valueAsNumber: true })}
                   className={styles.input}
                 />
               </div>
             </div>
           </div>
-          
+
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>Product Images</h2>
             <div className={styles.imageGrid}>
@@ -219,16 +219,16 @@ function ProductForm() {
                   name="image.desktop"
                   control={control}
                   render={({ field }) => (
-                    <ProductImageUploader 
-                      label="Desktop Detail" 
-                      value={field.value} 
+                    <ProductImageUploader
+                      label="Desktop Detail"
+                      value={field.value}
                       onChange={(val) => {
                         field.onChange(val);
                         // Auto-fill others if empty
                         const vals = control._formValues;
                         if (!vals.image.mobile) control.setValue("image.mobile", val);
                         if (!vals.image.tablet) control.setValue("image.tablet", val);
-                      }} 
+                      }}
                       folder="products/detail"
                     />
                   )}
@@ -237,15 +237,15 @@ function ProductForm() {
                   name="categoryImage.desktop"
                   control={control}
                   render={({ field }) => (
-                    <ProductImageUploader 
-                      label="Category Preview" 
-                      value={field.value} 
+                    <ProductImageUploader
+                      label="Category Preview"
+                      value={field.value}
                       onChange={(val) => {
                         field.onChange(val);
                         const vals = control._formValues;
                         if (!vals.categoryImage.mobile) control.setValue("categoryImage.mobile", val);
                         if (!vals.categoryImage.tablet) control.setValue("categoryImage.tablet", val);
-                      }} 
+                      }}
                       folder="products/category"
                     />
                   )}
@@ -257,14 +257,14 @@ function ProductForm() {
                   name="gallery.first.desktop"
                   control={control}
                   render={({ field }) => (
-                    <ProductImageUploader 
-                      label="Gallery 1" 
-                      value={field.value} 
+                    <ProductImageUploader
+                      label="Gallery 1"
+                      value={field.value}
                       onChange={(val) => {
                         field.onChange(val);
                         control.setValue("gallery.first.mobile", val);
                         control.setValue("gallery.first.tablet", val);
-                      }} 
+                      }}
                       folder="products/gallery"
                     />
                   )}
@@ -273,14 +273,14 @@ function ProductForm() {
                   name="gallery.second.desktop"
                   control={control}
                   render={({ field }) => (
-                    <ProductImageUploader 
-                      label="Gallery 2" 
-                      value={field.value} 
+                    <ProductImageUploader
+                      label="Gallery 2"
+                      value={field.value}
                       onChange={(val) => {
                         field.onChange(val);
                         control.setValue("gallery.second.mobile", val);
                         control.setValue("gallery.second.tablet", val);
-                      }} 
+                      }}
                       folder="products/gallery"
                     />
                   )}
@@ -293,12 +293,12 @@ function ProductForm() {
         <div className={styles.formSidebar}>
           <div className={styles.card}>
             <h2 className={styles.cardTitle}>Status</h2>
-            
+
             <div className={styles.toggleGroup}>
               <label>Active Product</label>
               <input type="checkbox" {...register("is_active")} />
             </div>
-            
+
             <div className={styles.toggleGroup}>
               <label>"New" Badge</label>
               <input type="checkbox" {...register("new")} />
@@ -323,9 +323,9 @@ function ProductForm() {
 
 // Simple loader for the button
 const Loader2 = ({ size, className }) => (
-  <svg 
-    width={size} height={size} viewBox="0 0 24 24" fill="none" 
-    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
+  <svg
+    width={size} height={size} viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
     className={`${className} animate-spin`}
   >
     <path d="M21 12a9 9 0 1 1-6.219-8.56" />

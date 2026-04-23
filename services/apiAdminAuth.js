@@ -11,7 +11,6 @@ export async function getAdminRole(userId) {
 
   if (error) {
     if (error.code === 'PGRST116') {
-      // Row not found (not an admin)
       return null;
     }
     console.error("Error fetching admin role:", error.message);

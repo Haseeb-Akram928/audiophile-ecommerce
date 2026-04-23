@@ -118,7 +118,6 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignupPage />,
       },
-      // Protected Routes
       {
         element: <ProtectedRoute />,
         children: [
@@ -136,7 +135,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-      // Catch-all route
       {
         path: "*",
         element: <NotFound />

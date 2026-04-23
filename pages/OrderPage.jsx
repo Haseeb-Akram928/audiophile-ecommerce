@@ -1,5 +1,5 @@
-import OrderHistory from "@/features/orders/OrderHistory/OrderHistory"; // Corrected path
-import styles from "@/pages/OrderPage.module.css"; // Keep the styles if needed for the container
+import OrderHistory from "@/features/orders/OrderHistory/OrderHistory";
+import styles from "@/pages/OrderPage.module.css";
 
 function OrderPage() {
   return (

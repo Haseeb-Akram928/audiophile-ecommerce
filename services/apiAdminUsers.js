@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 
 export async function getAdminUsers() {
   const { data, error } = await supabase.rpc("get_admin_all_users");
-  
+
   if (error) {
     console.error("Error fetching admin users:", error);
     throw new Error("Could not fetch user list");
@@ -12,7 +12,6 @@ export async function getAdminUsers() {
 }
 
 export async function promoteUserToAdmin({ userId, role, adminId }) {
-  // Insert or update role in admin_roles
   const { data, error } = await supabase
     .from("admin_roles")
     .upsert(
@@ -27,7 +26,6 @@ export async function promoteUserToAdmin({ userId, role, adminId }) {
     throw new Error("Could not assign admin role");
   }
 
-  // Log activity
   if (adminId) {
     await supabase.from("admin_activity_log").insert({
       user_id: adminId,

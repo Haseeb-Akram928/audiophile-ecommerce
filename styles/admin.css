@@ -1,21 +1,20 @@
 :root {
-  /* Admin Design Tokens */
-  --admin-bg-primary: hsl(222, 47%, 11%);        /* Deep navy */
-  --admin-bg-secondary: hsl(217, 33%, 17%);      /* Card backgrounds */
-  --admin-bg-tertiary: hsl(215, 28%, 22%);       /* Hover states */
-  --admin-sidebar-bg: hsl(222, 47%, 8%);         /* Darker sidebar */
+  --admin-bg-primary: hsl(222, 47%, 11%);
+  --admin-bg-secondary: hsl(217, 33%, 17%);
+  --admin-bg-tertiary: hsl(215, 28%, 22%);
+  --admin-sidebar-bg: hsl(222, 47%, 8%);
 
-  --admin-text-primary: hsl(210, 40%, 96%);      /* Near-white */
-  --admin-text-secondary: hsl(215, 20%, 65%);    /* Muted text */
-  --admin-text-tertiary: hsl(215, 16%, 47%);     /* Very muted */
+  --admin-text-primary: hsl(210, 40%, 96%);
+  --admin-text-secondary: hsl(215, 20%, 65%);
+  --admin-text-tertiary: hsl(215, 16%, 47%);
 
-  --admin-accent: hsl(22, 65%, 57%);             /* Audiophile copper — brand consistency */
-  --admin-accent-hover: hsl(21, 94%, 75%);       /* Peach hover */
+  --admin-accent: hsl(22, 65%, 57%);
+  --admin-accent-hover: hsl(21, 94%, 75%);
 
-  --admin-success: hsl(142, 71%, 45%);           /* Green */
-  --admin-warning: hsl(38, 92%, 50%);            /* Amber */
-  --admin-danger: hsl(0, 72%, 51%);              /* Red */
-  --admin-info: hsl(199, 89%, 48%);              /* Blue */
+  --admin-success: hsl(142, 71%, 45%);
+  --admin-warning: hsl(38, 92%, 50%);
+  --admin-danger: hsl(0, 72%, 51%);
+  --admin-info: hsl(199, 89%, 48%);
 
   --admin-border: hsl(215, 28%, 25%);
   --admin-radius: 10px;

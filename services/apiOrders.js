@@ -10,7 +10,6 @@ export async function createOrder({
   couponId,
 }) {
   try {
-    // 1. Create the order
     const orderData = {
       total_amount: totalAmount,
       shipping_address: shippingAddress,
@@ -33,10 +32,9 @@ export async function createOrder({
       throw new Error(`Order could not be created: ${orderError.message}`);
     }
 
-    // 2. Create order items
     const orderItems = cartItems.map((item) => ({
       order_id: order.id,
-      product_id: item.productId, // Assuming cart item has productId
+      product_id: item.productId,
       quantity: item.quantity,
       price: item.price,
     }));
@@ -50,7 +48,6 @@ export async function createOrder({
       throw new Error("Could not create order items.");
     }
 
-    // 3. Increment coupon usage if applied
     if (couponId) {
       await incrementCouponUsage(couponId);
     }
@@ -58,7 +55,7 @@ export async function createOrder({
     return { status: "success", orderId: order.id };
   } catch (error) {
     console.error("Error in createOrder:", error);
-    throw error; // Re-throw the error for the caller to handle
+    throw error;
   }
 }
 

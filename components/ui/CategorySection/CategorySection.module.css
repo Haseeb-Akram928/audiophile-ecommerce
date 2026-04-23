@@ -1,5 +1,5 @@
 .categoryWrapper {
-  padding: 92px 0 120px 0; /* Space for the overlapping images */
+  padding: 92px 0 120px 0;
   background-color: var(--color-bg-light);
 }
 
@@ -9,12 +9,12 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 68px; /* Vertical gap for mobile */
+  gap: 68px;
 }
 
 .categoryCard {
   position: relative;
-  background-color: var(--color-surface); /* hsl(0, 0%, 95%) */
+  background-color: var(--color-surface);
   border-radius: 8px;
   height: 165px;
   display: flex;
@@ -33,7 +33,7 @@
 
 .imageWrapper {
   position: absolute;
-  top: -52px; /* Pulls image above the gray box */
+  top: -52px;
   width: 150px;
 }
 
@@ -42,8 +42,8 @@
 }
 
 .categoryName {
-  font-size: var(--fs-300); /* 15px */
-  letter-spacing: var(--spacing-300); /* 1px */
+  font-size: var(--fs-300);
+  letter-spacing: var(--spacing-300);
   color: var(--color-text-dark);
   font-weight: 700;
 }
@@ -53,7 +53,7 @@
   align-items: center;
   gap: 13px;
   text-decoration: none;
-  font-size: var(--fs-100); /* 13px */
+  font-size: var(--fs-100);
   font-weight: 700;
   color: rgba(0, 0, 0, 0.5);
   letter-spacing: var(--spacing-300);
@@ -61,7 +61,7 @@
 }
 
 .shopLink:hover {
-  color: var(--color-primary); /* --copper */
+  color: var(--color-primary);
 }
 
 .arrow {
@@ -69,7 +69,6 @@
   height: 12px;
 }
 
-/* Tablet (768px) and Desktop (1100px) */
 @media (min-width: 768px) {
   .categoryWrapper {
     padding: 148px 0 96px 0;
@@ -77,7 +76,7 @@
 
   .container {
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px; /* Small gap between horizontal cards */
+    gap: 10px;
   }
 
   .categoryCard {
@@ -99,12 +98,12 @@
     height: 204px;
   }
 
-  .categoryName{
-    font-size: var(--fs-400); /* 18px */
+  .categoryName {
+    font-size: var(--fs-400);
     letter-spacing: 1.286px;
   }
 
   .container {
-    gap: 30px; /* Wider gap for desktop */
+    gap: 30px;
   }
 }

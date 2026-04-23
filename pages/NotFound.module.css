@@ -1,6 +1,6 @@
 .wrapper {
-  background-color: var(--color-bg-dark); /* hsl(0, 0%, 6%) */
-  min-height: 80vh; /* Takes up most of the viewport height */
+  background-color: var(--color-bg-dark);
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,35 +19,34 @@
 }
 
 .errorCode {
-  font-size: 10rem; /* Large impact font */
-  color: var(--color-primary); /* --copper */
+  font-size: 10rem;
+  color: var(--color-primary);
   line-height: 1;
   margin-bottom: 1rem;
   opacity: 0.8;
 }
 
 .title {
-  font-size: var(--fs-800); /* 40px */
+  font-size: var(--fs-800);
   color: var(--color-text-light);
   margin-bottom: 24px;
   text-transform: uppercase;
 }
 
 .description {
-  font-size: var(--fs-300); /* 15px */
+  font-size: var(--fs-300);
   color: var(--color-text-light);
   opacity: 0.5;
   line-height: 1.6;
   margin-bottom: 40px;
 }
 
-/* Tablet and Desktop scaling */
 @media (min-width: 768px) {
   .errorCode {
     font-size: 15rem;
   }
 
   .title {
-    font-size: var(--fs-900); /* 56px */
+    font-size: var(--fs-900);
   }
 }

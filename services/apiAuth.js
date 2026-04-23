@@ -63,12 +63,11 @@ export async function signup({ fullName, username, email, password }) {
   }
 
   if (data?.user) {
-    // Attempt to update the profiles row with the new username directly
     const { error: profileError } = await supabase
       .from("profiles")
       .update({ username, full_name: fullName })
       .eq("id", data.user.id);
-      
+
     if (profileError) {
       console.error("Could not update profiles table:", profileError);
     }
@@ -99,7 +98,6 @@ export async function loginWithGoogle() {
 }
 
 export async function updateAvatar({ userId, file }) {
-  // 1. Upload to Supabase Storage avatars bucket
   const fileName = `avatar-${userId}-${Date.now()}`;
   const { data: uploadData, error: uploadError } = await supabase.storage
     .from("avatars")
@@ -110,14 +108,12 @@ export async function updateAvatar({ userId, file }) {
     throw new Error(uploadError.message);
   }
 
-  // 2. Extract public URL
   const { data: urlData } = supabase.storage
     .from("avatars")
     .getPublicUrl(fileName);
 
   const newAvatarUrl = urlData.publicUrl;
 
-  // 3. Update profiles table
   const { data: profileData, error: profileError } = await supabase
     .from("profiles")
     .update({ avatar_url: newAvatarUrl })
@@ -130,7 +126,6 @@ export async function updateAvatar({ userId, file }) {
     throw new Error(profileError.message);
   }
 
-  // 4. Update core auth metadata cache
   await supabase.auth.updateUser({
     data: { avatar: newAvatarUrl },
   });

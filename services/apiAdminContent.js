@@ -1,10 +1,9 @@
 import { supabase } from "@/lib/supabase";
 
-// -- REVIEWS --
 export async function getAdminReviews() {
   const { data, error } = await supabase
     .from("product_reviews")
-    .select(`*, products(name), profiles(username)`)
+    .select(`*, products:products!fk_product_reviews_products(name), profiles:profiles!fk_product_reviews_profiles(username)`)
     .order("created_at", { ascending: false });
 
   if (error) throw new Error("Could not fetch reviews");
@@ -34,7 +33,6 @@ export async function approveReview({ reviewId, isApproved, adminId }) {
   return data;
 }
 
-// -- COUPONS --
 export async function getAdminCoupons() {
   const { data, error } = await supabase
     .from("coupons")
@@ -68,7 +66,6 @@ export async function toggleCoupon({ couponId, isActive }) {
   return data;
 }
 
-// -- SITE SETTINGS --
 export async function getSiteSettings() {
   const { data, error } = await supabase
     .from("site_settings")
@@ -81,11 +78,11 @@ export async function getSiteSettings() {
 export async function updateSiteSetting({ settingKey, value, adminId }) {
   const { data, error } = await supabase
     .from("site_settings")
-    .upsert({ 
-      key: settingKey, 
-      value, 
-      updated_by: adminId, 
-      updated_at: new Date().toISOString() 
+    .upsert({
+      key: settingKey,
+      value,
+      updated_by: adminId,
+      updated_at: new Date().toISOString()
     })
     .select()
     .single();
