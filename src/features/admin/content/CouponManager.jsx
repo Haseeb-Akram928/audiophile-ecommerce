@@ -148,7 +148,7 @@ export default function CouponManager() {
                   onChange={e => setNewCoupon({...newCoupon, discount_type: e.target.value})}
                 >
                   <option value="percentage">Percentage (%)</option>
-                  <option value="fixed">Fixed Amount ($)</option>
+                  <option value="fixed">Fixed ($)</option>
                 </select>
               </div>
             </div>
