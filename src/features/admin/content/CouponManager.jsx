@@ -119,64 +119,94 @@ export default function CouponManager() {
 
       {showForm && (
         <form className={styles.formCard} onSubmit={handleCreate}>
-          <div className={styles.inputGroup}>
-            <label>Coupon Code (e.g. SUMMER20)</label>
-            <input 
-              required 
-              className={styles.input} 
-              value={newCoupon.code} 
-              onChange={e => setNewCoupon({...newCoupon, code: e.target.value.toUpperCase()})}
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label>Description (Optional)</label>
-            <input 
-              className={styles.input} 
-              value={newCoupon.description} 
-              onChange={e => setNewCoupon({...newCoupon, description: e.target.value})}
-              placeholder="e.g. Summer Sale"
-            />
-          </div>
-          <div className={styles.inputGroup}>
-            <label>Discount Value</label>
-            <div className={styles.inputRow}>
+          <h2 className={styles.formTitle}>Create New Coupon</h2>
+          
+          <div className={styles.formGrid}>
+            <div className={styles.inputGroup}>
+              <label>Coupon Code</label>
+              <input 
+                required 
+                placeholder="e.g. SUMMER50"
+                className={styles.input} 
+                value={newCoupon.code} 
+                onChange={e => setNewCoupon({...newCoupon, code: e.target.value.toUpperCase()})}
+              />
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Discount Value</label>
+              <div className={styles.inputRow}>
+                <input 
+                  type="number" required min="1" 
+                  className={styles.input} 
+                  value={newCoupon.discount_value} 
+                  onChange={e => setNewCoupon({...newCoupon, discount_value: Number(e.target.value)})}
+                />
+                <select 
+                  className={styles.input}
+                  value={newCoupon.discount_type}
+                  onChange={e => setNewCoupon({...newCoupon, discount_type: e.target.value})}
+                >
+                  <option value="percentage">Percentage (%)</option>
+                  <option value="fixed">Fixed Amount ($)</option>
+                </select>
+              </div>
+            </div>
+
+            <div className={`${styles.inputGroup} ${styles.fullWidth}`}>
+              <label>Description (Optional)</label>
+              <input 
+                className={styles.input} 
+                value={newCoupon.description} 
+                onChange={e => setNewCoupon({...newCoupon, description: e.target.value})}
+                placeholder="e.g. Summer special discount on audio products"
+              />
+            </div>
+            
+            <div className={styles.inputGroup}>
+              <label>Max Uses</label>
               <input 
                 type="number" required min="1" 
                 className={styles.input} 
-                value={newCoupon.discount_value} 
-                onChange={e => setNewCoupon({...newCoupon, discount_value: Number(e.target.value)})}
+                value={newCoupon.max_uses} 
+                onChange={e => setNewCoupon({...newCoupon, max_uses: Number(e.target.value)})}
+                placeholder="e.g. 100"
               />
-              <select 
-                className={styles.input}
-                value={newCoupon.discount_type}
-                onChange={e => setNewCoupon({...newCoupon, discount_type: e.target.value})}
-              >
-                <option value="percentage">Percentage (%)</option>
-                <option value="fixed">Fixed Amount ($)</option>
-              </select>
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label>Expires At</label>
+              <input 
+                type="date" 
+                className={styles.input} 
+                value={newCoupon.expires_at} 
+                onChange={e => setNewCoupon({...newCoupon, expires_at: e.target.value})}
+              />
             </div>
           </div>
-          <div className={styles.inputGroup}>
-            <label>Max Uses</label>
-            <input 
-              type="number" required min="1" 
-              className={styles.input} 
-              value={newCoupon.max_uses} 
-              onChange={e => setNewCoupon({...newCoupon, max_uses: Number(e.target.value)})}
-            />
+
+          <div className={styles.formActions}>
+            <button 
+              type="button" 
+              className={styles.cancelBtn} 
+              onClick={() => {
+                setShowForm(false);
+                setNewCoupon({ 
+                  code: "", 
+                  description: "",
+                  discount_type: "percentage",
+                  discount_value: 10, 
+                  max_uses: 100, 
+                  expires_at: "" 
+                });
+              }}
+            >
+              Cancel
+            </button>
+            <button type="submit" className={styles.submitBtn} disabled={isCreating}>
+              {isCreating ? "Saving..." : "Save Coupon"}
+            </button>
           </div>
-          <div className={styles.inputGroup}>
-            <label>Expires At</label>
-            <input 
-              type="date" 
-              className={styles.input} 
-              value={newCoupon.expires_at} 
-              onChange={e => setNewCoupon({...newCoupon, expires_at: e.target.value})}
-            />
-          </div>
-          <button type="submit" className={styles.submitBtn} disabled={isCreating}>
-            Save Coupon
-          </button>
         </form>
       )}
 
