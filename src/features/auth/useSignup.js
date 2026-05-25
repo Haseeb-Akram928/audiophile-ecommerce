@@ -23,6 +23,9 @@ export function useSignup() {
 
       // 2. Trigger Welcome Email
       if (data?.user) {
+        // Flag localStorage so the global hook doesn't send a duplicate welcome email
+        localStorage.setItem(`welcome_email_sent_${data.user.id}`, "true");
+
         sendWelcomeEmail({
           fullName: data.user.user_metadata.fullName,
           email: data.user.email,
