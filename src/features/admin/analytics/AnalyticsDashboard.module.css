@@ -1,99 +1,112 @@
+/* ═══════════════════════════════════════════
+   ANALYTICS DASHBOARD — Premium Design
+   ═══════════════════════════════════════════ */
+
 .page {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
 .header {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
   color: var(--admin-text-primary);
   margin: 0;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
-  color: var(--admin-text-secondary);
+  color: var(--admin-text-tertiary);
   font-size: 14px;
   margin-top: 4px;
 }
 
+/* ── Overview Grid ── */
 .overviewGrid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 32px;
+  gap: 24px;
 }
 
-.fullWidthCard {
-  margin-top: 32px;
-  grid-column: 1 / -1;
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .overviewGrid {
     grid-template-columns: 1fr;
   }
 }
 
+.fullWidthCard {
+  grid-column: 1 / -1;
+}
+
+/* ── Card ── */
 .card {
-  background-color: var(--admin-bg-secondary);
-  border-radius: var(--admin-radius-lg, 12px);
+  background: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius-lg);
   border: 1px solid var(--admin-border);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--admin-shadow);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: var(--admin-transition);
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--admin-shadow-md);
+  border-color: var(--admin-border-light);
 }
 
 .cardHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 24px;
+  padding: 18px 24px;
   border-bottom: 1px solid var(--admin-border);
 }
 
 .cardTitle {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   color: var(--admin-text-primary);
   margin: 0;
+  letter-spacing: -0.1px;
 }
 
 .badge {
-  background-color: var(--admin-bg-tertiary);
-  color: var(--admin-text-secondary);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 99px;
+  background: var(--admin-accent-dim);
+  color: var(--admin-accent);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--admin-radius-full);
+  letter-spacing: 0.3px;
+  border: 1px solid var(--admin-accent-glow);
 }
 
+/* ── Product Table Text ── */
 .productName {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--admin-text-primary);
+  font-size: 13.5px;
 }
 
 .category {
   text-transform: capitalize;
-  color: var(--admin-text-secondary);
+  color: var(--admin-text-muted);
+  font-size: 12.5px;
 }
 
 .units {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--admin-text-primary);
 }
 
 .revenue {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--admin-success);
 }

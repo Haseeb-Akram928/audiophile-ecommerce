@@ -5,6 +5,7 @@ export function useAdminKpis() {
   const { data: kpis, isLoading, error } = useQuery({
     queryKey: ["admin_kpis"],
     queryFn: getAdminKpis,
+    retry: 1, // don't hammer a broken RPC
   });
 
   return { kpis, isLoading, error };

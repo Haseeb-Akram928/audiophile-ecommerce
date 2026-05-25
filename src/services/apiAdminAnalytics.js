@@ -6,7 +6,8 @@ export async function getAdminKpis() {
     console.error("Error fetching admin KPIs:", error);
     throw new Error("Could not fetch KPIs");
   }
-  return data;
+  // RETURNS TABLE always gives back an array — extract the single row
+  return Array.isArray(data) ? data[0] ?? null : data;
 }
 
 export async function getDailyRevenue(days = 30) {

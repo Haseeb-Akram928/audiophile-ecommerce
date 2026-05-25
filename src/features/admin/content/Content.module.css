@@ -1,157 +1,186 @@
+/* ═══════════════════════════════════════════
+   CONTENT MODULE (Reviews, Coupons, Settings)
+   Premium Design
+   ═══════════════════════════════════════════ */
+
 .page {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
   color: var(--admin-text-primary);
   margin: 0;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
-  color: var(--admin-text-secondary);
+  color: var(--admin-text-tertiary);
   font-size: 14px;
   margin-top: 4px;
 }
 
+/* ── Primary Button ── */
 .primaryBtn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--admin-accent);
-  color: white;
+  background: linear-gradient(135deg, var(--admin-accent), hsl(28, 85%, 50%));
+  color: #fff;
   border: none;
   border-radius: var(--admin-radius);
   padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13.5px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: var(--admin-transition);
+  box-shadow: var(--admin-glow);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-family: var(--admin-font);
 }
 
 .primaryBtn:hover {
-  background-color: var(--admin-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px var(--admin-accent-glow);
+  filter: brightness(1.1);
 }
 
+/* ── Table Wrapper ── */
 .tableWrapper {
-  background-color: var(--admin-bg-secondary);
-  border-radius: var(--admin-radius);
+  border-radius: var(--admin-radius-lg);
   box-shadow: var(--admin-shadow);
   overflow: hidden;
 }
 
-/* Reviews Mod */
+/* ── Review Cells ── */
 .productName {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--admin-text-primary);
+  font-size: 13.5px;
 }
 
 .rating {
   display: flex;
-  color: #f1c40f;
-  font-size: 16px;
+  gap: 2px;
+  color: hsl(38, 92%, 52%);
+  font-size: 15px;
 }
 
-.starFilled { color: #f1c40f; }
-.starEmpty { color: var(--admin-text-tertiary); }
+.starFilled { color: hsl(38, 92%, 52%); }
+.starEmpty  { color: var(--admin-border-light); }
 
 .comment {
   display: inline-block;
-  max-width: 300px;
+  max-width: 280px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--admin-text-secondary);
+  font-size: 13px;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .actionBtn {
-  background: none;
-  border: none;
+  background: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
   cursor: pointer;
   padding: 6px;
-  border-radius: 4px;
+  border-radius: var(--admin-radius);
   display: flex;
   align-items: center;
-  transition: all 0.2s;
+  transition: var(--admin-transition-fast);
+  width: 30px;
+  height: 30px;
+  justify-content: center;
 }
 
 .approveBtn { color: var(--admin-success); }
-.approveBtn:hover:not(:disabled) { background-color: rgba(46, 204, 113, 0.1); }
+.approveBtn:hover:not(:disabled) {
+  background: var(--admin-success-dim);
+  border-color: var(--admin-success);
+}
 
 .rejectBtn { color: var(--admin-danger); }
-.rejectBtn:hover:not(:disabled) { background-color: rgba(231, 76, 60, 0.1); }
+.rejectBtn:hover:not(:disabled) {
+  background: var(--admin-danger-dim);
+  border-color: var(--admin-danger);
+}
 
-.actionBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+.actionBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
-/* Coupons */
+/* ── Coupon Cells ── */
 .couponCode {
-  font-family: monospace;
-  font-weight: 700;
-  color: var(--admin-text-primary);
-  background-color: var(--admin-bg-primary);
-  padding: 4px 8px;
-  border-radius: 4px;
-  letter-spacing: 1px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-weight: 800;
+  color: var(--admin-accent);
+  background: var(--admin-accent-dim);
+  padding: 4px 10px;
+  border-radius: var(--admin-radius-sm);
+  letter-spacing: 1.5px;
+  font-size: 12.5px;
+  border: 1px solid var(--admin-accent-glow);
 }
 
 .discount {
-  font-weight: 700;
-  color: var(--admin-accent);
+  font-weight: 800;
+  color: var(--admin-success);
+  font-size: 14px;
 }
 
+/* ── Coupon Form Card ── */
 .formCard {
-  background-color: var(--admin-bg-secondary);
+  background: var(--admin-bg-secondary);
   border: 1px solid var(--admin-border);
-  border-radius: var(--admin-radius);
-  padding: 32px;
+  border-radius: var(--admin-radius-lg);
+  padding: 28px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  max-width: 650px;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-  animation: slideDown 0.3s ease-out;
+  gap: 22px;
+  max-width: 680px;
+  box-shadow: var(--admin-shadow-md);
+  animation: slideDown 0.25s ease-out;
   margin-bottom: 24px;
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .formTitle {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--admin-text-primary);
   margin: 0;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--admin-border);
-  padding-bottom: 12px;
+  letter-spacing: -0.1px;
 }
 
 .formGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 18px;
 }
 
 .fullWidth {
@@ -165,40 +194,43 @@
 }
 
 .inputGroup label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--admin-text-secondary);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--admin-text-tertiary);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
 }
 
 .input {
   width: 100%;
-  background-color: var(--admin-bg-primary);
+  background: var(--admin-bg-primary);
   border: 1px solid var(--admin-border);
   color: var(--admin-text-primary);
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-family: inherit;
+  padding: 10px 14px;
+  border-radius: var(--admin-radius);
+  font-family: var(--admin-font);
   font-size: 14px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: var(--admin-transition-fast);
   outline: none;
   box-sizing: border-box;
 }
 
 .input:focus {
   border-color: var(--admin-accent);
-  box-shadow: 0 0 0 2px rgba(227, 104, 34, 0.25);
+  box-shadow: 0 0 0 3px var(--admin-accent-dim);
+}
+
+.input:hover:not(:focus) {
+  border-color: var(--admin-border-light);
 }
 
 .input::placeholder {
-  color: var(--admin-text-tertiary);
-  opacity: 0.5;
+  color: var(--admin-text-muted);
 }
 
 .inputRow {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -212,69 +244,73 @@
   min-width: 0;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238892b0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 12px center;
-  background-size: 16px;
-  padding-right: 32px;
-  text-overflow: ellipsis;
+  background-size: 14px;
+  padding-right: 34px;
 }
 
 .inputRow select.input option {
-  background-color: var(--admin-bg-secondary);
+  background: var(--admin-bg-secondary);
   color: var(--admin-text-primary);
 }
 
+/* ── Form Actions ── */
 .formActions {
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 12px;
+  gap: 10px;
+  margin-top: 8px;
   border-top: 1px solid var(--admin-border);
-  padding-top: 20px;
+  padding-top: 18px;
+  flex-wrap: wrap;
 }
 
 .submitBtn {
-  background-color: var(--admin-accent);
-  color: white;
+  background: linear-gradient(135deg, var(--admin-accent), hsl(28, 85%, 50%));
+  color: #fff;
   border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: var(--admin-radius);
+  font-size: 13.5px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: var(--admin-transition);
+  font-family: var(--admin-font);
+  box-shadow: var(--admin-glow);
 }
 
 .submitBtn:hover:not(:disabled) {
-  background-color: var(--admin-accent-hover);
-}
-
-.submitBtn:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px var(--admin-accent-glow);
+  filter: brightness(1.1);
 }
 
 .submitBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+  filter: none;
 }
 
 .cancelBtn {
-  background-color: transparent;
+  background: transparent;
   color: var(--admin-text-secondary);
   border: 1px solid var(--admin-border);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: var(--admin-radius);
+  font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: var(--admin-transition-fast);
+  font-family: var(--admin-font);
 }
 
 .cancelBtn:hover {
-  background-color: var(--admin-bg-tertiary);
+  background: var(--admin-bg-tertiary);
   color: var(--admin-text-primary);
-  border-color: var(--admin-text-secondary);
+  border-color: var(--admin-border-light);
 }
 
 @media (max-width: 600px) {
@@ -284,34 +320,47 @@
   .fullWidth {
     grid-column: span 1;
   }
+  .formCard {
+    padding: 20px;
+  }
+  .inputRow {
+    flex-direction: column;
+  }
 }
 
-/* Settings */
+/* ═══ SETTINGS ═══ */
 .settingsGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 22px;
 }
 
 .settingsCard {
-  background-color: var(--admin-bg-secondary);
-  border-radius: var(--admin-radius);
+  background: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius-lg);
   border: 1px solid var(--admin-border);
-  padding: 24px;
+  padding: 26px;
   box-shadow: var(--admin-shadow);
+  transition: var(--admin-transition);
+}
+
+.settingsCard:hover {
+  border-color: var(--admin-border-light);
 }
 
 .cardTitle {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--admin-text-primary);
-  margin: 0 0 8px 0;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.1px;
 }
 
 .cardDesc {
-  color: var(--admin-text-secondary);
-  font-size: 14px;
+  color: var(--admin-text-tertiary);
+  font-size: 13.5px;
   margin: 0 0 20px 0;
+  line-height: 1.5;
 }
 
 .settingsForm {
@@ -322,31 +371,52 @@
 }
 
 .textarea {
-  background-color: var(--admin-bg-primary);
+  background: var(--admin-bg-primary);
   border: 1px solid var(--admin-border);
   color: var(--admin-text-primary);
-  padding: 10px 12px;
-  border-radius: 6px;
-  font-family: inherit;
+  padding: 10px 14px;
+  border-radius: var(--admin-radius);
+  font-family: var(--admin-font);
+  font-size: 14px;
   resize: vertical;
+  transition: var(--admin-transition-fast);
+  outline: none;
+  line-height: 1.6;
+}
+
+.textarea:focus {
+  border-color: var(--admin-accent);
+  box-shadow: 0 0 0 3px var(--admin-accent-dim);
 }
 
 .saveBtn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   align-self: flex-start;
-  background-color: var(--admin-accent);
-  color: white;
+  background: linear-gradient(135deg, var(--admin-accent), hsl(28, 85%, 50%));
+  color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: var(--admin-radius);
   padding: 10px 20px;
-  font-weight: 600;
+  font-size: 13.5px;
+  font-weight: 700;
   cursor: pointer;
   margin-top: 8px;
+  transition: var(--admin-transition);
+  box-shadow: var(--admin-glow);
+  font-family: var(--admin-font);
+}
+
+.saveBtn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px var(--admin-accent-glow);
+  filter: brightness(1.1);
 }
 
 .saveBtn:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
 }
-

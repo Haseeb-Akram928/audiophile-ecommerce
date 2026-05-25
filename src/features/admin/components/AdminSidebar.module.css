@@ -1,72 +1,185 @@
+/* ═══════════════════════════════════════════
+   ADMIN SIDEBAR — Premium Dark Design
+   ═══════════════════════════════════════════ */
+
 .sidebar {
-  width: 260px;
-  background-color: var(--admin-sidebar-bg);
+  width: 252px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, 
+    var(--admin-sidebar-bg) 0%, 
+    hsl(224, 42%, 7%) 100%
+  );
   border-right: 1px solid var(--admin-border);
   display: flex;
   flex-direction: column;
-  padding: 24px 16px;
+  padding: 0;
   position: sticky;
   top: 0;
   height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 100;
 }
 
+/* ── Header ── */
 .header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 40px;
-  padding: 0 8px;
+  gap: 10px;
+  padding: 22px 20px;
+  border-bottom: 1px solid var(--admin-border);
+  flex-shrink: 0;
 }
 
 .logo {
-  height: 24px;
+  height: 22px;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
 }
 
 .badge {
-  background-color: var(--admin-accent);
-  color: white;
+  background: linear-gradient(135deg, var(--admin-accent), hsl(28, 85%, 48%));
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: var(--admin-radius-sm);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px var(--admin-accent-glow);
+  flex-shrink: 0;
+}
+
+/* ── Nav Section ── */
+.navSection {
+  padding: 16px 12px 8px;
+  flex: 1;
+}
+
+.navLabel {
   font-size: 10px;
   font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 4px;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  color: var(--admin-text-muted);
+  text-transform: uppercase;
+  padding: 4px 8px 8px;
+  display: block;
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   flex: 1;
 }
 
+/* ── Nav Items ── */
 .navItem {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 8px;
-  color: var(--admin-text-secondary);
+  gap: 11px;
+  padding: 10px 12px;
+  border-radius: var(--admin-radius);
+  color: var(--admin-text-tertiary);
   text-decoration: none;
+  font-size: 14px;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: var(--admin-transition-fast);
+  position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.navItem::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--admin-accent);
+  border-radius: 0 var(--admin-radius-full) var(--admin-radius-full) 0;
+  transition: height 0.2s ease;
 }
 
 .navItem:hover {
-  background-color: var(--admin-bg-tertiary);
+  background: var(--admin-bg-tertiary);
   color: var(--admin-text-primary);
 }
 
+.navItem:hover::before {
+  height: 60%;
+}
+
 .active {
-  background-color: var(--admin-accent) !important;
-  color: white !important;
+  background: var(--admin-accent-dim) !important;
+  color: var(--admin-accent) !important;
+  font-weight: 600;
+}
+
+.active::before {
+  height: 70% !important;
 }
 
 .icon {
   flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
 }
 
+.navItem:hover .icon,
+.active .icon {
+  opacity: 1;
+}
+
+/* ── Footer ── */
 .footer {
-  margin-top: auto;
-  padding-top: 16px;
+  padding: 12px;
   border-top: 1px solid var(--admin-border);
+  flex-shrink: 0;
+}
+
+/* ── Close Button (mobile) ── */
+.closeButton {
+  display: none;
+  cursor: pointer;
+  color: var(--admin-text-secondary);
+  padding: 6px;
+  border-radius: var(--admin-radius);
+  transition: var(--admin-transition-fast);
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.closeButton:hover {
+  background-color: var(--admin-bg-tertiary);
+  color: var(--admin-text-primary);
+}
+
+/* ── Mobile Drawer ── */
+@media (max-width: 768px) {
+  .closeButton {
+    display: flex;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(-100%);
+    box-shadow: var(--admin-shadow-lg);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-right: 1px solid var(--admin-border-light);
+  }
+
+  /* Open state — controlled by the CSS checkbox */
+  :global(#admin-sidebar-toggle):checked ~ .sidebar {
+    transform: translateX(0);
+  }
 }

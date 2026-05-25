@@ -1,32 +1,40 @@
+/* ═══════════════════════════════════════════
+   SETTINGS — Premium Design
+   ═══════════════════════════════════════════ */
+
 .page {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
   color: var(--admin-text-primary);
   margin: 0;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
-  color: var(--admin-text-secondary);
+  color: var(--admin-text-tertiary);
   font-size: 14px;
   margin-top: 4px;
 }
 
+/* ── Grid ── */
 .grid {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 24px;
+  align-items: start;
 }
 
 @media (max-width: 1024px) {
@@ -38,54 +46,69 @@
 .settingsCol, .logsCol {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
+/* ── Card ── */
 .card {
-  background-color: var(--admin-bg-secondary);
-  border-radius: var(--admin-radius);
+  background: var(--admin-bg-secondary);
+  border-radius: var(--admin-radius-lg);
   border: 1px solid var(--admin-border);
-  padding: 24px;
+  padding: 26px;
   box-shadow: var(--admin-shadow);
+  transition: var(--admin-transition);
+}
+
+.card:hover {
+  border-color: var(--admin-border-light);
 }
 
 .cardTitle {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--admin-text-primary);
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.2px;
 }
 
 .cardDesc {
-  color: var(--admin-text-secondary);
-  font-size: 14px;
-  margin: -10px 0 20px 0;
+  color: var(--admin-text-tertiary);
+  font-size: 13.5px;
+  margin: -14px 0 20px 0;
+  line-height: 1.5;
 }
 
-/* Profile Box */
+/* ── Profile Box ── */
 .profileBox {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px;
-  background-color: var(--admin-bg-primary);
+  padding: 18px;
+  background: var(--admin-bg-primary);
   border: 1px solid var(--admin-border);
-  border-radius: 8px;
-  margin-bottom: 16px;
+  border-radius: var(--admin-radius-lg);
+  margin-bottom: 18px;
+  transition: var(--admin-transition-fast);
+}
+
+.profileBox:hover {
+  border-color: var(--admin-border-light);
 }
 
 .profileAvatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: var(--admin-accent);
-  color: white;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--admin-radius);
+  background: linear-gradient(135deg, var(--admin-accent), hsl(28, 85%, 48%));
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px var(--admin-accent-glow);
 }
 
 .profileAvatar img {
@@ -101,69 +124,78 @@
 }
 
 .profileName {
-  font-weight: 700;
+  font-weight: 800;
   color: var(--admin-text-primary);
   font-size: 16px;
+  letter-spacing: -0.2px;
 }
 
 .profileEmail {
-  color: var(--admin-text-tertiary);
+  color: var(--admin-text-muted);
   font-size: 13px;
 }
 
 .profileRoleBadge {
-  display: inline-block;
-  background-color: rgba(216, 125, 74, 0.15); /* Accent color wash */
+  display: inline-flex;
+  align-items: center;
+  background: var(--admin-accent-dim);
   color: var(--admin-accent);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 99px;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 9px;
+  border-radius: var(--admin-radius-full);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
   align-self: flex-start;
-  margin-top: 4px;
+  margin-top: 2px;
+  border: 1px solid var(--admin-accent-glow);
 }
 
 .note {
-  font-size: 13px;
-  color: var(--admin-text-tertiary);
+  font-size: 12.5px;
+  color: var(--admin-text-muted);
   font-style: italic;
-  line-height: 1.5;
+  line-height: 1.6;
+  padding: 12px;
+  background: var(--admin-bg-primary);
+  border-radius: var(--admin-radius);
+  border: 1px dashed var(--admin-border);
 }
 
-/* Activity Logs */
+/* ── Activity Log ── */
 .logList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .logItem {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
-  padding: 16px;
-  background-color: var(--admin-bg-primary);
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--admin-bg-primary);
   border: 1px solid var(--admin-border);
-  border-radius: 8px;
-  transition: background-color 0.2s;
+  border-radius: var(--admin-radius);
+  transition: var(--admin-transition-fast);
 }
 
 .logItem:hover {
-  background-color: var(--admin-bg-tertiary);
+  background: var(--admin-bg-hover);
+  border-color: var(--admin-border-light);
 }
 
 .logIcon {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  background-color: var(--admin-bg-secondary);
-  color: var(--admin-text-secondary);
+  border-radius: var(--admin-radius);
+  background: var(--admin-accent-dim);
+  color: var(--admin-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--admin-border);
+  flex-shrink: 0;
+  border: 1px solid var(--admin-accent-glow);
 }
 
 .logContent {
@@ -171,32 +203,40 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-width: 0;
 }
 
 .logHeader {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .logUser {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--admin-text-primary);
-  font-size: 14px;
+  font-size: 13.5px;
 }
 
 .logAction {
-  background-color: var(--admin-bg-secondary);
+  background: var(--admin-bg-secondary);
   color: var(--admin-text-secondary);
   padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
+  border-radius: var(--admin-radius-sm);
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  border: 1px solid var(--admin-border);
 }
 
 .logMeta {
-  color: var(--admin-text-tertiary);
-  font-size: 13px;
+  color: var(--admin-text-muted);
+  font-size: 12.5px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .logDetail {
@@ -204,14 +244,32 @@
 }
 
 .logTime {
-  color: var(--admin-text-tertiary);
-  font-size: 12px;
+  color: var(--admin-text-muted);
+  font-size: 11.5px;
   white-space: nowrap;
+  flex-shrink: 0;
+  padding-top: 2px;
 }
 
 .emptyLogs {
-  padding: 40px;
+  padding: 48px;
   text-align: center;
-  color: var(--admin-text-tertiary);
+  color: var(--admin-text-muted);
   font-style: italic;
+  font-size: 14px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .card {
+    padding: 20px;
+  }
+
+  .profileBox {
+    padding: 14px;
+  }
+
+  .logItem {
+    padding: 12px;
+  }
 }

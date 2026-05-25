@@ -1,35 +1,62 @@
+/* ═══════════════════════════════════════════
+   STATUS BADGE — Premium Design
+   ═══════════════════════════════════════════ */
+
 .badge {
   display: inline-flex;
   align-items: center;
-  padding: 4px 10px;
-  border-radius: 9999px;
-  font-size: 12px;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--admin-radius-full);
+  font-size: 11.5px;
   font-weight: 600;
   text-transform: capitalize;
-  line-height: 1;
+  line-height: 1.4;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+}
+
+/* Dot indicator */
+.badge::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .success {
-  background-color: rgba(46, 204, 113, 0.15);
+  background: var(--admin-success-dim);
   color: var(--admin-success);
+  border: 1px solid hsla(152, 60%, 45%, 0.25);
 }
+.success::before { background: var(--admin-success); }
 
 .warning {
-  background-color: rgba(241, 196, 15, 0.15);
+  background: var(--admin-warning-dim);
   color: var(--admin-warning);
+  border: 1px solid hsla(38, 92%, 52%, 0.25);
 }
+.warning::before { background: var(--admin-warning); }
 
 .danger {
-  background-color: rgba(231, 76, 60, 0.15);
+  background: var(--admin-danger-dim);
   color: var(--admin-danger);
+  border: 1px solid hsla(4, 74%, 56%, 0.25);
 }
+.danger::before { background: var(--admin-danger); }
 
 .info {
-  background-color: rgba(52, 152, 219, 0.15);
+  background: var(--admin-info-dim);
   color: var(--admin-info);
+  border: 1px solid hsla(210, 78%, 57%, 0.25);
 }
+.info::before { background: var(--admin-info); }
 
 .default {
-  background-color: var(--admin-bg-tertiary);
-  color: var(--admin-text-secondary);
+  background: var(--admin-bg-tertiary);
+  color: var(--admin-text-tertiary);
+  border: 1px solid var(--admin-border);
 }
+.default::before { background: var(--admin-text-muted); }

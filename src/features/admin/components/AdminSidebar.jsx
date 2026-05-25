@@ -8,7 +8,8 @@ import {
   MessageSquare,
   Ticket,
   LayoutTemplate,
-  BarChart3
+  BarChart3,
+  X
 } from "lucide-react";
 import styles from "./AdminSidebar.module.css";
 import PermissionGate from "../auth/PermissionGate";
@@ -32,27 +33,34 @@ function AdminSidebar() {
       <div className={styles.header}>
         <img src="/assets/shared/desktop/logo.svg" alt="audiophile" className={styles.logo} />
         <span className={styles.badge}>ADMIN</span>
+        
+        {/* Mobile Sidebar Close Trigger (Pure HTML/CSS - Zero JS Logic) */}
+        <label htmlFor="admin-sidebar-toggle" className={styles.closeButton} aria-label="Close Sidebar Menu">
+          <X size={20} />
+        </label>
       </div>
 
-      <nav className={styles.nav}>
-        {navItems.map((item) => {
-          const isActive = item.exact 
-            ? location.pathname === item.path 
-            : location.pathname.startsWith(item.path);
+      <div className={styles.navSection}>
+        <nav className={styles.nav}>
+          {navItems.map((item) => {
+            const isActive = item.exact 
+              ? location.pathname === item.path 
+              : location.pathname.startsWith(item.path);
 
-          return (
-            <PermissionGate key={item.path} action={item.permission}>
-              <Link 
-                to={item.path} 
-                className={`${styles.navItem} ${isActive ? styles.active : ""}`}
-              >
-                <item.icon size={20} className={styles.icon} />
-                <span>{item.name}</span>
-              </Link>
-            </PermissionGate>
-          );
-        })}
-      </nav>
+            return (
+              <PermissionGate key={item.path} action={item.permission}>
+                <Link 
+                  to={item.path} 
+                  className={`${styles.navItem} ${isActive ? styles.active : ""}`}
+                >
+                  <item.icon size={18} className={styles.icon} />
+                  <span>{item.name}</span>
+                </Link>
+              </PermissionGate>
+            );
+          })}
+        </nav>
+      </div>
 
       <div className={styles.footer}>
         <PermissionGate action="view_settings">
@@ -60,7 +68,7 @@ function AdminSidebar() {
             to="/admin/settings" 
             className={`${styles.navItem} ${location.pathname.startsWith("/admin/settings") ? styles.active : ""}`}
           >
-            <Settings size={20} className={styles.icon} />
+            <Settings size={18} className={styles.icon} />
             <span>Settings</span>
           </Link>
         </PermissionGate>

@@ -1,75 +1,91 @@
+/* ═══════════════════════════════════════════
+   ORDERS LIST — Premium Design
+   ═══════════════════════════════════════════ */
+
 .page {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
   color: var(--admin-text-primary);
   margin: 0;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
-  color: var(--admin-text-secondary);
+  color: var(--admin-text-tertiary);
   font-size: 14px;
   margin-top: 4px;
+  line-height: 1.5;
 }
 
+/* ── Table Wrapper ── */
 .tableWrapper {
-  background-color: var(--admin-bg-secondary);
-  border-radius: var(--admin-radius);
+  border-radius: var(--admin-radius-lg);
   box-shadow: var(--admin-shadow);
   overflow: hidden;
 }
 
+/* ── Order ID ── */
 .orderId {
-  font-family: monospace;
+  font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+  font-size: 12px;
   color: var(--admin-text-secondary);
-  background-color: var(--admin-bg-primary);
-  padding: 4px 8px;
-  border-radius: 4px;
+  background: var(--admin-bg-primary);
+  padding: 3px 8px;
+  border-radius: var(--admin-radius-sm);
   border: 1px solid var(--admin-border);
+  letter-spacing: 0.5px;
 }
 
 .customer {
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--admin-text-primary);
 }
 
 .total {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--admin-text-primary);
 }
 
 .payment {
   text-transform: capitalize;
   color: var(--admin-text-tertiary);
+  font-size: 13px;
 }
 
+/* ── View Button ── */
 .viewBtn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  background-color: var(--admin-bg-primary);
+  padding: 6px 14px;
+  background: var(--admin-bg-primary);
   border: 1px solid var(--admin-border);
-  color: var(--admin-text-primary);
-  border-radius: 6px;
+  color: var(--admin-text-secondary);
+  border-radius: var(--admin-radius);
   text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  transition: all 0.2s;
+  font-size: 12.5px;
+  font-weight: 600;
+  transition: var(--admin-transition-fast);
+  white-space: nowrap;
 }
 
 .viewBtn:hover {
-  background-color: var(--admin-bg-tertiary);
+  background: var(--admin-accent-dim);
   border-color: var(--admin-accent);
   color: var(--admin-accent);
+  box-shadow: 0 0 0 2px var(--admin-accent-dim);
 }

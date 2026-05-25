@@ -10,20 +10,29 @@ function AdminTopbar() {
 
   return (
     <header className={styles.topbar}>
+      {/* Mobile Hamburger Menu Toggle Trigger (Pure HTML/CSS - Zero JS Logic) */}
+      <label htmlFor="admin-sidebar-toggle" className={styles.hamburger} aria-label="Toggle Sidebar Menu">
+        <span className={styles.hamburgerLine}></span>
+        <span className={styles.hamburgerLine}></span>
+        <span className={styles.hamburgerLine}></span>
+      </label>
+
       <div className={styles.search}>
-        <Search size={20} className={styles.searchIcon} />
+        <Search size={16} className={styles.searchIcon} />
         <input type="text" placeholder="Search orders, products, users..." className={styles.searchInput} />
       </div>
 
       <div className={styles.actions}>
         <a href="/" target="_blank" rel="noreferrer" className={styles.storefrontLink} title="View Storefront">
-          <ExternalLink size={20} />
+          <ExternalLink size={16} />
         </a>
         
-        <button className={styles.iconButton}>
-          <Bell size={20} />
+        <button className={styles.iconButton} aria-label="Notifications">
+          <Bell size={16} />
           <span className={styles.notificationBadge}></span>
         </button>
+
+        <div className={styles.divider}></div>
 
         <div className={styles.profile}>
           <div className={styles.avatar}>

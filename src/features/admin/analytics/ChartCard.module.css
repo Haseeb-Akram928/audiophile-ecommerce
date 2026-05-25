@@ -1,48 +1,64 @@
+/* ═══════════════════════════════════════════
+   CHART CARD — Premium Design
+   ═══════════════════════════════════════════ */
+
 .card {
-  background-color: var(--admin-bg-secondary, #1a1c23);
-  border: 1px solid var(--border-color, #27272a);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-5);
+  background: var(--admin-bg-secondary);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  padding: 24px;
   display: flex;
   flex-direction: column;
   height: 100%;
+  transition: var(--admin-transition);
+}
+
+.card:hover {
+  border-color: var(--admin-border-light);
+  box-shadow: var(--admin-shadow-md);
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: var(--spacing-5);
+  margin-bottom: 20px;
+  gap: 12px;
 }
 
 .title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-primary, #fff);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+  margin: 0;
+  letter-spacing: -0.1px;
 }
 
 .subtitle {
-  font-size: 0.85rem;
-  color: var(--text-secondary, #a1a1aa);
-  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--admin-text-muted);
+  margin-top: 3px;
+  line-height: 1.4;
 }
 
 .actionBtn {
-  background: transparent;
-  border: 1px solid var(--border-color, #27272a);
-  color: var(--text-secondary, #a1a1aa);
-  padding: 6px;
-  border-radius: var(--radius-sm);
+  background: var(--admin-bg-primary);
+  border: 1px solid var(--admin-border);
+  color: var(--admin-text-secondary);
+  padding: 6px 10px;
+  border-radius: var(--admin-radius);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: var(--admin-transition-fast);
+  flex-shrink: 0;
 }
 
 .actionBtn:hover {
-  background: var(--admin-bg-tertiary, #27272a);
-  color: var(--text-primary, #fff);
+  background: var(--admin-bg-tertiary);
+  color: var(--admin-text-primary);
+  border-color: var(--admin-border-light);
 }
 
 .content {

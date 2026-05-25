@@ -9,7 +9,11 @@ function KpiCard({ title, value, icon: Icon, trend, trendValue, isCurrency }) {
     <div className={styles.kpiCard}>
       <div className={styles.header}>
         <h3 className={styles.title}>{title}</h3>
-        {Icon && <Icon size={20} className={styles.icon} />}
+        {Icon && (
+          <div className={styles.iconWrapper}>
+            <Icon size={18} className={styles.icon} />
+          </div>
+        )}
       </div>
       
       <div className={styles.body}>

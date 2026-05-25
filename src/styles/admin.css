@@ -1,27 +1,164 @@
+/* =========================================================
+   AUDIOPHILE ADMIN — Design Tokens
+   Premium dark theme with vibrant accents
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 :root {
-  --admin-bg-primary: hsl(222, 47%, 11%);
-  --admin-bg-secondary: hsl(217, 33%, 17%);
-  --admin-bg-tertiary: hsl(215, 28%, 22%);
-  --admin-sidebar-bg: hsl(222, 47%, 8%);
+  /* ── Backgrounds ── */
+  --admin-bg-primary:     hsl(224, 36%, 8%);
+  --admin-bg-secondary:   hsl(224, 28%, 12%);
+  --admin-bg-tertiary:    hsl(224, 22%, 17%);
+  --admin-bg-hover:       hsl(224, 22%, 20%);
+  --admin-sidebar-bg:     hsl(224, 40%, 6%);
 
-  --admin-text-primary: hsl(210, 40%, 96%);
-  --admin-text-secondary: hsl(215, 20%, 65%);
-  --admin-text-tertiary: hsl(215, 16%, 47%);
+  /* ── Text ── */
+  --admin-text-primary:   hsl(213, 31%, 96%);
+  --admin-text-secondary: hsl(215, 18%, 63%);
+  --admin-text-tertiary:  hsl(215, 14%, 44%);
+  --admin-text-muted:     hsl(215, 12%, 34%);
 
-  --admin-accent: hsl(22, 65%, 57%);
-  --admin-accent-hover: hsl(21, 94%, 75%);
+  /* ── Brand Accent (warm orange) ── */
+  --admin-accent:         hsl(22, 80%, 56%);
+  --admin-accent-light:   hsl(22, 80%, 66%);
+  --admin-accent-dim:     hsla(22, 80%, 56%, 0.15);
+  --admin-accent-glow:    hsla(22, 80%, 56%, 0.3);
 
-  --admin-success: hsl(142, 71%, 45%);
-  --admin-warning: hsl(38, 92%, 50%);
-  --admin-danger: hsl(0, 72%, 51%);
-  --admin-info: hsl(199, 89%, 48%);
+  /* ── Status Colors ── */
+  --admin-success:        hsl(152, 60%, 45%);
+  --admin-success-dim:    hsla(152, 60%, 45%, 0.15);
+  --admin-warning:        hsl(38, 92%, 52%);
+  --admin-warning-dim:    hsla(38, 92%, 52%, 0.15);
+  --admin-danger:         hsl(4, 74%, 56%);
+  --admin-danger-dim:     hsla(4, 74%, 56%, 0.15);
+  --admin-info:           hsl(210, 78%, 57%);
+  --admin-info-dim:       hsla(210, 78%, 57%, 0.15);
 
-  --admin-border: hsl(215, 28%, 25%);
-  --admin-radius: 10px;
-  --admin-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  /* ── Borders & Radius ── */
+  --admin-border:         hsl(224, 22%, 20%);
+  --admin-border-light:   hsl(224, 22%, 24%);
+  --admin-radius-sm:      6px;
+  --admin-radius:         10px;
+  --admin-radius-lg:      14px;
+  --admin-radius-xl:      20px;
+  --admin-radius-full:    9999px;
+
+  /* ── Shadows ── */
+  --admin-shadow-xs:  0 1px 3px rgba(0, 0, 0, 0.25);
+  --admin-shadow:     0 4px 16px rgba(0, 0, 0, 0.35);
+  --admin-shadow-md:  0 8px 24px rgba(0, 0, 0, 0.45);
+  --admin-shadow-lg:  0 20px 60px rgba(0, 0, 0, 0.6);
+  --admin-glow:       0 0 20px hsla(22, 80%, 56%, 0.25);
+
+  /* ── Transitions ── */
+  --admin-transition-fast:   all 0.15s ease;
+  --admin-transition:        all 0.25s ease;
+  --admin-transition-slow:   all 0.4s ease;
+
+  /* ── Typography ── */
+  --admin-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* ── Global Admin Body Reset ── */
 body:has(.admin-app) {
   background-color: var(--admin-bg-primary);
   color: var(--admin-text-primary);
+  font-family: var(--admin-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar Styling ── */
+body:has(.admin-app) ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+body:has(.admin-app) ::-webkit-scrollbar-track {
+  background: var(--admin-bg-primary);
+}
+body:has(.admin-app) ::-webkit-scrollbar-thumb {
+  background: var(--admin-border-light);
+  border-radius: var(--admin-radius-full);
+}
+body:has(.admin-app) ::-webkit-scrollbar-thumb:hover {
+  background: var(--admin-text-tertiary);
+}
+
+/* ── Shared Page Title Block ── */
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.admin-page-title {
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
+  color: var(--admin-text-primary);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.admin-page-subtitle {
+  color: var(--admin-text-tertiary);
+  font-size: 14px;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+/* ── Shared Card ── */
+.admin-card {
+  background: var(--admin-bg-secondary);
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius-lg);
+  box-shadow: var(--admin-shadow);
+  transition: var(--admin-transition);
+}
+
+/* ── Primary Button ── */
+.admin-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, var(--admin-accent), hsl(28, 85%, 50%));
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  border: none;
+  border-radius: var(--admin-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--admin-transition);
+  box-shadow: var(--admin-glow);
+  white-space: nowrap;
+}
+
+.admin-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px var(--admin-accent-glow);
+  filter: brightness(1.1);
+}
+
+/* ── Ghost Button ── */
+.admin-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  background: transparent;
+  color: var(--admin-text-secondary);
+  font-weight: 500;
+  font-size: 14px;
+  border: 1px solid var(--admin-border);
+  border-radius: var(--admin-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--admin-transition);
+}
+.admin-btn-ghost:hover {
+  background: var(--admin-bg-tertiary);
+  color: var(--admin-text-primary);
+  border-color: var(--admin-border-light);
 }

@@ -1,62 +1,137 @@
+/* ═══════════════════════════════════════════
+   KPI CARD — Premium Design
+   ═══════════════════════════════════════════ */
+
 .kpiCard {
-  background-color: var(--admin-bg-secondary);
+  background: var(--admin-bg-secondary);
   border: 1px solid var(--admin-border);
-  border-radius: var(--admin-radius);
-  padding: 24px;
+  border-radius: var(--admin-radius-lg);
+  padding: 22px 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   box-shadow: var(--admin-shadow);
+  transition: var(--admin-transition);
+  position: relative;
+  overflow: hidden;
 }
 
+/* Subtle top accent bar */
+.kpiCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--admin-accent), var(--admin-accent-light));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.kpiCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--admin-shadow-md);
+  border-color: var(--admin-border-light);
+}
+
+.kpiCard:hover::before {
+  opacity: 1;
+}
+
+/* ── Header Row ── */
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .title {
-  color: var(--admin-text-secondary);
-  font-size: 14px;
-  font-weight: 500;
+  color: var(--admin-text-tertiary);
+  font-size: 12px;
+  font-weight: 600;
   margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+/* ── Icon Wrapper ── */
+.iconWrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--admin-radius);
+  background: var(--admin-accent-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: var(--admin-transition-fast);
 }
 
 .icon {
-  color: var(--admin-text-tertiary);
+  color: var(--admin-accent);
+  flex-shrink: 0;
 }
 
+.kpiCard:hover .iconWrapper {
+  background: var(--admin-accent);
+}
+
+.kpiCard:hover .icon {
+  color: #fff;
+}
+
+/* ── Value ── */
 .body {
-  margin-top: 4px;
+  flex: 1;
 }
 
 .value {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: clamp(24px, 3vw, 30px);
+  font-weight: 800;
   color: var(--admin-text-primary);
   line-height: 1;
+  letter-spacing: -1px;
 }
 
+/* ── Trend Footer ── */
 .footer {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
-  margin-top: 4px;
+  font-size: 12.5px;
+  padding-top: 10px;
+  border-top: 1px solid var(--admin-border);
 }
 
 .trend {
-  font-weight: 600;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: var(--admin-radius-full);
+  font-size: 11.5px;
 }
 
 .positive {
   color: var(--admin-success);
+  background: var(--admin-success-dim);
 }
 
 .negative {
   color: var(--admin-danger);
+  background: var(--admin-danger-dim);
 }
 
 .trendLabel {
-  color: var(--admin-text-tertiary);
+  color: var(--admin-text-muted);
+  font-size: 12px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 540px) {
+  .kpiCard {
+    padding: 18px 20px;
+  }
 }
