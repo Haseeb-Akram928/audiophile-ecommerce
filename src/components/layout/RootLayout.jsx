@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Header from "@/components/layout/Header/Header.jsx";
 import Footer from "@/components/layout/Footer/Footer.jsx";
 import { useWelcomeEmail } from "@/hooks/useWelcomeEmail";
+import { Analytics } from "@vercel/analytics/react";
 
 const RootLayout = () => {
   const { pathname } = useLocation();
@@ -21,6 +22,7 @@ const RootLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <Analytics />
     </>
   );
 };
